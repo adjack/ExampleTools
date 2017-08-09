@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="1dp"
+        android:id="@+id/linear_nagative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp">
+
+        <Button
+            android:id="@+id/bt_rooftop"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button_combinerbox_select"
+            android:text="宝贝消息"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <!--<Button
+            android:id="@+id/bt_power"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:text="电站"
+            android:layout_marginLeft="-2dp"
+            android:layout_weight="1"
+            android:textSize="15sp"
+            android:textColor="@color/red1"
+            android:background="@drawable/shape_button_inverter_normal"/>-->
+
+        <!--<Button
+            android:id="@+id/bt_temp"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:text="环境温度"
+            android:layout_marginLeft="-2dp"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/red1"
+            android:background="@drawable/shape_button_inverter_normal"/>-->
+
+        <Button
+            android:id="@+id/bt_News"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="-2dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_button_report_normal"
+            android:text="系统消息"
+            android:textColor="@color/red1"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_below="@+id/linear_nagative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:flipInterval="30"
+        android:persistentDrawingCache="animation"/>
+
+</RelativeLayout>
+

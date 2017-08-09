@@ -1,5 +1,6 @@
 package activity.example.yuan.cn.exampletools;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,9 +13,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import activity.example.yuan.cn.test_xrecyclerview.RecyclerChatActivity;
+import activity.example.yuan.cn.test_xrecyclerview.RecyclerLinearActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public void recyclerviewOnclick(View view){
+        Toast.makeText(this,"--",Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this,RecyclerChatActivity.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

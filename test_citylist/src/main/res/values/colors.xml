@@ -1,0 +1,33 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+   <color name="white">#ffffff</color>
+   <color name="black">#000000</color>
+   <color name="title_color">#f3383e</color>
+   <color name="tab_title_color">#da0309</color>
+   <color name="gray">#6e6e6e</color>
+   <color name="gray2">#c9c9c9</color>
+   <color name="gray3">#333333</color>
+   <color name="gray4">#d9d9d9</color>
+   <color name="gray5">#c7c7cd</color>
+   <color name="gray6">#8f8f8f</color>
+   <color name="gray7">#dcdbdb</color>
+   <color name="color1">#DC143C</color>
+   <color name="tab_gray">#6e6e6e</color>
+
+   <color name="station_status_normal">#03a41f</color>
+   <color name="station_status_error">#e5070e</color>
+   <color name="station_status_exception">#e7b905</color>
+
+   <color name="red1">#FC383E</color>
+   <color name="yellow">#F8a032</color>
+
+   <color name="green">#03a41f</color>
+   <color name="gray1">#efefef</color>
+   <color name="transparent">#00000000</color>
+
+   <color name="colorPrimary">#3F51B5</color>
+   <color name="colorPrimaryDark">#303F9F</color>
+   <color name="colorAccent">#FF4081</color>
+
+</resources>

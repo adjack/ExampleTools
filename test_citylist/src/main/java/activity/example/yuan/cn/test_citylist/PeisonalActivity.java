@@ -41,7 +41,7 @@ public class PeisonalActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_my);
+        setContentView(R.layout.activity_contractdetail);
 
         initView();
     }

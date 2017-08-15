@@ -13,6 +13,11 @@
         <activity
             android:name=".RecyclerChatActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+
+        <activity
+            android:name=".DetailActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
     </application>
 
 </manifest>
+

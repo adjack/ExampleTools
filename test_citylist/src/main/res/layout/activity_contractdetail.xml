@@ -1,0 +1,167 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="11dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/color_white"
+            android:text="过车合同"
+            android:textColor="#202532"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="11dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_return"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="17dp"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#ebebeb"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="49dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginTop="23dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="合同说明书"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:textColor="#262a37"/>
+
+                <TextView
+                    android:layout_marginTop="17dp"
+                    android:layout_marginLeft="23dp"
+                    android:layout_marginRight="22dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="validateNum(data.sy + data.sh - data.ty - data.tvalidateNum(data.sy + data.sh - data.ty - data.tvalidateNum(data.sy + data.sh - data.ty - data.tvalidateNum(data.sy + data.sh - data.ty - data.tvalidateNum(data.sy + data.sh - data.ty - data.tvalidateNum(data.sy + data.sh - data.ty - data.tvalidateNum(data.sy + data.sh - data.ty - data.tvalidateNum(data.sy + data.sh - data.ty - data.tvalidateNum(data.sy + data.sh - data.ty - data.tvalidateNum(data.sy + data.sh - data.ty - data.tvalidateNum(data.sy + data.sh - data.ty - data.t"
+                    android:textSize="15sp"
+                    android:textColor="#262a37"/>
+
+                <LinearLayout
+                    android:layout_marginTop="33dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2"
+                    android:orientation="horizontal">
+                    <RelativeLayout
+                        android:paddingLeft="15dp"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv_jiafang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="甲方：######"
+                            android:textSize="15sp"
+                            android:textColor="#262a37"/>
+
+                        <TextView
+                            android:id="@+id/tv_jiafangflag"
+                            android:layout_below="@+id/tv_jiafang"
+                            android:layout_marginTop="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="甲方签名："
+                            android:textSize="15sp"
+                            android:textColor="#262a37"/>
+
+                        <EditText
+                            android:id="@+id/et_sign1"
+                            android:textColor="#000000"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_jiafang"
+                            android:layout_marginTop="20dp"
+                            android:layout_toRightOf="@+id/tv_jiafangflag"
+                            android:background="@null"
+                            android:maxLength="30" />
+                    </RelativeLayout>
+                    
+                    <View
+                        android:layout_marginTop="10dp"
+                        android:layout_width="0.5dp"
+                        android:layout_height="154dp"
+                        android:background="#d7d7d7"/>
+
+                    <RelativeLayout
+                        android:paddingLeft="23dp"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv_yifang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="乙方：######"
+                            android:textSize="15sp"
+                            android:textColor="#262a37"/>
+
+                        <TextView
+                            android:id="@+id/tv_yifangflag"
+                            android:layout_below="@+id/tv_yifang"
+                            android:layout_marginTop="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="乙方签名："
+                            android:textSize="15sp"
+                            android:textColor="#262a37"/>
+
+                        <EditText
+                            android:id="@+id/et_sign2"
+                            android:textColor="#000000"
+                            android:layout_marginTop="20dp"
+                            android:layout_below="@+id/tv_yifang"
+                            android:layout_toRightOf="@+id/tv_yifangflag"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:maxLength="30"
+                            android:background="@null"/>
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:gravity="center"
+            android:background="#21b751"
+            android:layout_alignParentBottom="true"
+            android:text="保存签名"
+            android:textColor="#ffffff"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+
+
+</LinearLayout>

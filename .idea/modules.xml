@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ExampleTools.iml" filepath="$PROJECT_DIR$/ExampleTools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test_citylist/test_citylist.iml" filepath="$PROJECT_DIR$/test_citylist/test_citylist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test_webview/test_webview.iml" filepath="$PROJECT_DIR$/test_webview/test_webview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test_xrecyclerview/test_xrecyclerview.iml" filepath="$PROJECT_DIR$/test_xrecyclerview/test_xrecyclerview.iml" />
+    </modules>
+  </component>
+</project>

@@ -8,8 +8,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -17,9 +15,7 @@ import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -28,13 +24,16 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import activity.example.yuan.cn.exampletools.http.GetRequest_Interface;
 import activity.example.yuan.cn.exampletools.view.DrawView;
-import activity.example.yuan.cn.test_citylist.PeisonalActivity;
-import activity.example.yuan.cn.test_citylist.SearchActivity;
 import activity.example.yuan.cn.test_webview.WebActivity;
-import activity.example.yuan.cn.test_xrecyclerview.DetailActivity;
-import activity.example.yuan.cn.test_xrecyclerview.RecyclerChatActivity;
-import activity.example.yuan.cn.test_xrecyclerview.RecyclerLinearActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -69,6 +68,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ButterKnife.bind(this);
+
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //
@@ -94,12 +96,50 @@ public class MainActivity extends AppCompatActivity
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         Log.d("displayMetrics",displayMetrics.densityDpi+"/"+displayMetrics.heightPixels);
 
-        iv_draw = (ImageView) findViewById(R.id.iv_draw);
+//        iv_draw = (ImageView) findViewById(R.id.iv_draw);
 
         initCaoGaoPop();
+        iv_draw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this,"start",Toast.LENGTH_SHORT).show();
+            }
+        });
+//        setNetRequest("https://webapi.wyjr168.com/API/WebAPI/UserService");
+    }
 
+    public void onclickSHU(View view){
+//        startActivity(new Intent(this,PtrFrameActivity.class));
+//        startActivity(new Intent(this,AdRunActivity.class));
+//        startActivity(new Intent(this,GreenDaoActivity.class));
+//        startActivity(new Intent(this,WebViewActivity.class));
+//        startActivity(new Intent(this,AnimalActivity.class));
+        startActivity(new Intent(this,OnclickStyleActivity.class));
+    }
+
+
+    //测试网络请求
+    public void setNetRequest(String url){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url) // 设置 网络请求 Url
+                .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
+                .build();
+        Call<Object> call =  retrofit.create(GetRequest_Interface.class).getCall();
+        call.enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+
+            }
+        });
 
     }
+
+    @BindView(R.id.iv_draw)
     ImageView iv_draw;
 
     public void onClickDraw(View view){

@@ -2,9 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="activity.example.yuan.cn.exampletools">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -30,9 +34,20 @@
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".PtrFrameActivity" />
+        <activity android:name=".AdRunActivity" />
+        <activity android:name=".GreenDaoActivity" />
+        <activity android:name=".WebViewActivity" />
+        <activity android:name=".AnimalActivity" />
+        <activity
+            android:name=".SlideActivity"
+            android:theme="@style/NoTitleTranslucentTheme" />
+        <activity android:name=".OnclickStyleActivity"></activity>
     </application>
 
 </manifest>

@@ -3,8 +3,8 @@ apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0"
-    defaultConfig {
+    buildToolsVersion "26.0.2"
+    defaultConfig {//配置
         applicationId "activity.example.yuan.cn.exampletools"
         minSdkVersion 19
         targetSdkVersion 26

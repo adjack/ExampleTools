@@ -1,1 +1,1 @@
-include ':app', ':test_xrecyclerview', ':test_citylist', ':test_webview'
+include ':app',':test_xrecyclerview', ':test_citylist', ':test_webview'

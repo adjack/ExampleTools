@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="activity.example.yuan.cn.exampletools.AnimalActivity">
+    <activity.example.yuan.cn.exampletools.view.MyScrollView
+        android:id="@+id/linear_mune_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="57dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:contentDescription="@string/hint_contentDescription"
+            android:id="@+id/ib_function_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/style_button_menu_open" />
+
+        <LinearLayout
+            android:id="@+id/linear_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_normal"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableTop="@drawable/icon_hint_normal"
+                android:paddingTop="5dp"
+                android:text="正常"
+                android:textColor="@color/station_status_normal"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="0.8dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray7" />
+
+            <Button
+                android:id="@+id/bt_error"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableTop="@drawable/icon_hint_error"
+                android:paddingTop="5dp"
+                android:text="故障"
+                android:textColor="@color/station_status_error"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="0.8dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray7" />
+
+            <Button
+                android:id="@+id/bt_other"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableTop="@drawable/icon_hint_exception"
+                android:paddingTop="5dp"
+                android:text="异常"
+                android:textColor="@color/station_status_exception"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="0.8dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/gray7" />
+
+            <Button
+                android:id="@+id/bt_all"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawableTop="@drawable/icon_hint_all"
+                android:paddingTop="5dp"
+                android:text="所有"
+                android:textColor="#538CBA"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
+    </activity.example.yuan.cn.exampletools.view.MyScrollView>
+</FrameLayout>

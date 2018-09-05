@@ -117,6 +117,10 @@ public class MainActivity extends AppCompatActivity
         startActivity(new Intent(this,OnclickStyleActivity.class));
     }
 
+    public void onclickMore(View view){
+        startActivity(new Intent(this,OnclickStyleActivity.class));
+    }
+
 
     //测试网络请求
     public void setNetRequest(String url){

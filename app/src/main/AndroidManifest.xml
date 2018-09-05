@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <!-- 我什么都没干 -->
     <application
         android:name=".MyApplication"
@@ -47,7 +48,8 @@
         <activity
             android:name=".SlideActivity"
             android:theme="@style/NoTitleTranslucentTheme" />
-        <activity android:name=".OnclickStyleActivity"></activity>
+        <activity android:name=".OnclickStyleActivity" />
+        <activity android:name=".MoreActivity"></activity>
     </application>
 
 </manifest>

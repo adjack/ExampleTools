@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void onclickMore(View view){
-        startActivity(new Intent(this,OnclickStyleActivity.class));
+        startActivity(new Intent(this,MoreActivity.class));
     }
 
 

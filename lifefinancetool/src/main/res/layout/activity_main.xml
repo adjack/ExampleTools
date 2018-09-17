@@ -1,18 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.yuan.lifefinance.tool.MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="30dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="日期："
+            android:textColor="#666"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:textColor="#666"
+            android:textStyle="bold"
+            android:text="股票名称"/>
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:paddingLeft="10dp"
+            android:maxLength="10"
+            android:textSize="20sp"
+            android:background="@drawable/shape_bg_style01"/>
+    </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:textColor="#666"
+            android:textStyle="bold"
+            android:text="买入价格"/>
+        <EditText
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/shape_bg_style01"
+            android:maxLength="10"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:textColor="#666"
+            android:textStyle="bold"
+            android:text="止损价格"/>
+        <EditText
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/shape_bg_style01"
+            android:maxLength="10"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:textColor="#666"
+            android:textStyle="bold"
+            android:text="目标价格"/>
+        <EditText
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:maxLength="10"
+            android:background="@drawable/shape_bg_style01"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:textColor="#666"
+            android:textStyle="bold"
+            android:text="R比率"/>
+        <EditText
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/shape_bg_style01"
+            android:maxLength="10"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <Button
+                android:layout_marginBottom="10dp"
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onclick"
+                android:text="生成记录"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/shape_bg_style02"/>
+
+            <Button
+                android:layout_marginBottom="10dp"
+                android:id="@+id/button2"
+                android:layout_toRightOf="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onclick"
+                android:text="出卖股票"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/shape_bg_style02"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

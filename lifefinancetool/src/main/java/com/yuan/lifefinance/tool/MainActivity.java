@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -96,14 +97,14 @@ public class MainActivity extends Activity implements PermissionTools.Permission
             return;
         }
 
-        if(StringInputUtils.valueIsEmpty(tv_time)){
+        if(StringInputUtils.valueIsEmpty(et_name)){
             Toast.makeText(MainActivity.this,"请输入名称！",Toast.LENGTH_SHORT).show();
             return;
         }
 
         try {
             String nowdate = getNowDate().replace(" ","");
-            saveToSD(myShot(MainActivity.this),et_name.toString()+"-"+nowdate);
+            saveToSD(myShot(MainActivity.this),et_name.getText().toString()+"_"+nowdate);
 
 
             Toast.makeText(MainActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
@@ -148,12 +149,18 @@ public class MainActivity extends Activity implements PermissionTools.Permission
         // 判断sd卡是否存在
         if (Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)) {
-            File dir = new File(dirName+fileName);
+            File dir1 = new File(dirName+fileName);
             // 判断文件夹是否存在，不存在则创建
-            if(!dir.exists()){
-                dir.mkdir();
+            if(!dir1.exists()){
+                dir1.mkdir();
             }
-
+//            Log.d("saveToSD",dirName+fileName);
+//            File dir2 = new File(dirName+fileName);
+//            // 判断文件夹是否存在，不存在则创建
+//            if(!dir2.exists()){
+//                dir2.mkdir();
+//            }
+            Log.d("saveToSD",dirName +fileName+ File.separator+fileName+".jpg");
             File file = new File(dirName +fileName+ File.separator+fileName+".jpg");
             // 判断文件是否存在，不存在则创建
             if (!file.exists()) {

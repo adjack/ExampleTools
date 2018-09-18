@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:paddingRight="10dp"
+    android:orientation="vertical" >
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="中天科技"
+        android:textStyle="bold"
+        android:textColor="#d7000f"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="201801253652"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/tv_cost"
+        android:layout_below="@+id/tv_name"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="成本：10.53"
+        android:textSize="12sp"
+        android:textColor="#000"/>
+
+    <TextView
+        android:layout_below="@+id/tv_cost"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="止损：11"
+        android:textColor="#006400"/>
+
+    <LinearLayout
+        android:id="@+id/linear_01"
+        android:layout_toRightOf="@+id/tv_name"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#d7000f"
+            android:text="最高：20"/>
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="卖出：--"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_toRightOf="@+id/linear_01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R：5.2"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:textColor="#d7000f"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="收益:"
+            android:textSize="11sp"
+            android:textColor="#d7000f"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10%"
+            android:layout_marginTop="2dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#d7000f"/>
+    </LinearLayout>
+</RelativeLayout>

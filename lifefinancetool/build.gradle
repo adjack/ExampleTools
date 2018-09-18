@@ -4,6 +4,10 @@ apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 26
 
+    compileOptions {
+        sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+        targetCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "com.yuan.lifefinance.tool"
@@ -23,10 +27,21 @@ android {
         }
     }
 
+    greendao {
+        //版本号，升级时可配置
+        schemaVersion 1
+    }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
@@ -37,4 +52,11 @@ dependencies {
     //GreenDao
     compile 'org.greenrobot:greendao:3.2.0'
     implementation 'com.github.yuweiguocn:GreenDaoUpgradeHelper:v2.0.3'
+    compile(name: 'AnimalDialog_Lib', ext: 'aar')
+
+    compile(name: 'LRecyclerview_library', ext: 'aar')
+    compile 'com.android.support:design:26.1.0'
+
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

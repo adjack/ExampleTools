@@ -37,7 +37,7 @@ public class StringInputUtils {
      * @param textView
      * @return
      */
-    public static String isEmpty(@NonNull TextView textView){
+    public static String value(TextView textView){
         String value = textView.getText().toString();
         return TextUtils.isEmpty(value)?"":value;
     }

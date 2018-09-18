@@ -1,6 +1,12 @@
 package com.yuan.lifefinance.tool.greendao;
 
 import android.graphics.Bitmap;
+import android.util.Log;
+
+import com.yuan.lifefinance.tool.MyApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -20,8 +26,8 @@ public class DBManager {
         return mInstance;
     }
     private DBManager() {
-//        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(MyApplication.gainContext(), "wyjr-db", null);
-        MySQLiteOpenHelper helper = new MySQLiteOpenHelper(MyApplication.gainContext(), "wyjr-db",null);
+////        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(MyApplication.gainContext(), "wyjr-db", null);
+        MySQLiteOpenHelper helper = new MySQLiteOpenHelper(MyApplication.gainContext(), "finance-db",null);
         DaoMaster mDaoMaster = new DaoMaster(helper.getWritableDatabase());
         mDaoSession = mDaoMaster.newSession();
     }
@@ -35,55 +41,54 @@ public class DBManager {
     }
 
     /**
-     * 更新保存接口数据
-     * @param methodName
-     * @param data
+     * 查询历史数据
+     * @param
+     * @param
      */
-    public void updateHistoryInfo(String methodName,String data,String param){
-//        try {
-//            HistoryInfoDao historyInfoDao =  DBManager.getInstance().getSession().getHistoryInfoDao();
-//            List<HistoryInfo> historyInfos = historyInfoDao.queryBuilder().where(
-//                    HistoryInfoDao.Properties.MethodName.eq(methodName),
-//                    HistoryInfoDao.Properties.Param.eq(getMsgJson(param))).build().list();
-//            if(historyInfos.size() > 0){
-//                HistoryInfo historyInfo = historyInfos.get(0);
-//                historyInfo.setJsonData(data);
-//                historyInfo.setRequestTime(System.currentTimeMillis());
-//                historyInfoDao.update(historyInfo);
-//            }
-//            else{
-//                historyInfoDao.insert(new HistoryInfo(null,methodName,data,System.currentTimeMillis(),getMsgJson(param),""));
-//            }
-//        }
-//        catch (Exception ex){}
+    public List<StockInfo> selectStockInfo(int page,int pageSize){
+        try {
+            StockInfoDao stockInfoDao =  DBManager.getInstance().getSession().getStockInfoDao();
+            List<StockInfo> stockInfos = stockInfoDao.queryBuilder().offset((page-1)*pageSize).limit(pageSize).list();
+//            List<StockInfo> stockInfos = stockInfoDao.queryBuilder().build().list().s;
+            return stockInfos;
+        }
+        catch (Exception ex){}
+        return new ArrayList<>();
 //        LogUtil.e("MycallBack",methodName+"--->开始更新:"+getMsgJson(param));
     }
 
+    public int getStockInfoNum(){
+        try {
+            StockInfoDao stockInfoDao =  DBManager.getInstance().getSession().getStockInfoDao();
+            return stockInfoDao.queryBuilder().build().list().size();
+        }
+        catch (Exception ex){}
+        return 0;
+    }
+
     /**
-     * 保存图片数据
-     * @param imageUrl
-     * @param bitmap
+     * 保存个股信息
+     * @param
+     * @param
      */
-    public synchronized void updatePictureInfo(String imageUrl, Bitmap bitmap){
-//        try {
-//            PictureInfoDao pictureInfoDao =  DBManager.getInstance().getSession().getPictureInfoDao();
-//            List<PictureInfo> pictureInfos = pictureInfoDao.queryBuilder().where(
-//                    PictureInfoDao.Properties.ImageUrl.eq(imageUrl)).build().list();
-//            if(pictureInfos.size() > 0){
-//                PictureInfo pictureInfo = pictureInfos.get(0);
-//                pictureInfo.setPicData(Base64.encode(ImageUtil.formatBitmapToByte(bitmap)));
-//                pictureInfo.setRequestTime(System.currentTimeMillis());
-//                pictureInfoDao.update(pictureInfo);
-//            }
-//            else{
-//                ToolFile.saveCrashInfoToFile("保存图片："+imageUrl);
-//                pictureInfoDao.insert(new PictureInfo(null,imageUrl,Base64.encode(ImageUtil.formatBitmapToByte(bitmap)),System.currentTimeMillis(),0,""));
-//            }
-//        }
-//        catch (Exception ex){
-//            ToolFile.saveCrashInfoToFile("保存图片error："+ex.toString());
-//            LogUtil.d("requestGetHotActivityList","保存图片error："+ex.toString());
-//        }
+    public synchronized int savaStockInfo(String stokeName,String cost,double stopLoss,double mostPrice,double rValue,String timeInfo){
+        int result = 0;
+        try {
+            StockInfoDao stockInfoDao =  mDaoSession.getStockInfoDao();
+            StockInfo stockInfo = new StockInfo();
+            stockInfo.setStokeName(stokeName);
+            stockInfo.setCost(cost);
+            stockInfo.setStopLoss(stopLoss);
+            stockInfo.setMostPrice(mostPrice);
+            stockInfo.setRValue(rValue);
+            stockInfo.setTimeInfo(timeInfo);
+            stockInfoDao.insert(stockInfo);
+            result = 1;
+        }
+        catch (Exception ex){
+            Log.d("savaStockInfo","保存信息："+ex.toString());
+        }
+        return result;
 
     }
 

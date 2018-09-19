@@ -6,17 +6,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.yuan.lifefinance.tool.MainActivity">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center"
         android:background="#436EEE">
+        <ImageView
+            android:id="@+id/iv_return"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_return_up"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="交易单"
+            android:text="出卖单"
+            android:layout_centerInParent="true"
             android:textColor="#fff"/>
-    </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
@@ -45,16 +53,16 @@
             android:textColor="#666"
             android:textStyle="bold"
             android:text="股票名称"/>
-        <EditText
-            android:id="@+id/et_name"
+        <TextView
+            android:id="@+id/tv_name"
             android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="30dp"
             android:paddingLeft="10dp"
             android:maxLength="10"
+            android:textColor="#d7000f"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:background="@drawable/shape_bg_style01"/>
+            android:textStyle="bold"/>
     </LinearLayout>
 
     <LinearLayout
@@ -70,12 +78,11 @@
             android:textColor="#666"
             android:textStyle="bold"
             android:text="买入价格"/>
-        <EditText
-            android:id="@+id/et_cost"
+        <TextView
+            android:id="@+id/tv_cost"
             android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="@drawable/shape_bg_style01"
+            android:layout_height="30dp"
             android:maxLength="10"
             android:inputType="numberDecimal"
             android:paddingLeft="10dp"
@@ -96,12 +103,11 @@
             android:textColor="#666"
             android:textStyle="bold"
             android:text="止损价格"/>
-        <EditText
-            android:id="@+id/et_stopLoss"
+        <TextView
+            android:id="@+id/tv_stopLoss"
             android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="@drawable/shape_bg_style01"
+            android:layout_height="30dp"
             android:maxLength="10"
             android:inputType="numberDecimal"
             android:paddingLeft="10dp"
@@ -122,15 +128,14 @@
             android:textColor="#666"
             android:textStyle="bold"
             android:text="目标价格"/>
-        <EditText
-            android:id="@+id/et_mostPrice"
+        <TextView
+            android:id="@+id/tv_mostPrice"
             android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="30dp"
             android:maxLength="10"
             android:paddingLeft="10dp"
             android:inputType="numberDecimal"
-            android:background="@drawable/shape_bg_style01"
             android:textSize="16sp"
             android:textStyle="bold"/>
     </LinearLayout>
@@ -155,10 +160,40 @@
             android:layout_toRightOf="@+id/tv_006"
             android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="30dp"
             android:maxLength="10"
             android:paddingLeft="5dp"
             android:gravity="center_vertical"
+            android:textColor="#d7000f"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+        <TextView
+            android:id="@+id/tv_007"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:textColor="#666"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:text="卖出价格"/>
+        <EditText
+            android:id="@+id/et_salePrice"
+            android:layout_toRightOf="@+id/tv_007"
+            android:layout_marginLeft="25dp"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:maxLength="10"
+            android:paddingLeft="5dp"
+            android:inputType="numberDecimal"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_bg_style01"
             android:textColor="#d7000f"
             android:textSize="20sp"/>
         <TextView
@@ -167,9 +202,34 @@
             android:layout_height="35dp"
             android:gravity="center_vertical|right"
             android:layout_alignParentRight="true"
-            android:text="刷新"
+            android:text="计算"
             android:textStyle="bold"/>
     </RelativeLayout>
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:textColor="#666"
+            android:textStyle="bold"
+            android:text="最终收益"/>
+        <TextView
+            android:id="@+id/tv_income"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:maxLength="10"
+            android:paddingLeft="10dp"
+            android:inputType="numberDecimal"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -186,7 +246,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onclick"
-                android:text="生成记录"
+                android:text="马上卖出"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/shape_bg_style02"/>
@@ -202,20 +262,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/shape_bg_style02"/>
-
-            <Button
-                android:layout_marginBottom="10dp"
-                android:id="@+id/button3"
-                android:layout_toRightOf="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onclickCompare"
-                android:text="个股比较"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="20dp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/shape_bg_style02"/>
+                android:background="@drawable/shape_bg_style02"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

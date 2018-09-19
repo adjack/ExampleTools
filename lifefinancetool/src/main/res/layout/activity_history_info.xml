@@ -6,19 +6,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.yuan.lifefinance.tool.HistoryInfoActivity">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:gravity="center"
+        android:layout_height="50dp"
         android:background="#436EEE">
+        <ImageView
+            android:id="@+id/iv_return"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_return_up"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="历史记录"
+            android:text="已购买"
+            android:layout_centerInParent="true"
             android:textColor="#fff"/>
-    </LinearLayout>
+    </RelativeLayout>
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView
+        android:layout_marginTop="20dp"
         android:id="@+id/lrecycle_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

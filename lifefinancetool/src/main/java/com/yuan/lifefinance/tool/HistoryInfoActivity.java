@@ -1,6 +1,7 @@
 package com.yuan.lifefinance.tool;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -8,7 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
+import com.github.jdsjlzx.interfaces.OnItemClickListener;
 import com.github.jdsjlzx.interfaces.OnLoadMoreListener;
 import com.github.jdsjlzx.recyclerview.LRecyclerView;
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter;
@@ -16,10 +20,13 @@ import com.github.jdsjlzx.recyclerview.ProgressStyle;
 import com.yuan.lifefinance.tool.adapter.StockHistoryAdapter;
 import com.yuan.lifefinance.tool.greendao.DBManager;
 import com.yuan.lifefinance.tool.greendao.StockInfo;
+import com.yuan.lifefinance.tool.view.CustomHintDialog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.OnClick;
 
 public class HistoryInfoActivity extends Activity {
     List<StockInfo> stockInfos = new ArrayList<>();
@@ -30,10 +37,24 @@ public class HistoryInfoActivity extends Activity {
     LRecyclerView lrecycle_list;
     private LRecyclerViewAdapter mAdapter;
     private StockHistoryAdapter mDataAdapter;
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        try {
+            LoadData(1,pageSize);
+        }
+        catch (Exception ex){}
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_info);
+        findViewById(R.id.iv_return).setOnClickListener(v->finish());
+
         myHandler = new MyHandler(this);
 
         lrecycle_list = findViewById(R.id.lrecycle_list);
@@ -68,6 +89,18 @@ public class HistoryInfoActivity extends Activity {
                 }
             }
         });
+        mAdapter.setOnItemClickListener((View view, int position)-> {
+                startActivity(new Intent(HistoryInfoActivity.this,SaleDetailActivity.class)
+                .putExtra("stokeName",stockInfos.get(position).getStokeName())
+                .putExtra("cost",stockInfos.get(position).getCost()+"")
+                .putExtra("stopLoss",stockInfos.get(position).getStopLoss()+"")
+                .putExtra("mostPrice",stockInfos.get(position).getMostPrice()+"")
+                .putExtra("rValue",stockInfos.get(position).getRValue())
+                .putExtra("timeInfoBuy",stockInfos.get(position).getTimeInfoBuy()));
+//                new CustomHintDialog(HistoryInfoActivity.this, str->{
+//                    Toast.makeText(HistoryInfoActivity.this,stockInfos.get(position).getRValue()+"",Toast.LENGTH_SHORT).show();
+//                },"取消", "卖出");
+        });
 
         LoadData(1,pageSize);
 
@@ -88,7 +121,7 @@ public class HistoryInfoActivity extends Activity {
         new Thread(){
             @Override
             public void run() {
-                SystemClock.sleep(1000);
+                SystemClock.sleep(100);
                 if(maxNum == 0){
                     maxNum = DBManager.getInstance().getStockInfoNum();
                     Log.d("HistoryInfoActivity_log","总数："+maxNum);

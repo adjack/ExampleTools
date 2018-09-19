@@ -47,6 +47,13 @@ public class StringInputUtils {
         return TextUtils.isEmpty(value);
     }
 
+    public static String value(Object str){
+        if(str == null || str.toString().trim().isEmpty() || str.toString().length() == 0 || str.equals("null")){
+            return "";
+        }
+        return str.toString();
+    }
+
     /**
      * 处理字符串对象
      * @param ob

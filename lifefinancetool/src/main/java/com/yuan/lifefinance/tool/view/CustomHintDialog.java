@@ -8,13 +8,16 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.flyco.animation.BounceEnter.BounceEnter;
 import com.flyco.animation.ZoomExit.ZoomOutExit;
 import com.flyco.dialog.widget.base.BaseDialog;
 import com.yuan.lifefinance.tool.R;
+import com.yuan.lifefinance.tool.tools.StringInputUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +41,10 @@ public class CustomHintDialog {
         void sureClick();
     }
 
+    public interface OnSureListener2 {
+        void sureClick(String value);
+    }
+
     public CustomHintDialog(Context context, OnSureListener clickListener, String content, String exitDisc, String sureDisc, int dialog_type) {
         int loadLayoutid = 0;
         if (dialog_type == Dialog_TYPE_1) {
@@ -46,6 +53,14 @@ public class CustomHintDialog {
             loadLayoutid = R.layout.my_isopen_dialog2;
         }
         CustomDialog1 dialog = new CustomDialog1(context, loadLayoutid, clickListener, content, exitDisc, sureDisc);
+        dialog.showAnim(new BounceEnter().duration(800));
+//		dialog.dismissAnim(new ZoomOutExit().duration(50));
+        dialog.show();
+    }
+
+    public CustomHintDialog(Context context, OnSureListener2 clickListener,String exitDisc, String sureDisc) {
+        int loadLayoutid = R.layout.my_isopen_dialog2;
+        CustomDialog2 dialog = new CustomDialog2(context, loadLayoutid, clickListener, exitDisc, sureDisc);
         dialog.showAnim(new BounceEnter().duration(800));
 //		dialog.dismissAnim(new ZoomOutExit().duration(50));
         dialog.show();
@@ -99,23 +114,25 @@ public class CustomHintDialog {
         }
     }
 
-    class CustomDialog3 extends BaseDialog<CustomDialog3>{
+    class CustomDialog2 extends BaseDialog<CustomDialog2>{
+        @BindView(R.id.cancel)
+        Button cancel;
         @BindView(R.id.sure)
         Button sure;
-        @BindView(R.id.textView2)
-        TextView textContent;
+        @BindView(R.id.et_value)
+        EditText et_value;
         private int layoutID;
         private Context mContext;
-        private OnSureListener clickListener;
-        private String content;
+        private OnSureListener2 clickListener;
+        private String exitDisc;
         private String sureDisc;
 
-        public CustomDialog3(Context context, int layoutID, OnSureListener clickListener, String content, String sureDisc) {
+        public CustomDialog2(Context context, int layoutID, OnSureListener2 clickListener, String exitDisc, String sureDisc) {
             super(context);
             this.layoutID = layoutID;
             this.mContext = context;
             this.clickListener = clickListener;
-            this.content = content;
+            this.exitDisc = exitDisc;
             this.sureDisc = sureDisc;
         }
 
@@ -129,13 +146,17 @@ public class CustomHintDialog {
 
         @Override
         public void setUiBeforShow() {
-            textContent.setText(content);
+            cancel.setText(exitDisc);
             sure.setText(sureDisc);
             sure.setOnClickListener(view -> {
-                clickListener.sureClick();
+                if(StringInputUtils.value(et_value).isEmpty()){
+                    Toast.makeText(mContext,"请输入价格！",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                clickListener.sureClick(et_value.getText().toString());
                 dismiss();
             });
-
+            cancel.setOnClickListener(view -> dismiss());
         }
     }
 

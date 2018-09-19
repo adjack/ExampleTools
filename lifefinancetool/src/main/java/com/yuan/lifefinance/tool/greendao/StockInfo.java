@@ -27,8 +27,11 @@ public class StockInfo {
     //出售价格
     private String salePrice;
 
-    //购买时生成的时间信息
-    private String timeInfo;
+    //购买时间信息
+    private String timeInfoBuy;
+
+    //出卖时间信息
+    private String timeInfoSale;
 
     //最终收益
     private String income;
@@ -48,18 +51,17 @@ public class StockInfo {
     //备注4
     private String discrib4;
 
-    @Generated(hash = 1842359128)
-    public StockInfo(Long id, String stokeName, String cost, double stopLoss,
-            double mostPrice, String salePrice, String timeInfo, String income,
-            double rValue, String discrib1, String discrib2, String discrib3,
-            String discrib4) {
+    @Generated(hash = 643845246)
+    public StockInfo(Long id, String stokeName, String cost, double stopLoss, double mostPrice, String salePrice, String timeInfoBuy,
+            String timeInfoSale, String income, double rValue, String discrib1, String discrib2, String discrib3, String discrib4) {
         this.id = id;
         this.stokeName = stokeName;
         this.cost = cost;
         this.stopLoss = stopLoss;
         this.mostPrice = mostPrice;
         this.salePrice = salePrice;
-        this.timeInfo = timeInfo;
+        this.timeInfoBuy = timeInfoBuy;
+        this.timeInfoSale = timeInfoSale;
         this.income = income;
         this.rValue = rValue;
         this.discrib1 = discrib1;
@@ -110,14 +112,6 @@ public class StockInfo {
 
     public void setSalePrice(String salePrice) {
         this.salePrice = salePrice;
-    }
-
-    public String getTimeInfo() {
-        return this.timeInfo;
-    }
-
-    public void setTimeInfo(String timeInfo) {
-        this.timeInfo = timeInfo;
     }
 
     public String getIncome() {
@@ -179,7 +173,23 @@ public class StockInfo {
     @Override
     public String toString() {
         return "id:"+getId()+"  stokeName:"+getStokeName()+"  cost:"+getCost()+"  stopLoss:"+getStopLoss()+"  mostPrice:"+getMostPrice()+
-                "  salePrice:"+getSalePrice()+"  timeInfo:"+getTimeInfo()+"  income:"+getIncome()+"  rValue:"+getRValue()+
+                "  salePrice:"+getSalePrice()+"  timeInfobug:"+getTimeInfoBuy()+"  timeInfoSale:"+getTimeInfoSale()+"  income:"+getIncome()+"  rValue:"+getRValue()+
                 "  discrib1:"+getDiscrib1()+"  discrib2:"+getDiscrib2()+"  discrib3:"+getDiscrib3()+"  discrib4:"+getDiscrib4();
+    }
+
+    public String getTimeInfoBuy() {
+        return this.timeInfoBuy;
+    }
+
+    public void setTimeInfoBuy(String timeInfoBuy) {
+        this.timeInfoBuy = timeInfoBuy;
+    }
+
+    public String getTimeInfoSale() {
+        return this.timeInfoSale;
+    }
+
+    public void setTimeInfoSale(String timeInfoSale) {
+        this.timeInfoSale = timeInfoSale;
     }
 }

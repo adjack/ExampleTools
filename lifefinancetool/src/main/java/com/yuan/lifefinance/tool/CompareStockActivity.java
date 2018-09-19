@@ -1,6 +1,5 @@
 package com.yuan.lifefinance.tool;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,14 +11,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yuan.lifefinance.tool.greendao.DBManager;
-import com.yuan.lifefinance.tool.tools.PermissionTools;
 import com.yuan.lifefinance.tool.tools.StringInputUtils;
 import com.yuan.lifefinance.tool.view.CustomHintDialog;
 
@@ -29,37 +25,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
-public class MainActivity extends Activity implements PermissionTools.PermissionDealListener{
+public class CompareStockActivity extends Activity{
 
-
-    HashMap<String, String> permissionlist = new HashMap<>();
-
-    {
-//		permissionlist.put(Manifest.permission.READ_PHONE_STATE,"获取手机版本信息");
-//		permissionlist.put(Manifest.permission.ACCESS_COARSE_LOCATION,"获取定位信息");
-        permissionlist.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, "获取存储权限");
-    }
-    PermissionTools permissionTools;
     private boolean permissionIsOk;
     private TextView tv_time;
-
-    @Override
-    public void permissionForbidden(ArrayList<String> noGrantpermissionDislist) {
-        permissionTools.showPermissionDialog(noGrantpermissionDislist);
-    }
-
-    @Override
-    public void permissionRefuse(){
-    }
-
-    @Override
-    public void permissionPass() {
-        permissionIsOk = true;
-    }
 
     private EditText et_name,et_cost,et_stopLoss,et_mostPrice;
     private TextView tv_rValue,tv_refreshRValue;
@@ -69,12 +40,9 @@ public class MainActivity extends Activity implements PermissionTools.Permission
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_comparestock);
         initView();
 
-        permissionTools = PermissionTools.getInstance(this, permissionlist, this);
-        permissionTools.requestRunPermission(false);
         setDate();
 
 //        new Thread(){
@@ -127,7 +95,7 @@ public class MainActivity extends Activity implements PermissionTools.Permission
     }
 
     public void onclickSell(View view){
-        startActivity(new Intent(MainActivity.this,HistoryInfoActivity.class));
+        startActivity(new Intent(CompareStockActivity.this,HistoryInfoActivity.class));
     }
 
     @Override
@@ -156,27 +124,27 @@ public class MainActivity extends Activity implements PermissionTools.Permission
 
     private boolean isDataOk(){
         if(StringInputUtils.valueIsEmpty(et_name)){
-            Toast.makeText(MainActivity.this,"请输入名称！",Toast.LENGTH_SHORT).show();
+            Toast.makeText(CompareStockActivity.this,"请输入名称！",Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if(StringInputUtils.valueIsEmpty(et_cost)){
-            Toast.makeText(MainActivity.this,"买入价格为空！",Toast.LENGTH_SHORT).show();
+            Toast.makeText(CompareStockActivity.this,"买入价格为空！",Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if(StringInputUtils.valueIsEmpty(et_stopLoss)){
-            Toast.makeText(MainActivity.this,"止损价格为空！",Toast.LENGTH_SHORT).show();
+            Toast.makeText(CompareStockActivity.this,"止损价格为空！",Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if(StringInputUtils.valueIsEmpty(et_mostPrice)){
-            Toast.makeText(MainActivity.this,"目标价格为空！",Toast.LENGTH_SHORT).show();
+            Toast.makeText(CompareStockActivity.this,"目标价格为空！",Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if(StringInputUtils.valueIsEmpty(tv_rValue)){
-            Toast.makeText(MainActivity.this,"R比率为空！",Toast.LENGTH_SHORT).show();
+            Toast.makeText(CompareStockActivity.this,"R比率为空！",Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -186,7 +154,7 @@ public class MainActivity extends Activity implements PermissionTools.Permission
     public void onclick(View view){
         if(isDataOk()){
             String value = rvalue < 3?"R比率很低哦，谨慎下单哦！":"确定下单！";
-            new CustomHintDialog(MainActivity.this, ()->savaData(),value,"取消", "下单",CustomHintDialog.Dialog_TYPE_1);
+            new CustomHintDialog(CompareStockActivity.this, ()->savaData(),value,"取消", "下单",CustomHintDialog.Dialog_TYPE_1);
         }
 
     }
@@ -195,7 +163,6 @@ public class MainActivity extends Activity implements PermissionTools.Permission
 //        if(isDataOk()){
 //            new CustomHintDialog(MainActivity.this, ()->savaDataToTempStockInfo(),"添加到比对池","取消", "添加",CustomHintDialog.Dialog_TYPE_1);
 //        }
-        startActivity(new Intent(MainActivity.this,CompareStockActivity.class));
     }
 
     //下单保存
@@ -211,13 +178,13 @@ public class MainActivity extends Activity implements PermissionTools.Permission
             Log.d("savaStockInfo","result:"+result);
             //截图保存
             String nowdate = getNowDate().replace(" ","");
-            saveToSD(myShot(MainActivity.this),et_name.getText().toString()+"_"+nowdate);
-            Toast.makeText(MainActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
+            saveToSD(myShot(CompareStockActivity.this),et_name.getText().toString()+"_"+nowdate);
+            Toast.makeText(CompareStockActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
 
             clearData();
         }
         catch (Exception ex){
-            Toast.makeText(MainActivity.this,ex.toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(CompareStockActivity.this,ex.toString(),Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -233,13 +200,13 @@ public class MainActivity extends Activity implements PermissionTools.Permission
             Log.d("savaStockInfo","result:"+result);
             //截图保存
             String nowdate = getNowDate().replace(" ","");
-            saveToSD(myShot(MainActivity.this),et_name.getText().toString()+"_"+nowdate);
-            Toast.makeText(MainActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
+            saveToSD(myShot(CompareStockActivity.this),et_name.getText().toString()+"_"+nowdate);
+            Toast.makeText(CompareStockActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
 
             clearData();
         }
         catch (Exception ex){
-            Toast.makeText(MainActivity.this,ex.toString(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(CompareStockActivity.this,ex.toString(),Toast.LENGTH_SHORT).show();
         }
     }
 

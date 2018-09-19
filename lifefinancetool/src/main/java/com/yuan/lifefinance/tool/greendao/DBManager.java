@@ -71,7 +71,7 @@ public class DBManager {
      * @param
      * @param
      */
-    public synchronized int savaStockInfo(String stokeName,String cost,double stopLoss,double mostPrice,double rValue,String timeInfo){
+    public synchronized int savaStockInfo(String stokeName,String cost,double stopLoss,double mostPrice,double rValue,String timeInfoBug){
         int result = 0;
         try {
             StockInfoDao stockInfoDao =  mDaoSession.getStockInfoDao();
@@ -81,7 +81,7 @@ public class DBManager {
             stockInfo.setStopLoss(stopLoss);
             stockInfo.setMostPrice(mostPrice);
             stockInfo.setRValue(rValue);
-            stockInfo.setTimeInfo(timeInfo);
+            stockInfo.setTimeInfoBuy(timeInfoBug);
             stockInfoDao.insert(stockInfo);
             result = 1;
         }
@@ -89,7 +89,52 @@ public class DBManager {
             Log.d("savaStockInfo","保存信息："+ex.toString());
         }
         return result;
+    }
 
+    public synchronized int savaTempStockInfo(String stokeName,String cost,double stopLoss,double mostPrice,double rValue){
+        int result = 0;
+        try {
+            TempStockInfoDao stockInfoDao =  mDaoSession.getTempStockInfoDao();
+            TempStockInfo stockInfo = new TempStockInfo();
+            stockInfo.setStokeName(stokeName);
+            stockInfo.setCostValue(cost);
+            stockInfo.setStopLoss(stopLoss);
+            stockInfo.setMostPrice(mostPrice);
+            stockInfo.setRValue(rValue);
+            stockInfoDao.insert(stockInfo);
+            result = 1;
+        }
+        catch (Exception ex){
+            Log.d("savaStockInfo","保存信息："+ex.toString());
+        }
+        return result;
+    }
+
+    /**
+     * 提交卖单.更新数据
+     * @param timeInfoSale
+     * @param salePrice
+     * @param income
+     * @param timeInfoBug
+     */
+    public synchronized StockInfo updateStockInfo(String timeInfoSale,String salePrice,String income,String timeInfoBug){
+        StockInfo result = null;
+        try {
+            StockInfoDao stockInfoDao =  mDaoSession.getStockInfoDao();
+            List<StockInfo> stockInfos = stockInfoDao.queryBuilder().where(StockInfoDao.Properties.TimeInfoBuy.eq(timeInfoBug)).build().list();
+            if(stockInfos.size() > 0){
+                StockInfo stockInfo = stockInfos.get(0);
+                stockInfo.setTimeInfoSale(timeInfoSale);
+                stockInfo.setSalePrice(salePrice);
+                stockInfo.setIncome(income);
+                stockInfoDao.update(stockInfo);
+                result = stockInfo;
+            }
+        }
+        catch (Exception ex){
+            Log.d("savaStockInfo","更新信息："+ex.toString());
+        }
+        return result;
     }
 
 }

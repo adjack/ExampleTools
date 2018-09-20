@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yuan.lifefinance.tool.greendao.DBManager;
+import com.yuan.lifefinance.tool.tools.DoubleTools;
 import com.yuan.lifefinance.tool.tools.StringInputUtils;
 import com.yuan.lifefinance.tool.view.CustomHintDialog;
 
@@ -23,6 +24,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,14 +37,13 @@ public class CompareStockActivity extends Activity{
     private EditText et_name,et_cost,et_stopLoss,et_mostPrice;
     private TextView tv_rValue,tv_refreshRValue;
 
-
     double rvalue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comparestock);
+        findViewById(R.id.iv_return).setOnClickListener(v->finish());
         initView();
-
         setDate();
 
 //        new Thread(){
@@ -61,26 +62,26 @@ public class CompareStockActivity extends Activity{
 //        }.start();
 
 
-        tv_refreshRValue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    double value1 =  Double.valueOf(StringInputUtils.value(et_cost)) - Double.valueOf(StringInputUtils.value(et_stopLoss));
-                    double value2 =  Double.valueOf(StringInputUtils.value(et_mostPrice)) - Double.valueOf(StringInputUtils.value(et_cost));
-                    NumberFormat nf = NumberFormat.getNumberInstance();
-                    nf.setMaximumFractionDigits(2);
-                    rvalue = value2/value1;
-                    if(rvalue < 3){
-                        tv_rValue.setTextColor(Color.parseColor("#008B45"));
-                    }
-                    else{
-                        tv_rValue.setTextColor(Color.RED);
-                    }
-                    tv_rValue.setText(nf.format(rvalue));
-                }
-                catch (Exception ex){}
-            }
-        });
+//        tv_refreshRValue.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                try {
+//                    double value1 =  Double.valueOf(StringInputUtils.value(et_cost)) - Double.valueOf(StringInputUtils.value(et_stopLoss));
+//                    double value2 =  Double.valueOf(StringInputUtils.value(et_mostPrice)) - Double.valueOf(StringInputUtils.value(et_cost));
+//                    NumberFormat nf = NumberFormat.getNumberInstance();
+//                    nf.setMaximumFractionDigits(2);
+//                    rvalue = value2/value1;
+//                    if(rvalue < 3){
+//                        tv_rValue.setTextColor(Color.parseColor("#008B45"));
+//                    }
+//                    else{
+//                        tv_rValue.setTextColor(Color.RED);
+//                    }
+//                    tv_rValue.setText(nf.format(rvalue));
+//                }
+//                catch (Exception ex){}
+//            }
+//        });
     }
 
     private void initView(){
@@ -128,10 +129,10 @@ public class CompareStockActivity extends Activity{
             return false;
         }
 
-        if(StringInputUtils.valueIsEmpty(et_cost)){
-            Toast.makeText(CompareStockActivity.this,"买入价格为空！",Toast.LENGTH_SHORT).show();
-            return false;
-        }
+//        if(StringInputUtils.valueIsEmpty(et_cost)){
+//            Toast.makeText(CompareStockActivity.this,"买入价格为空！",Toast.LENGTH_SHORT).show();
+//            return false;
+//        }
 
         if(StringInputUtils.valueIsEmpty(et_stopLoss)){
             Toast.makeText(CompareStockActivity.this,"止损价格为空！",Toast.LENGTH_SHORT).show();
@@ -153,8 +154,8 @@ public class CompareStockActivity extends Activity{
 
     public void onclick(View view){
         if(isDataOk()){
-            String value = rvalue < 3?"R比率很低哦，谨慎下单哦！":"确定下单！";
-            new CustomHintDialog(CompareStockActivity.this, ()->savaData(),value,"取消", "下单",CustomHintDialog.Dialog_TYPE_1);
+            String value = "添加到备选池！";
+            new CustomHintDialog(CompareStockActivity.this, ()->savaData(),value,"取消", "添加",CustomHintDialog.Dialog_TYPE_1);
         }
 
     }
@@ -170,18 +171,19 @@ public class CompareStockActivity extends Activity{
         try {
             //保存数据库信息
             String stokeName = StringInputUtils.value(et_name);
-            String cost = StringInputUtils.value(et_cost);
             double stopLoss = Double.valueOf(StringInputUtils.value(et_stopLoss));
             double mostPrice = Double.valueOf(StringInputUtils.value(et_mostPrice));
             double rValue = Double.valueOf(StringInputUtils.value(tv_rValue));
-            int result = DBManager.getInstance().savaStockInfo(stokeName,cost,stopLoss,mostPrice,rValue,nowDate);
+            double cost = (mostPrice+rValue*stopLoss)/(1+rValue);
+            int result = DBManager.getInstance().savaTempStockInfo(stokeName, DoubleTools.dealMaximumFractionDigits(cost,2),stopLoss,mostPrice,rValue);
             Log.d("savaStockInfo","result:"+result);
             //截图保存
-            String nowdate = getNowDate().replace(" ","");
-            saveToSD(myShot(CompareStockActivity.this),et_name.getText().toString()+"_"+nowdate);
-            Toast.makeText(CompareStockActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
-
+//            String nowdate = getNowDate().replace(" ","");
+//            saveToSD(myShot(CompareStockActivity.this),et_name.getText().toString()+"_"+nowdate);
+            Toast.makeText(CompareStockActivity.this,"添加成功",Toast.LENGTH_SHORT).show();
             clearData();
+            startActivity(new Intent(CompareStockActivity.this,TempStockInfoActivity.class));
+            finish();
         }
         catch (Exception ex){
             Toast.makeText(CompareStockActivity.this,ex.toString(),Toast.LENGTH_SHORT).show();
@@ -250,10 +252,10 @@ public class CompareStockActivity extends Activity{
     }
 
     private void saveToSD(Bitmap bmp,String fileName) throws IOException {
-        String dirName = Environment.getExternalStorageDirectory()
-                .getAbsolutePath() + File.separator + "finance"+ File.separator;
         // 判断sd卡是否存在
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            String dirName = Environment.getExternalStorageDirectory()
+                    .getAbsolutePath() + File.separator + "finance"+ File.separator;
             File dir1 = new File(dirName);
             if(!dir1.exists()) dir1.mkdir();
 

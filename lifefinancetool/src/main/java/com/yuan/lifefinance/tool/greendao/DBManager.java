@@ -41,7 +41,7 @@ public class DBManager {
     }
 
     /**
-     * 查询历史数据
+     * 查询个股历史数据
      * @param
      * @param
      */
@@ -54,7 +54,23 @@ public class DBManager {
         }
         catch (Exception ex){}
         return new ArrayList<>();
-//        LogUtil.e("MycallBack",methodName+"--->开始更新:"+getMsgJson(param));
+    }
+
+    public List<TempStockInfo> selectTempStockInfo(int page,int pageSize){
+        try {
+            TempStockInfoDao tmepstockInfoDao =  DBManager.getInstance().getSession().getTempStockInfoDao();
+            List<TempStockInfo> tempStockInfo = tmepstockInfoDao.queryBuilder().offset((page-1)*pageSize).limit(pageSize).list();
+//            List<StockInfo> stockInfos = stockInfoDao.queryBuilder().build().list().s;
+            return tempStockInfo;
+        }
+        catch (Exception ex){}
+        return new ArrayList<>();
+    }
+
+    public void deleteTempStockInfoFromName(String name){
+        TempStockInfoDao tmepstockInfoDao =  DBManager.getInstance().getSession().getTempStockInfoDao();
+        TempStockInfo tempStockInfo = tmepstockInfoDao.queryBuilder().where(TempStockInfoDao.Properties.StokeName.eq(name)).build().unique();
+        tmepstockInfoDao.delete(tempStockInfo);
     }
 
     public int getStockInfoNum(){
@@ -66,6 +82,15 @@ public class DBManager {
         return 0;
     }
 
+    //获取临时个股列表
+    public int getTempStockInfoNum(){
+        try {
+            TempStockInfoDao stockInfoDao =  DBManager.getInstance().getSession().getTempStockInfoDao();
+            return stockInfoDao.queryBuilder().build().list().size();
+        }
+        catch (Exception ex){}
+        return 0;
+    }
     /**
      * 保存个股信息
      * @param

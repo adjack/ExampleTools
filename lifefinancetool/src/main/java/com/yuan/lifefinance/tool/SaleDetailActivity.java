@@ -57,9 +57,6 @@ public class SaleDetailActivity extends Activity{
                 double value2 = value/Double.valueOf(StringInputUtils.value(tv_cost))*100;
                 NumberFormat nf = NumberFormat.getNumberInstance();
                 nf.setMaximumFractionDigits(2);
-
-                Log.d("setMaximumFractions",nf.format(value2)+"");
-
                 value2 = Double.valueOf(nf.format(value2));
                 income = nf.format(value2)+"%";
                 tv_income.setText(income);

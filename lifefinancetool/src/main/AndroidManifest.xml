@@ -20,10 +20,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.yuan.lifefinance.tool.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity android:name=".HistoryInfoActivity"
             android:launchMode="singleTask"></activity>
         <activity android:name=".SaleDetailActivity" android:launchMode="singleTask"></activity>
         <activity android:name=".CompareStockActivity" android:launchMode="singleTask"></activity>
+        <activity android:name=".TempStockInfoActivity" android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>

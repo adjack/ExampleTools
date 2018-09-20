@@ -6,31 +6,54 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.yuan.lifefinance.tool.MainActivity">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center"
         android:background="#436EEE">
+        <ImageView
+            android:id="@+id/iv_return"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_return_up"/>
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="个股对比"
+            android:text="添加个股"
+            android:layout_centerInParent="true"
             android:textColor="#fff"/>
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_add"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:text="增加"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"/>
+    </RelativeLayout>
     <LinearLayout
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:paddingLeft="30dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="日期："
             android:textColor="#666"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:visibility="gone"/>
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="20dp"
@@ -63,7 +86,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:paddingRight="30dp"
+        android:visibility="gone">
         <TextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
@@ -72,32 +96,6 @@
             android:text="买入价格"/>
         <EditText
             android:id="@+id/et_cost"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="@drawable/shape_bg_style01"
-            android:maxLength="10"
-            android:inputType="numberDecimal"
-            android:paddingLeft="10dp"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
-        <TextView
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:textColor="#666"
-            android:textStyle="bold"
-            android:text="止损价格"/>
-        <EditText
-            android:id="@+id/et_stopLoss"
             android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="35dp"
@@ -135,6 +133,34 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:textColor="#666"
+            android:textStyle="bold"
+            android:text="止损价格"/>
+        <EditText
+            android:id="@+id/et_stopLoss"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/shape_bg_style01"
+            android:maxLength="10"
+            android:inputType="numberDecimal"
+            android:paddingLeft="10dp"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+
+
     <RelativeLayout
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
@@ -149,7 +175,7 @@
             android:textColor="#666"
             android:textStyle="bold"
             android:layout_centerVertical="true"
-            android:text="R比率"/>
+            android:text="最低R比率"/>
         <TextView
             android:id="@+id/tv_rValue"
             android:layout_toRightOf="@+id/tv_006"
@@ -158,6 +184,7 @@
             android:layout_height="35dp"
             android:maxLength="10"
             android:paddingLeft="5dp"
+            android:text="3.0"
             android:gravity="center_vertical"
             android:textColor="#d7000f"
             android:textSize="20sp"/>
@@ -168,6 +195,7 @@
             android:gravity="center_vertical|right"
             android:layout_alignParentRight="true"
             android:text="刷新"
+            android:visibility="gone"
             android:textStyle="bold"/>
     </RelativeLayout>
 
@@ -186,7 +214,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onclick"
-                android:text="生成记录"
+                android:text="添加到备选"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/shape_bg_style02"/>
@@ -202,7 +230,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/shape_bg_style02"/>
+                android:background="@drawable/shape_bg_style02"
+                android:visibility="gone"/>
 
             <Button
                 android:layout_marginBottom="10dp"
@@ -215,7 +244,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/shape_bg_style02"/>
+                android:background="@drawable/shape_bg_style02"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

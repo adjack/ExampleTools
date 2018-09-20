@@ -171,6 +171,32 @@
             android:textStyle="bold"/>
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:textColor="#666"
+            android:textStyle="bold"
+            android:text="预期收益"/>
+        <TextView
+            android:id="@+id/tv_income"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:maxLength="10"
+            android:paddingLeft="5dp"
+            android:inputType="numberDecimal"
+            android:textSize="20sp"
+            android:textColor="#d7000f"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -187,8 +213,6 @@
                 android:layout_height="wrap_content"
                 android:onClick="onclick"
                 android:text="生成记录"
-                android:layout_marginRight="20dp"
-                android:layout_alignParentBottom="true"
                 android:background="@drawable/shape_bg_style02"/>
 
             <Button
@@ -200,8 +224,6 @@
                 android:onClick="onclickSell"
                 android:text="出卖股票"
                 android:layout_marginLeft="5dp"
-                android:layout_marginRight="20dp"
-                android:layout_alignParentBottom="true"
                 android:background="@drawable/shape_bg_style02"/>
 
             <Button
@@ -212,6 +234,18 @@
                 android:layout_height="wrap_content"
                 android:onClick="onclickCompare"
                 android:text="个股比较"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/shape_bg_style02"/>
+
+            <Button
+                android:layout_marginBottom="10dp"
+                android:id="@+id/button4"
+                android:layout_toRightOf="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onclickOpenFile"
+                android:text="查看文件"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentBottom="true"

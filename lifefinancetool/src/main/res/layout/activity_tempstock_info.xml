@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#fff"
     tools:context="com.yuan.lifefinance.tool.HistoryInfoActivity">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,9 +23,20 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已购买"
+            android:text="备选池"
             android:layout_centerInParent="true"
             android:textColor="#fff"/>
+
+        <TextView
+            android:id="@+id/tv_add"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:text="增加"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
     </RelativeLayout>
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView

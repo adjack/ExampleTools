@@ -9,6 +9,8 @@ import com.yuan.lifefinance.tool.R;
 import com.yuan.lifefinance.tool.adapter.recyclebase.ListBaseAdapter;
 import com.yuan.lifefinance.tool.adapter.recyclebase.SuperViewHolder;
 import com.yuan.lifefinance.tool.greendao.StockInfo;
+import com.yuan.lifefinance.tool.greendao.TempStockInfo;
+import com.yuan.lifefinance.tool.tools.DoubleTools;
 import com.yuan.lifefinance.tool.tools.StringInputUtils;
 
 import java.text.ParseException;
@@ -19,15 +21,15 @@ import java.util.Date;
  * Created by 123 on 2018/9/18.
  */
 
-public class StockHistoryAdapter extends ListBaseAdapter<StockInfo> {
+public class TempStockHistoryAdapter extends ListBaseAdapter<TempStockInfo> {
     private Context context;
-    public StockHistoryAdapter(Context context) {
+    public TempStockHistoryAdapter(Context context) {
         super(context);
         this.context = context;
     }
     @Override
     public int getLayoutId() {
-        return R.layout.item_history;
+        return R.layout.item_temphistory;
     }
 
     @Override
@@ -48,15 +50,19 @@ public class StockHistoryAdapter extends ListBaseAdapter<StockInfo> {
         TextView tv_timeInfo =  holder.getView(R.id.tv_timeInfo);
         TextView tv_salePrice =  holder.getView(R.id.tv_salePrice);
         tv_name.setText(mDataList.get(pos).getStokeName());
-        tv_cost.setText("成本："+mDataList.get(pos).getCost());
+        tv_cost.setText("买入成本应少于："+mDataList.get(pos).getCostValue());
         tv_stopLoss.setText("止损："+mDataList.get(pos).getStopLoss());
         tv_mostPrice.setText("目标："+mDataList.get(pos).getMostPrice()+" ¥");
         initRValueColor(tv_rValueFlag,tv_rValue,mDataList.get(pos).getRValue());
-        tv_timeInfo.setText(dealTime(mDataList.get(pos).getTimeInfoBuy()));
-
-        tv_salePrice.setText(dealSalePrice(mDataList.get(pos).getSalePrice()));
-        Log.d("getIncome","getIncome:"+mDataList.get(pos).getIncome()+"/"+mDataList.get(pos).getIncome());
-        initIncome(tv_incomeFlag,tv_income,mDataList.get(pos).getIncome());
+//        tv_timeInfo.setText(dealTime(mDataList.get(pos).getTimeInfoBuy()));
+//
+//        tv_salePrice.setText(dealSalePrice(mDataList.get(pos).getSalePrice()));
+//        Log.d("getIncome","getIncome:"+mDataList.get(pos).getIncome()+"/"+mDataList.get(pos).getIncome());
+//        initIncome(tv_incomeFlag,tv_income,mDataList.get(pos).getIncome());
+        //当前成本最高价格买入的最高收益率
+        double value2 = mDataList.get(pos).getMostPrice()- Double.valueOf(mDataList.get(pos).getCostValue());
+        double value3 = Double.valueOf(DoubleTools.dealMaximumFractionDigits(value2/Double.valueOf(mDataList.get(pos).getCostValue())*100,2));
+        tv_income.setText(DoubleTools.dealMaximumFractionDigits(value3,2)+"%");
     }
 
     private String dealSalePrice(String salePrice){

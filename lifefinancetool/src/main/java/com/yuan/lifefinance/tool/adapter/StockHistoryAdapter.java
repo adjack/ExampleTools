@@ -2,7 +2,11 @@ package com.yuan.lifefinance.tool.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yuan.lifefinance.tool.R;
@@ -37,6 +41,7 @@ public class StockHistoryAdapter extends ListBaseAdapter<StockInfo> {
 
     @Override
     public void onBindItemHolder(SuperViewHolder holder, int pos) {
+        RelativeLayout root_view = holder.getView(R.id.root_view);
         TextView tv_name =  holder.getView(R.id.tv_name);
         TextView tv_cost =  holder.getView(R.id.tv_cost);
         TextView tv_stopLoss =  holder.getView(R.id.tv_stopLoss);
@@ -47,6 +52,9 @@ public class StockHistoryAdapter extends ListBaseAdapter<StockInfo> {
         TextView tv_rValueFlag =  holder.getView(R.id.tv_rValueFlag);
         TextView tv_timeInfo =  holder.getView(R.id.tv_timeInfo);
         TextView tv_salePrice =  holder.getView(R.id.tv_salePrice);
+        LinearLayout linear_DayNum = holder.getView(R.id.linear_DayNum);
+        TextView tv_DayNum =  holder.getView(R.id.tv_DayNum);
+
         tv_name.setText(mDataList.get(pos).getStokeName());
         tv_cost.setText("成本："+mDataList.get(pos).getCost());
         tv_stopLoss.setText("止损："+mDataList.get(pos).getStopLoss());
@@ -57,6 +65,29 @@ public class StockHistoryAdapter extends ListBaseAdapter<StockInfo> {
         tv_salePrice.setText(dealSalePrice(mDataList.get(pos).getSalePrice()));
         Log.d("getIncome","getIncome:"+mDataList.get(pos).getIncome()+"/"+mDataList.get(pos).getIncome());
         initIncome(tv_incomeFlag,tv_income,mDataList.get(pos).getIncome());
+        String timeInfoSale = StringInputUtils.value(mDataList.get(pos).getTimeInfoSale());
+
+
+        if(TextUtils.isEmpty(timeInfoSale)){//2018092115:27:53
+//            long value = new Date().getTime() - dealBugTime("2018091815:27:53");
+            long value = new Date().getTime() - dealBugTime(mDataList.get(pos).getTimeInfoBuy());
+            linear_DayNum.setVisibility(value > 0?View.VISIBLE:View.GONE);
+            if(value > 0){
+                tv_DayNum.setText(value/1000/60/60/24+"");
+            }
+        }
+        else{
+            long value = dealBugTime(mDataList.get(pos).getTimeInfoSale()) - dealBugTime(mDataList.get(pos).getTimeInfoBuy());
+            linear_DayNum.setVisibility(value > 0?View.VISIBLE:View.GONE);
+            if(value > 0){
+                tv_DayNum.setText(value/1000/60/60/24+"");
+            }
+        }
+        Log.d("linear_DayNum","timeInfoSale:"+timeInfoSale);
+
+        root_view.setBackgroundResource(TextUtils.isEmpty(timeInfoSale)?R.drawable.item_shape_01:R.drawable.item_shape_02);
+//        root_view.setBackgroundColor(Color.parseColor(TextUtils.isEmpty(timeInfoSale)?"#fffff0":"#F2F2F2"));
+
     }
 
     private String dealSalePrice(String salePrice){
@@ -76,6 +107,18 @@ public class StockHistoryAdapter extends ListBaseAdapter<StockInfo> {
         } catch (ParseException e) {
         }
         return formatNew.format(date);
+    }
+
+    private long dealBugTime(String timeV){
+        long value = 0;
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHH:mm:ss");
+        Date date = null;
+        try {
+            date = format.parse(timeV);
+            value = date.getTime();
+        } catch (ParseException e) {
+        }
+        return value;
     }
 
     private void initRValueColor(TextView textViewFlag,TextView tv_rValue,double rValue){

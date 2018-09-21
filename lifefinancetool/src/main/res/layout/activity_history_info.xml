@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#fff"
     tools:context="com.yuan.lifefinance.tool.HistoryInfoActivity">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,6 +29,8 @@
     </RelativeLayout>
 
     <com.github.jdsjlzx.recyclerview.LRecyclerView
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_marginTop="20dp"
         android:id="@+id/lrecycle_list"
         android:layout_width="match_parent"

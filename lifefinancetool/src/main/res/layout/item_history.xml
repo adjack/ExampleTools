@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="20dp"
     android:paddingTop="25dp"
-    android:paddingBottom="25dp"
-    android:paddingRight="10dp"
     android:background="#FFFFF0"
     android:orientation="vertical" >
     <TextView
@@ -13,6 +11,7 @@
         android:layout_width="85dp"
         android:layout_height="wrap_content"
         android:text="中天科技是"
+        android:layout_marginLeft="20dp"
         android:textStyle="bold"
         android:textSize="16sp"
         android:textColor="#d7000f"/>
@@ -21,12 +20,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="201801253652"
+        android:layout_marginRight="20dp"
         android:layout_alignParentRight="true"/>
 
     <TextView
         android:id="@+id/tv_cost"
         android:layout_below="@+id/tv_name"
         android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="成本：10.53"
@@ -37,6 +38,7 @@
         android:id="@+id/tv_stopLoss"
         android:layout_below="@+id/tv_cost"
         android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="13sp"
@@ -97,6 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/tv_incomeFlag"
@@ -112,5 +115,50 @@
             android:layout_marginTop="2dp"
             android:textStyle="bold"
             android:textSize="20sp"/>
+    </LinearLayout>
+    <View
+        android:id="@+id/view01"
+        android:layout_below="@+id/tv_stopLoss"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"/>
+    <View
+        android:layout_below="@+id/view01"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#fff"/>
+    <LinearLayout
+        android:id="@+id/linear_DayNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="60dp"
+        android:visibility="gone"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_Flag2"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="持有："
+            android:layout_marginTop="2dp"
+            android:textColor="#d7000f"
+            android:textSize="11sp"
+            />
+        <TextView
+            android:id="@+id/tv_DayNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:textColor="#d7000f"
+            android:layout_marginTop="2dp"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/tv_Flag3"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text=" 天"
+            android:layout_marginTop="2dp"
+            android:textColor="#d7000f"
+            android:textSize="11sp"/>
     </LinearLayout>
 </RelativeLayout>

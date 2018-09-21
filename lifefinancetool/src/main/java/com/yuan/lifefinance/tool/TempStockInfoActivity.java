@@ -33,7 +33,7 @@ import java.util.List;
 public class TempStockInfoActivity extends Activity {
     List<TempStockInfo> stockInfos = new ArrayList<>();
     int pageIndex = 1;
-    int pageSize = 10;
+    int pageSize = 20;
     int maxNum=0;
     private boolean onFall = true;
     LRecyclerView lrecycle_list;
@@ -45,6 +45,9 @@ public class TempStockInfoActivity extends Activity {
         super.onNewIntent(intent);
 
         try {
+            onFall = true;
+            mDataAdapter.clear();
+            stockInfos.clear();
             LoadData(1,pageSize);
         }
         catch (Exception ex){}
@@ -97,14 +100,18 @@ public class TempStockInfoActivity extends Activity {
         mAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
             public void onItemLongClick(View view, int position) {
-                new CustomHintDialog(TempStockInfoActivity.this, ()->{
-                    DBManager.getInstance().deleteTempStockInfoFromName(stockInfos.get(position).getStokeName());
-                    stockInfos.remove(position);
-                    mDataAdapter.clear();
-                    mDataAdapter.addAll(stockInfos);
-                    mDataAdapter.notifyDataSetChanged();
-                    Toast.makeText(TempStockInfoActivity.this,"删除成功!",Toast.LENGTH_SHORT).show();
-                },"删除本条信息？","取消", "删除",CustomHintDialog.Dialog_TYPE_1);
+                try {
+                    new CustomHintDialog(TempStockInfoActivity.this, ()->{
+                        DBManager.getInstance().deleteTempStockInfoFromName(stockInfos.get(position).getStokeName());
+                        stockInfos.remove(position);
+                        mDataAdapter.clear();
+                        mDataAdapter.addAll(stockInfos);
+                        mDataAdapter.notifyDataSetChanged();
+                        Toast.makeText(TempStockInfoActivity.this,"删除成功!",Toast.LENGTH_SHORT).show();
+                    },"删除本条信息？","取消", "删除",CustomHintDialog.Dialog_TYPE_1);
+                }
+                catch (Exception ex){}
+
             }
         });
 //        mAdapter.setOnItemClickListener((View view, int position)-> {
@@ -143,7 +150,7 @@ public class TempStockInfoActivity extends Activity {
             public void run() {
                 SystemClock.sleep(100);
                 if(maxNum == 0){
-                    maxNum = 10;
+                    maxNum = 18;
                     Log.d("HistoryInfoActivity_log","总数："+maxNum);
                 }
 

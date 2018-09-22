@@ -13,6 +13,7 @@ import com.yuan.lifefinance.tool.R;
 import com.yuan.lifefinance.tool.adapter.recyclebase.ListBaseAdapter;
 import com.yuan.lifefinance.tool.adapter.recyclebase.SuperViewHolder;
 import com.yuan.lifefinance.tool.greendao.StockInfo;
+import com.yuan.lifefinance.tool.tools.DoubleTools;
 import com.yuan.lifefinance.tool.tools.StringInputUtils;
 
 import java.text.ParseException;
@@ -54,10 +55,18 @@ public class StockHistoryAdapter extends ListBaseAdapter<StockInfo> {
         TextView tv_salePrice =  holder.getView(R.id.tv_salePrice);
         LinearLayout linear_DayNum = holder.getView(R.id.linear_DayNum);
         TextView tv_DayNum =  holder.getView(R.id.tv_DayNum);
+        TextView tv_bili = holder.getView(R.id.tv_bili);
 
         tv_name.setText(mDataList.get(pos).getStokeName());
         tv_cost.setText("成本："+mDataList.get(pos).getCost());
         tv_stopLoss.setText("止损："+mDataList.get(pos).getStopLoss());
+        try {
+            double value2 = mDataList.get(pos).getMostPrice()- Double.valueOf(mDataList.get(pos).getCost());
+            double value3 = Double.valueOf(DoubleTools.dealMaximumFractionDigits(value2/Double.valueOf(mDataList.get(pos).getCost())*100,2));
+            tv_bili.setText(DoubleTools.dealMaximumFractionDigits(value3,2)+"%");
+        }
+        catch (Exception ex){
+        }
         tv_mostPrice.setText("目标："+mDataList.get(pos).getMostPrice()+" ¥");
         initRValueColor(tv_rValueFlag,tv_rValue,mDataList.get(pos).getRValue());
         tv_timeInfo.setText(dealTime(mDataList.get(pos).getTimeInfoBuy()));

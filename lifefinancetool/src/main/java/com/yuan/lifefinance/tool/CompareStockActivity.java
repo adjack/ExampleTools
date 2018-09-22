@@ -35,7 +35,7 @@ public class CompareStockActivity extends Activity{
     private TextView tv_time;
 
     private EditText et_name,et_cost,et_stopLoss,et_mostPrice;
-    private TextView tv_rValue,tv_refreshRValue;
+    private TextView tv_rValue,tv_refreshRValue;//
 
     double rvalue;
     @Override

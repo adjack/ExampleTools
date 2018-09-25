@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yuan.lifefinance.tool.greendao.DBManager;
+import com.yuan.lifefinance.tool.services.StockPriceService;
 import com.yuan.lifefinance.tool.tools.DoubleTools;
 import com.yuan.lifefinance.tool.tools.PermissionTools;
 import com.yuan.lifefinance.tool.tools.StringInputUtils;
@@ -80,6 +81,8 @@ public class MainActivity extends Activity implements PermissionTools.Permission
         permissionTools = PermissionTools.getInstance(this, permissionlist, this);
         permissionTools.requestRunPermission(false);
         setDate();
+
+        startService(new Intent(this, StockPriceService.class));
 
 //        new Thread(){
 //            @Override

@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -31,11 +31,22 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".HistoryInfoActivity"
-            android:launchMode="singleTask"></activity>
-        <activity android:name=".SaleDetailActivity" android:launchMode="singleTask"></activity>
-        <activity android:name=".CompareStockActivity" android:launchMode="singleTask"></activity>
-        <activity android:name=".TempStockInfoActivity" android:launchMode="singleTask"></activity>
+        <activity
+            android:name=".HistoryInfoActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".SaleDetailActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".CompareStockActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".TempStockInfoActivity"
+            android:launchMode="singleTask" />
+
+        <service
+            android:name=".services.StockPriceService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

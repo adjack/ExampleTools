@@ -34,7 +34,7 @@ public class CompareStockActivity extends Activity{
     private boolean permissionIsOk;
     private TextView tv_time;
 
-    private EditText et_name,et_cost,et_stopLoss,et_mostPrice;
+    private EditText et_name,et_cost,et_stopLoss,et_mostPrice,et_Code;
     private TextView tv_rValue,tv_refreshRValue;//
 
     double rvalue;
@@ -90,6 +90,7 @@ public class CompareStockActivity extends Activity{
         et_cost = findViewById(R.id.et_cost);
         et_stopLoss = findViewById(R.id.et_stopLoss);
         et_mostPrice = findViewById(R.id.et_mostPrice);
+        et_Code = findViewById(R.id.et_Code);
 
         tv_rValue = findViewById(R.id.tv_rValue);
         tv_refreshRValue = findViewById(R.id.tv_refreshRValue);
@@ -129,10 +130,10 @@ public class CompareStockActivity extends Activity{
             return false;
         }
 
-//        if(StringInputUtils.valueIsEmpty(et_cost)){
-//            Toast.makeText(CompareStockActivity.this,"买入价格为空！",Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
+        if(StringInputUtils.valueIsEmpty(et_Code) && StringInputUtils.value(et_Code).length() == 6){
+            Toast.makeText(CompareStockActivity.this,"股票代码有误！",Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         if(StringInputUtils.valueIsEmpty(et_stopLoss)){
             Toast.makeText(CompareStockActivity.this,"止损价格为空！",Toast.LENGTH_SHORT).show();
@@ -173,9 +174,16 @@ public class CompareStockActivity extends Activity{
             String stokeName = StringInputUtils.value(et_name);
             double stopLoss = Double.valueOf(StringInputUtils.value(et_stopLoss));
             double mostPrice = Double.valueOf(StringInputUtils.value(et_mostPrice));
-            double rValue = Double.valueOf(StringInputUtils.value(tv_rValue));
-            double cost = (mostPrice+rValue*stopLoss)/(1+rValue);
-            int result = DBManager.getInstance().savaTempStockInfo(stokeName, DoubleTools.dealMaximumFractionDigits(cost,2),stopLoss,mostPrice,rValue);
+            double rValue = Double.valueOf(StringInputUtils.value(tv_rValue));//默认拿最低R比率为3条件
+
+            double cost = (mostPrice+rValue*stopLoss)/(1+rValue);//根据最低R比率算出的最低买入价格
+            double cost_other = stopLoss/(1-0.03);//根据最大止损3%计算最高买入价格
+            double most_cost = cost <= cost_other?cost:cost_other;//最优的买入价格
+
+            //重新计算下R比率用于显示在列表
+            rValue = Double.valueOf(DoubleTools.dealMaximumFractionDigits((mostPrice - most_cost)/(most_cost - stopLoss),2));
+
+            int result = DBManager.getInstance().savaTempStockInfo(stokeName, StringInputUtils.value(et_Code),DoubleTools.dealMaximumFractionDigits(most_cost,2),stopLoss,mostPrice,rValue);
             Log.d("savaStockInfo","result:"+result);
             //截图保存
 //            String nowdate = getNowDate().replace(" ","");
@@ -190,27 +198,27 @@ public class CompareStockActivity extends Activity{
         }
     }
 
-    public void savaDataToTempStockInfo(){
-        try {
-            //保存数据库信息
-            String stokeName = StringInputUtils.value(et_name);
-            String cost = StringInputUtils.value(et_cost);
-            double stopLoss = Double.valueOf(StringInputUtils.value(et_stopLoss));
-            double mostPrice = Double.valueOf(StringInputUtils.value(et_mostPrice));
-            double rValue = Double.valueOf(StringInputUtils.value(tv_rValue));
-            int result = DBManager.getInstance().savaTempStockInfo(stokeName,cost,stopLoss,mostPrice,rValue);
-            Log.d("savaStockInfo","result:"+result);
-            //截图保存
-            String nowdate = getNowDate().replace(" ","");
-            saveToSD(myShot(CompareStockActivity.this),et_name.getText().toString()+"_"+nowdate);
-            Toast.makeText(CompareStockActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
-
-            clearData();
-        }
-        catch (Exception ex){
-            Toast.makeText(CompareStockActivity.this,ex.toString(),Toast.LENGTH_SHORT).show();
-        }
-    }
+//    public void savaDataToTempStockInfo(){
+//        try {
+//            //保存数据库信息
+//            String stokeName = StringInputUtils.value(et_name);
+//            String cost = StringInputUtils.value(et_cost);
+//            double stopLoss = Double.valueOf(StringInputUtils.value(et_stopLoss));
+//            double mostPrice = Double.valueOf(StringInputUtils.value(et_mostPrice));
+//            double rValue = Double.valueOf(StringInputUtils.value(tv_rValue));
+//            int result = DBManager.getInstance().savaTempStockInfo(stokeName,cost,stopLoss,mostPrice,rValue);
+//            Log.d("savaStockInfo","result:"+result);
+//            //截图保存
+//            String nowdate = getNowDate().replace(" ","");
+//            saveToSD(myShot(CompareStockActivity.this),et_name.getText().toString()+"_"+nowdate);
+//            Toast.makeText(CompareStockActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
+//
+//            clearData();
+//        }
+//        catch (Exception ex){
+//            Toast.makeText(CompareStockActivity.this,ex.toString(),Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     private void clearData(){
         et_name.setText("");

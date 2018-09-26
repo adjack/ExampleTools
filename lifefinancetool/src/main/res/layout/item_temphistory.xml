@@ -45,8 +45,19 @@
             android:id="@+id/tv_stopLoss"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="40dp"
             android:text="止损：11"
+            android:textColor="#006400"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_stopLossRatio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:layout_marginLeft="1dp"
+            android:text="3.0%"
+            android:textStyle="bold"
             android:textColor="#006400"
             android:textSize="14sp" />
 

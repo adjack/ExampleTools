@@ -55,6 +55,16 @@ public class DBManager {
         catch (Exception ex){}
         return new ArrayList<>();
     }
+    public List<StockInfo> selectBuyingStockInfo(){
+        try {
+            StockInfoDao stockInfoDao =  DBManager.getInstance().getSession().getStockInfoDao();
+            List<StockInfo> stockInfos = stockInfoDao.queryBuilder().where(StockInfoDao.Properties.TimeInfoSale.isNull()).build().list();
+            Log.d("selectBuyingStockInfo",stockInfos.size()+"");
+            return stockInfos;
+        }
+        catch (Exception ex){}
+        return new ArrayList<>();
+    }
 
     public List<TempStockInfo> selectTempStockInfo(int page,int pageSize){
         try {
@@ -96,12 +106,13 @@ public class DBManager {
      * @param
      * @param
      */
-    public synchronized int savaStockInfo(String stokeName,String cost,double stopLoss,double mostPrice,double rValue,String timeInfoBug){
+    public synchronized int savaStockInfo(String stokeName,String stokeCode,String cost,double stopLoss,double mostPrice,double rValue,String timeInfoBug){
         int result = 0;
         try {
             StockInfoDao stockInfoDao =  mDaoSession.getStockInfoDao();
             StockInfo stockInfo = new StockInfo();
             stockInfo.setStokeName(stokeName);
+            stockInfo.setDiscrib1(stokeCode);
             stockInfo.setCost(cost);
             stockInfo.setStopLoss(stopLoss);
             stockInfo.setMostPrice(mostPrice);
@@ -116,12 +127,13 @@ public class DBManager {
         return result;
     }
 
-    public synchronized int savaTempStockInfo(String stokeName,String cost,double stopLoss,double mostPrice,double rValue){
+    public synchronized int savaTempStockInfo(String stokeName,String stokeCode,String cost,double stopLoss,double mostPrice,double rValue){
         int result = 0;
         try {
             TempStockInfoDao stockInfoDao =  mDaoSession.getTempStockInfoDao();
             TempStockInfo stockInfo = new TempStockInfo();
             stockInfo.setStokeName(stokeName);
+            stockInfo.setDiscrib1(stokeCode);
             stockInfo.setCostValue(cost);
             stockInfo.setStopLoss(stopLoss);
             stockInfo.setMostPrice(mostPrice);

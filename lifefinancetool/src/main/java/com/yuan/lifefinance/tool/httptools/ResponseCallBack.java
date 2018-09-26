@@ -12,12 +12,12 @@ public abstract class ResponseCallBack<T> {
      * @param response
      * @param rawData
      */
-    public abstract void onSuccess(boolean dataCheck,int totalNum,T response,String rawData);
+    public abstract void onSuccess(Object requestOb,boolean dataCheck,int totalNum,T response,String rawData);
 
     /**
      * 失败
      * @param t
      * @param rawData
      */
-    public abstract void onFailure(Throwable t,String rawData);
+    public abstract void onFailure(Object requestOb,Throwable t,String rawData);
 }

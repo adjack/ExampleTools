@@ -47,6 +47,7 @@ public class TempStockHistoryAdapter extends ListBaseAdapter<TempStockInfo> {
         TextView tv_incomeFlag =  holder.getView(R.id.tv_incomeFlag);
         TextView tv_rValue =  holder.getView(R.id.tv_rValue);
         TextView tv_rValueFlag =  holder.getView(R.id.tv_rValueFlag);
+        TextView tv_stopLossRatio =  holder.getView(R.id.tv_stopLossRatio);
         TextView tv_timeInfo =  holder.getView(R.id.tv_timeInfo);
         TextView tv_salePrice =  holder.getView(R.id.tv_salePrice);
         tv_name.setText(mDataList.get(pos).getStokeName());
@@ -63,6 +64,10 @@ public class TempStockHistoryAdapter extends ListBaseAdapter<TempStockInfo> {
         double value2 = mDataList.get(pos).getMostPrice()- Double.valueOf(mDataList.get(pos).getCostValue());
         double value3 = Double.valueOf(DoubleTools.dealMaximumFractionDigits(value2/Double.valueOf(mDataList.get(pos).getCostValue())*100,2));
         tv_income.setText(DoubleTools.dealMaximumFractionDigits(value3,2)+"%");
+
+        double value4 = Double.valueOf(mDataList.get(pos).getCostValue()) - mDataList.get(pos).getStopLoss();
+        double value5 = Double.valueOf(DoubleTools.dealMaximumFractionDigits(value4/Double.valueOf(mDataList.get(pos).getCostValue())*100,2));
+        tv_stopLossRatio.setText("-"+DoubleTools.dealMaximumFractionDigits(value5,2)+"%");
     }
 
     private String dealSalePrice(String salePrice){
@@ -70,7 +75,6 @@ public class TempStockHistoryAdapter extends ListBaseAdapter<TempStockInfo> {
             return "";
         }
         return "卖出价格："+salePrice+" ¥";
-
     }
 
     private String dealTime(String timeV){

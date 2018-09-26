@@ -66,7 +66,7 @@ public class MainActivity extends Activity implements PermissionTools.Permission
         permissionIsOk = true;
     }
 
-    private EditText et_name,et_cost,et_stopLoss,et_mostPrice;
+    private EditText et_name,et_code,et_cost,et_stopLoss,et_mostPrice;
     private TextView tv_rValue,tv_refreshRValue,tv_income;
 
 
@@ -122,6 +122,7 @@ public class MainActivity extends Activity implements PermissionTools.Permission
     private void initView(){
         tv_time = findViewById(R.id.tv_time);
         et_name = findViewById(R.id.et_name);
+        et_code = findViewById(R.id.et_code);
         et_cost = findViewById(R.id.et_cost);
         et_stopLoss = findViewById(R.id.et_stopLoss);
         et_mostPrice = findViewById(R.id.et_mostPrice);
@@ -166,6 +167,10 @@ public class MainActivity extends Activity implements PermissionTools.Permission
             return false;
         }
 
+        if(StringInputUtils.valueIsEmpty(et_code)&& StringInputUtils.value(et_code).length() == 6){
+            Toast.makeText(MainActivity.this,"请输入个股代码！",Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if(StringInputUtils.valueIsEmpty(et_cost)){
             Toast.makeText(MainActivity.this,"买入价格为空！",Toast.LENGTH_SHORT).show();
             return false;
@@ -241,7 +246,7 @@ public class MainActivity extends Activity implements PermissionTools.Permission
             double stopLoss = Double.valueOf(StringInputUtils.value(et_stopLoss));
             double mostPrice = Double.valueOf(StringInputUtils.value(et_mostPrice));
             double rValue = Double.valueOf(StringInputUtils.value(tv_rValue));
-            int result = DBManager.getInstance().savaStockInfo(stokeName,cost,stopLoss,mostPrice,rValue,nowDate);
+            int result = DBManager.getInstance().savaStockInfo(stokeName,StringInputUtils.value(et_code),cost,stopLoss,mostPrice,rValue,nowDate);
             Log.d("savaStockInfo","result:"+result);
             //截图保存
             String nowdate = getNowDate().replace(" ","");
@@ -255,30 +260,31 @@ public class MainActivity extends Activity implements PermissionTools.Permission
         }
     }
 
-    public void savaDataToTempStockInfo(){
-        try {
-            //保存数据库信息
-            String stokeName = StringInputUtils.value(et_name);
-            String cost = StringInputUtils.value(et_cost);
-            double stopLoss = Double.valueOf(StringInputUtils.value(et_stopLoss));
-            double mostPrice = Double.valueOf(StringInputUtils.value(et_mostPrice));
-            double rValue = Double.valueOf(StringInputUtils.value(tv_rValue));
-            int result = DBManager.getInstance().savaTempStockInfo(stokeName,cost,stopLoss,mostPrice,rValue);
-            Log.d("savaStockInfo","result:"+result);
-            //截图保存
-            String nowdate = getNowDate().replace(" ","");
-            saveToSD(myShot(MainActivity.this),et_name.getText().toString()+"_"+nowdate);
-            Toast.makeText(MainActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
-
-            clearData();
-        }
-        catch (Exception ex){
-            Toast.makeText(MainActivity.this,ex.toString(),Toast.LENGTH_SHORT).show();
-        }
-    }
+//    public void savaDataToTempStockInfo(){
+//        try {
+//            //保存数据库信息
+//            String stokeName = StringInputUtils.value(et_name);
+//            String cost = StringInputUtils.value(et_cost);
+//            double stopLoss = Double.valueOf(StringInputUtils.value(et_stopLoss));
+//            double mostPrice = Double.valueOf(StringInputUtils.value(et_mostPrice));
+//            double rValue = Double.valueOf(StringInputUtils.value(tv_rValue));
+//            int result = DBManager.getInstance().savaTempStockInfo(stokeName,cost,stopLoss,mostPrice,rValue);
+//            Log.d("savaStockInfo","result:"+result);
+//            //截图保存
+//            String nowdate = getNowDate().replace(" ","");
+//            saveToSD(myShot(MainActivity.this),et_name.getText().toString()+"_"+nowdate);
+//            Toast.makeText(MainActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
+//
+//            clearData();
+//        }
+//        catch (Exception ex){
+//            Toast.makeText(MainActivity.this,ex.toString(),Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     private void clearData(){
         et_name.setText("");
+        et_code.setText("");
         et_cost.setText("");
         et_stopLoss.setText("");
         et_mostPrice.setText("");

@@ -128,31 +128,32 @@ public class NetworkFactory {
         public ResponseCallBack<JSONObject> responseCallBack;
         private String methodName;
         private String param;
-        public MycallBack(ResponseCallBack<JSONObject> responseCallBack,String methodName,String param){
+        private Object requestOb;
+        public MycallBack(Object requestOb,ResponseCallBack<JSONObject> responseCallBack,String methodName,String param){
             this.responseCallBack = responseCallBack;
             this.methodName = methodName;
             this.param = param;
+            this.requestOb = requestOb;
         }
         @Override
         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
             if(response == null || response.body() == null){
                 if(responseCallBack != null){
-                    responseCallBack.onFailure(new Exception("error"),"error");
+                    responseCallBack.onFailure(requestOb,new Exception("error"),"error");
                 }
                 return;
             }
             try {
 
                 String rawData = new String(response.body().bytes());
-                JSONObject dataObject = new JSONObject(rawData);
-
+                JSONObject dataObject = new JSONObject();
                 if(responseCallBack != null){
-                    responseCallBack.onSuccess(isDataOk(dataObject),getTotalNum(dataObject),dataObject,rawData);
+                    responseCallBack.onSuccess(requestOb,isDataOk(dataObject),getTotalNum(dataObject),dataObject,rawData);
                 }
             }
             catch (Exception ex){
                 if(responseCallBack != null){
-                    responseCallBack.onFailure(ex,response.body().toString());
+                    responseCallBack.onFailure(requestOb,ex,response.body().toString());
                 }
             }
         }
@@ -161,7 +162,7 @@ public class NetworkFactory {
         public void onFailure(Call<ResponseBody> call, Throwable t) {
             Log.e("MycallBack","error:"+t.toString()+"\n");
             if(responseCallBack != null){
-                responseCallBack.onFailure(t,"");
+                responseCallBack.onFailure(requestOb,t,"");
             }
         }
 
@@ -199,14 +200,14 @@ public class NetworkFactory {
     }
 
     //post执行具体业务接口
-    public void runBusinessInterface(final String url, String methodName,final String params, final ResponseCallBack<JSONObject> callBack){
+    public void runBusinessInterface(Object requestOb,final String url, String methodName,final String params, final ResponseCallBack<JSONObject> callBack){
         Call<ResponseBody> call =  getNetworkService(getUrlHead(url)).httpPost(getPathName(methodName),getHeadParam(url),getRequestBody(params));
-        call.enqueue(new MycallBack(callBack,getPathName(methodName),params));
+        call.enqueue(new MycallBack(requestOb,callBack,getPathName(methodName),params));
     }
 
     //get请求具体接口
     //http://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData?symbol=sz002095&scale=60&ma=no&datalen=1023
-    public void runBusinessInterface(String url,final ResponseCallBack<JSONObject> callBack){
+    public void runBusinessInterface(Object requestOb,String url,final ResponseCallBack<JSONObject> callBack){
         url = url.replace("?","###");
         Log.d("runBusinessInterface",url+"");
         String[] urls = url.split("###");
@@ -221,29 +222,39 @@ public class NetworkFactory {
         }
         Call<ResponseBody> call =  getNetworkService(baseDefaultUrl)
                 .httpGet(urls[0],map);
-        call.enqueue(new MycallBack(callBack,getPathName(urls[0]),null));
+        call.enqueue(new MycallBack(requestOb,callBack,getPathName(urls[0]),null));
     }
 
     //业务接口分割线=========================================================================================================
-    public synchronized void post(final String methodName, final String param, final ResponseCallBack<JSONObject> callBack){
+    public synchronized void post(Object requestOb,final String methodName, final String param, final ResponseCallBack<JSONObject> callBack){
         if(!checkNetwork()){
             if(callBack != null){
-                callBack.onFailure(new Exception(),"no net");
+                callBack.onFailure(requestOb,new Exception(),"no net");
             }
             return;
         }
         Log.d("MycallBack","下发参数："+param);
-        runBusinessInterface(baseDefaultUrl,methodName,param,callBack);
+        runBusinessInterface(requestOb,baseDefaultUrl,methodName,param,callBack);
     }
 
     public synchronized void get(final String url, final ResponseCallBack<JSONObject> callBack){
         if(!checkNetwork()){
             if(callBack != null){
-                callBack.onFailure(new Exception(),"no net");
+                callBack.onFailure(null,new Exception(),"no net");
             }
             return;
         }
-        runBusinessInterface(url,callBack);
+        runBusinessInterface(null,url,callBack);
+    }
+
+    public synchronized void get(Object requestOb,final String url, final ResponseCallBack<JSONObject> callBack){
+        if(!checkNetwork()){
+            if(callBack != null){
+                callBack.onFailure(requestOb,new Exception(),"no net");
+            }
+            return;
+        }
+        runBusinessInterface(requestOb,url,callBack);
     }
 
 }

@@ -14,7 +14,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = getApplicationContext();
-
+        MyConfiguration.init();
         setDefaultUncaughtExceptionHandler();
     }
 
@@ -31,4 +31,5 @@ public class MyApplication extends Application {
     public static Context gainContext(){
         return mContext;
     }
+
 }

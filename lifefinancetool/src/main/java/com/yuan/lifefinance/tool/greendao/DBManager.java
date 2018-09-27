@@ -1,9 +1,7 @@
 package com.yuan.lifefinance.tool.greendao;
 
-import android.graphics.Bitmap;
-import android.util.Log;
-
 import com.yuan.lifefinance.tool.MyApplication;
+import com.yuan.lifefinance.tool.tools.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,31 +39,67 @@ public class DBManager {
     }
 
     /**
-     * 查询个股历史数据
+     * 查询个股历史数据[分页]
      * @param
      * @param
      */
-    public List<StockInfo> selectStockInfo(int page,int pageSize){
+    public List<StockInfo> selectStockInfo_history(int page,int pageSize){
         try {
             StockInfoDao stockInfoDao =  DBManager.getInstance().getSession().getStockInfoDao();
-            List<StockInfo> stockInfos = stockInfoDao.queryBuilder().offset((page-1)*pageSize).limit(pageSize).list();
+            List<StockInfo> stockInfos = stockInfoDao.queryBuilder().where(StockInfoDao.Properties.TimeInfoSale.isNotNull()).offset((page-1)*pageSize).limit(pageSize).list();
 //            List<StockInfo> stockInfos = stockInfoDao.queryBuilder().build().list().s;
             return stockInfos;
         }
         catch (Exception ex){}
         return new ArrayList<>();
     }
-    public List<StockInfo> selectBuyingStockInfo(){
+
+    /**
+     * 查询持仓个股数据[分页]
+     * @param
+     * @param
+     */
+    public List<StockInfo> selectStockInfo_buying(int page,int pageSize){
         try {
             StockInfoDao stockInfoDao =  DBManager.getInstance().getSession().getStockInfoDao();
-            List<StockInfo> stockInfos = stockInfoDao.queryBuilder().where(StockInfoDao.Properties.TimeInfoSale.isNull()).build().list();
-            Log.d("selectBuyingStockInfo",stockInfos.size()+"");
+            List<StockInfo> stockInfos = stockInfoDao.queryBuilder().where(StockInfoDao.Properties.TimeInfoSale.isNull()).offset((page-1)*pageSize).limit(pageSize).list();
+//            List<StockInfo> stockInfos = stockInfoDao.queryBuilder().build().list().s;
             return stockInfos;
         }
         catch (Exception ex){}
         return new ArrayList<>();
     }
 
+
+    public List<StockInfo> selectBuyingStockInfo(){
+        try {
+            StockInfoDao stockInfoDao =  DBManager.getInstance().getSession().getStockInfoDao();
+            List<StockInfo> stockInfos = stockInfoDao.queryBuilder().where(StockInfoDao.Properties.TimeInfoSale.isNull()).build().list();
+            LogUtil.d("selectBuyingStockInfo",stockInfos.size()+"");
+            return stockInfos;
+        }
+        catch (Exception ex){}
+        return new ArrayList<>();
+    }
+
+    public StockInfo selectStockInfoById(long id){
+        try {
+            StockInfoDao stockInfoDao =  DBManager.getInstance().getSession().getStockInfoDao();
+            StockInfo stockInfo = stockInfoDao.queryBuilder().where(StockInfoDao.Properties.Id.eq(id)).build().unique();
+            return stockInfo;
+        }
+        catch (Exception ex){}
+        return null;
+    }
+    public void updateBuyingStockInfo(long id,String price){
+        try {
+            StockInfoDao stockInfoDao =  DBManager.getInstance().getSession().getStockInfoDao();
+            StockInfo stockInfo = stockInfoDao.queryBuilder().where(StockInfoDao.Properties.Id.eq(id)).build().unique();
+            stockInfo.setDiscrib2(price);
+            stockInfoDao.update(stockInfo);
+        }
+        catch (Exception ex){}
+    }
     public List<TempStockInfo> selectTempStockInfo(int page,int pageSize){
         try {
             TempStockInfoDao tmepstockInfoDao =  DBManager.getInstance().getSession().getTempStockInfoDao();
@@ -83,10 +117,19 @@ public class DBManager {
         tmepstockInfoDao.delete(tempStockInfo);
     }
 
-    public int getStockInfoNum(){
+    public int getStockInfoBuyingNum(){
         try {
             StockInfoDao stockInfoDao =  DBManager.getInstance().getSession().getStockInfoDao();
-            return stockInfoDao.queryBuilder().build().list().size();
+            return stockInfoDao.queryBuilder().where(StockInfoDao.Properties.TimeInfoSale.isNull()).build().list().size();
+        }
+        catch (Exception ex){}
+        return 0;
+    }
+
+    public int getStockInfoHistoryNum(){
+        try {
+            StockInfoDao stockInfoDao =  DBManager.getInstance().getSession().getStockInfoDao();
+            return stockInfoDao.queryBuilder().where(StockInfoDao.Properties.TimeInfoSale.isNotNull()).build().list().size();
         }
         catch (Exception ex){}
         return 0;
@@ -118,11 +161,14 @@ public class DBManager {
             stockInfo.setMostPrice(mostPrice);
             stockInfo.setRValue(rValue);
             stockInfo.setTimeInfoBuy(timeInfoBug);
+            if(mostPrice > 300){
+                stockInfo.setTimeInfoSale(timeInfoBug);
+            }
             stockInfoDao.insert(stockInfo);
             result = 1;
         }
         catch (Exception ex){
-            Log.d("savaStockInfo","保存信息："+ex.toString());
+            LogUtil.d("savaStockInfo","保存信息："+ex.toString());
         }
         return result;
     }
@@ -142,7 +188,7 @@ public class DBManager {
             result = 1;
         }
         catch (Exception ex){
-            Log.d("savaStockInfo","保存信息："+ex.toString());
+            LogUtil.d("savaStockInfo","保存信息："+ex.toString());
         }
         return result;
     }
@@ -169,7 +215,7 @@ public class DBManager {
             }
         }
         catch (Exception ex){
-            Log.d("savaStockInfo","更新信息："+ex.toString());
+            LogUtil.d("savaStockInfo","更新信息："+ex.toString());
         }
         return result;
     }

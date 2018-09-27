@@ -43,7 +43,7 @@ public class StockInfo {
     private String discrib1;
 
     //备注2
-    private String discrib2;
+    private String discrib2;//开盘价_当前价
 
     //备注3
     private String discrib3;

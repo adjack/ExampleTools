@@ -1,7 +1,10 @@
 package com.yuan.lifefinance.tool;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,13 +27,16 @@ import com.yuan.lifefinance.tool.adapter.TempStockHistoryAdapter;
 import com.yuan.lifefinance.tool.greendao.DBManager;
 import com.yuan.lifefinance.tool.greendao.StockInfo;
 import com.yuan.lifefinance.tool.greendao.TempStockInfo;
+import com.yuan.lifefinance.tool.services.TempStockPriceService;
+import com.yuan.lifefinance.tool.tools.ActivityUtils;
+import com.yuan.lifefinance.tool.tools.DoubleTools;
 import com.yuan.lifefinance.tool.view.CustomHintDialog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TempStockInfoActivity extends Activity {
+public class TempStockInfoActivity extends BaseActivity {
     List<TempStockInfo> stockInfos = new ArrayList<>();
     int pageIndex = 1;
     int pageSize = 20;
@@ -40,6 +46,7 @@ public class TempStockInfoActivity extends Activity {
     private LRecyclerViewAdapter mAdapter;
     private TempStockHistoryAdapter mDataAdapter;
 
+    Intent serviceIntent;
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -49,15 +56,19 @@ public class TempStockInfoActivity extends Activity {
             mDataAdapter.clear();
             stockInfos.clear();
             LoadData(1,pageSize);
+            startService(serviceIntent);
         }
         catch (Exception ex){}
 
     }
+    @Override
+    int bindLayout() {
+        return R.layout.activity_tempstock_info;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tempstock_info);
+    void initData() {
+        serviceIntent = new Intent(this, TempStockPriceService.class);
         findViewById(R.id.iv_return).setOnClickListener(v->finish());
         myHandler = new MyHandler(this);
 
@@ -65,29 +76,22 @@ public class TempStockInfoActivity extends Activity {
         mDataAdapter = new TempStockHistoryAdapter(this);
         mDataAdapter.addAll(stockInfos);
         mAdapter = new LRecyclerViewAdapter(mDataAdapter);
-        lrecycle_list.setLayoutManager(new LinearLayoutManager(this));
-//        DividerItemDecoration divider = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
-//        divider.setDrawable(ContextCompat.getDrawable(this,R.drawable.custom_divider));
-//        lrecycle_list.addItemDecoration(divider);
-        lrecycle_list.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        lrecycle_list.setArrowImageView(R.mipmap.iconfont_downgrey);
-        lrecycle_list.setAdapter(mAdapter);
+        initRecyclerView(lrecycle_list,mAdapter);
+//        lrecycle_list.setLayoutManager(new LinearLayoutManager(this));
+//        lrecycle_list.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+//        lrecycle_list.setArrowImageView(R.mipmap.iconfont_downgrey);
+//        lrecycle_list.setAdapter(mAdapter);
 
 
-        lrecycle_list.setOnRefreshListener(new com.github.jdsjlzx.interfaces.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
+        lrecycle_list.setOnRefreshListener(()->{
                 onFall = true;
                 pageIndex = 1;
                 LoadData(pageIndex,pageSize);
-            }
         });
 
-        lrecycle_list.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                Log.d("onLoadMore",maxNum+"//"+getMaxPage()+"//"+pageIndex);
-                if(getMaxPage() != pageIndex){
+        lrecycle_list.setOnLoadMoreListener(()->{
+                Log.d("onLoadMore",maxNum+"//"+getMaxPage(maxNum,pageSize)+"//"+pageIndex);
+                if(getMaxPage(maxNum,pageSize) != pageIndex){
                     onFall=false;
                     pageIndex = pageIndex+1;
                     LoadData(pageIndex,pageSize);
@@ -95,11 +99,8 @@ public class TempStockInfoActivity extends Activity {
                 else{
                     lrecycle_list.setNoMore(true);
                 }
-            }
         });
-        mAdapter.setOnItemLongClickListener(new OnItemLongClickListener() {
-            @Override
-            public void onItemLongClick(View view, int position) {
+        mAdapter.setOnItemLongClickListener((View view, int position)-> {
                 try {
                     new CustomHintDialog(TempStockInfoActivity.this, ()->{
                         DBManager.getInstance().deleteTempStockInfoFromName(stockInfos.get(position).getStokeName());
@@ -111,8 +112,6 @@ public class TempStockInfoActivity extends Activity {
                     },"删除本条信息？","取消", "删除",CustomHintDialog.Dialog_TYPE_1);
                 }
                 catch (Exception ex){}
-
-            }
         });
 //        mAdapter.setOnItemClickListener((View view, int position)-> {
 //                startActivity(new Intent(TempStockInfoActivity.this,SaleDetailActivity.class)
@@ -131,18 +130,24 @@ public class TempStockInfoActivity extends Activity {
 
         findViewById(R.id.tv_add).setOnClickListener(v->startActivity(new Intent(TempStockInfoActivity.this,CompareStockActivity.class)));
 
+        //开启更新服务
+        startService(serviceIntent);
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("com.yuan.action.stock.price.change");
+        registerReceiver(myReceiver, filter);
     }
 
-    private int getMaxPage(){
-        int value1 = maxNum / pageSize;
-        int value2 = maxNum % pageSize;
-        if(value2 == 0){
-            return value1 + 1;
-        }
-        else{
-            return value1+2;
-        }
-    }
+//    private int getMaxPage(){
+//        int value1 = maxNum / pageSize;
+//        int value2 = maxNum % pageSize;
+//        if(value2 == 0){
+//            return value1 + 1;
+//        }
+//        else{
+//            return value1+2;
+//        }
+//    }
 
     private void LoadData(int page,int pageSize){
         new Thread(){
@@ -157,7 +162,10 @@ public class TempStockInfoActivity extends Activity {
                 if(onFall){
                     stockInfos = new ArrayList<>();
                 }
-                stockInfos =  DBManager.getInstance().selectTempStockInfo(page,pageSize);
+                List<TempStockInfo> stockInfosTemp =  DBManager.getInstance().selectTempStockInfo(page,pageSize);
+                for (TempStockInfo tempStockInfo:stockInfosTemp){
+                    stockInfos.add(tempStockInfo);
+                }
                 Log.d("HistoryInfoActivity_log","stockInfos.size:"+stockInfos.size());
                 myHandler.sendEmptyMessage(1);
             }
@@ -175,7 +183,7 @@ public class TempStockInfoActivity extends Activity {
             super.handleMessage(msg);
             if ( weakReference.get() != null ){
                 TempStockInfoActivity instance = weakReference.get();
-                if(instance.pageIndex == 1) instance.mDataAdapter.clear();
+                instance.mDataAdapter.clear();
 //                Log.d("HistoryInfoActivity_log",)
                 instance.mDataAdapter.addAll(instance.stockInfos);
 //                for (StockInfo stockInfo:instance.stockInfos){
@@ -185,4 +193,41 @@ public class TempStockInfoActivity extends Activity {
             }
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(myReceiver != null){
+            unregisterReceiver(myReceiver);
+        }
+        if(serviceIntent != null) stopService(serviceIntent);
+    }
+
+    private BroadcastReceiver myReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent != null){
+                try {
+                    String stockName = intent.getStringExtra("stockName");
+                    double closePrice = intent.getDoubleExtra("closePrice",-1);
+                    double openPrice = intent.getDoubleExtra("openPrice",-1);
+                    String position = intent.getStringExtra("position");
+                    Log.d("onReceive_log",stockName+"/"+closePrice+"/"+position);
+                    TempStockInfo tempStockInfo = stockInfos.get(Integer.valueOf(position));
+                    if(tempStockInfo.getStokeName().equals(stockName)){//防止数据紊乱
+                        tempStockInfo.setDiscrib2(DoubleTools.dealMaximumFractionDigits(closePrice,2));
+                        tempStockInfo.setDiscrib3(DoubleTools.dealMaximumFractionDigits(openPrice,2));
+                        mDataAdapter.notifyDataSetChanged();
+                    }
+
+
+                }catch (Exception ex){}
+
+            }
+        }
+
+    };
+
+
 }

@@ -35,13 +35,13 @@ public class TempStockInfo {
     private String discrib1;//股票编码
 
     //备注2
-    private String discrib2;
+    private String discrib2;//当前价格
 
     //备注3
-    private String discrib3;
+    private String discrib3;//开盘价
 
     //备注4
-    private String discrib4;
+    private String discrib4;//数据库中的位置position 用于推送更新
 
     @Generated(hash = 1754002871)
     public TempStockInfo(Long id, String stokeName, String costValue,

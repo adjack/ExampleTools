@@ -22,7 +22,7 @@ import butterknife.BindView;
 /**
  * 正在买的个股列表
  */
-public class HistoryInfoActivity extends BaseActivity{
+public class HistoryStockListActivity extends BaseActivity{
     List<StockInfo> stockInfos = new ArrayList<>();
     int pageIndex = 1;
     int pageSize = 10;
@@ -41,13 +41,12 @@ public class HistoryInfoActivity extends BaseActivity{
 
     @Override
     int bindLayout() {
-        return R.layout.activity_history_info;
+        return R.layout.activity_history_stocklist;
     }
 
     @Override
     void initData() {
         findViewById(R.id.iv_return).setOnClickListener(v->finish());
-        findViewById(R.id.tv_history).setOnClickListener(v->startActivity(new Intent(this,HistoryStockListActivity.class)));
         myHandler = new MyHandler(this);
 
         mDataAdapter = new StockHistoryAdapter(this);
@@ -72,18 +71,19 @@ public class HistoryInfoActivity extends BaseActivity{
                     lrecycle_list.setNoMore(true);
                 }
         });
-        mAdapter.setOnItemClickListener((View view, int position)-> {
-            try {
-                startActivity(new Intent(HistoryInfoActivity.this,SaleDetailActivity.class)
-                        .putExtra("stokeName",stockInfos.get(position).getStokeName())
-                        .putExtra("cost",stockInfos.get(position).getCost()+"")
-                        .putExtra("stopLoss",stockInfos.get(position).getStopLoss()+"")
-                        .putExtra("mostPrice",stockInfos.get(position).getMostPrice()+"")
-                        .putExtra("rValue",stockInfos.get(position).getRValue())
-                        .putExtra("timeInfoBuy",stockInfos.get(position).getTimeInfoBuy()));
-            }
-            catch (Exception ex){}
-        });
+//        mAdapter.setOnItemClickListener((View view, int position)-> {
+//            try {
+//                LogUtil.d("HistoryStockListActivity",position+"/"+stockInfos.size());
+//                startActivity(new Intent(HistoryStockListActivity.this,SaleDetailActivity.class)
+//                        .putExtra("stokeName",stockInfos.get(position).getStokeName())
+//                        .putExtra("cost",stockInfos.get(position).getCost()+"")
+//                        .putExtra("stopLoss",stockInfos.get(position).getStopLoss()+"")
+//                        .putExtra("mostPrice",stockInfos.get(position).getMostPrice()+"")
+//                        .putExtra("rValue",stockInfos.get(position).getRValue())
+//                        .putExtra("timeInfoBuy",stockInfos.get(position).getTimeInfoBuy()));
+//            }
+//            catch (Exception ex){}
+//        });
 
         LoadData(1,pageSize);
     }
@@ -95,14 +95,14 @@ public class HistoryInfoActivity extends BaseActivity{
                 public void run() {
                     SystemClock.sleep(100);
                     if(maxNum == 0){
-                        maxNum = DBManager.getInstance().getStockInfoBuyingNum();
+                        maxNum = DBManager.getInstance().getStockInfoHistoryNum();
                         LogUtil.d("HistoryInfoActivity_log","总数："+maxNum);
                     }
 
                     if(onFall){
                         stockInfos = new ArrayList<>();
                     }
-                    List<StockInfo> stockInfosTemp =  DBManager.getInstance().selectStockInfo_buying(page,pageSize);
+                    List<StockInfo> stockInfosTemp =  DBManager.getInstance().selectStockInfo_history(page,pageSize);
                     for (StockInfo stockInfo:stockInfosTemp){
                         stockInfos.add(stockInfo);
                     }
@@ -117,15 +117,16 @@ public class HistoryInfoActivity extends BaseActivity{
 
     private MyHandler myHandler;
     private static class MyHandler extends Handler {
-        WeakReference<HistoryInfoActivity> weakReference ;
-        public MyHandler(HistoryInfoActivity activity ){
+        WeakReference<HistoryStockListActivity> weakReference ;
+        public MyHandler(HistoryStockListActivity activity ){
             weakReference  = new WeakReference<>(activity) ;
         }
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if ( weakReference.get() != null ){
-                HistoryInfoActivity instance = weakReference.get();
+                HistoryStockListActivity instance = weakReference.get();
+                LogUtil.d("HistoryStockListActivity","前："+instance.pageIndex+"/"+instance.stockInfos.size());
                 instance.mDataAdapter.clear();
                 instance.mDataAdapter.addAll(instance.stockInfos);
                 instance.lrecycle_list.refreshComplete(instance.pageSize);

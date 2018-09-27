@@ -35,6 +35,9 @@
             android:name=".HistoryInfoActivity"
             android:launchMode="singleTask" />
         <activity
+            android:name=".HistoryStockListActivity"
+            android:launchMode="singleTask" />
+        <activity
             android:name=".SaleDetailActivity"
             android:launchMode="singleTask" />
         <activity
@@ -46,6 +49,9 @@
 
         <service
             android:name=".services.StockPriceService"
+            android:exported="false"></service>
+        <service
+            android:name=".services.TempStockPriceService"
             android:exported="false"></service>
     </application>
 

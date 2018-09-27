@@ -1,16 +1,12 @@
 package com.yuan.lifefinance.tool;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,7 +14,7 @@ import android.widget.Toast;
 
 import com.yuan.lifefinance.tool.greendao.DBManager;
 import com.yuan.lifefinance.tool.greendao.StockInfo;
-import com.yuan.lifefinance.tool.tools.PermissionTools;
+import com.yuan.lifefinance.tool.tools.ActivityUtils;
 import com.yuan.lifefinance.tool.tools.StringInputUtils;
 import com.yuan.lifefinance.tool.view.CustomHintDialog;
 
@@ -28,9 +24,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 public class SaleDetailActivity extends Activity{
 
@@ -150,7 +144,7 @@ public class SaleDetailActivity extends Activity{
 
             //截图保存
             String nowdate = getNowDate().replace(" ","");
-            saveToSD(myShot(SaleDetailActivity.this),timeInfoBuy,nowdate,tv_name.getText().toString());
+            saveToSD(ActivityUtils.activityShot(SaleDetailActivity.this),timeInfoBuy,nowdate,tv_name.getText().toString());
             Toast.makeText(SaleDetailActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SaleDetailActivity.this,HistoryInfoActivity.class));
         }
@@ -159,34 +153,6 @@ public class SaleDetailActivity extends Activity{
         }
     }
 
-
-
-    public Bitmap myShot(Activity activity) {
-        // 获取windows中最顶层的view
-        View view = activity.getWindow().getDecorView();
-        view.buildDrawingCache();
-
-        // 获取状态栏高度
-        Rect rect = new Rect();
-        view.getWindowVisibleDisplayFrame(rect);
-        int statusBarHeights = rect.top;
-        Display display = activity.getWindowManager().getDefaultDisplay();
-
-        // 获取屏幕宽和高
-        int widths = display.getWidth();
-        int heights = display.getHeight();
-
-        // 允许当前窗口保存缓存信息
-        view.setDrawingCacheEnabled(true);
-
-        // 去掉状态栏
-        Bitmap bmp = Bitmap.createBitmap(view.getDrawingCache(), 0,
-                statusBarHeights, widths, heights - statusBarHeights-200);
-
-        // 销毁缓存信息
-        view.destroyDrawingCache();
-        return bmp;
-    }
 
     private void saveToSD(Bitmap bmp,String timeInfoBuy,String nowDate,String stockName) throws IOException {
         try {

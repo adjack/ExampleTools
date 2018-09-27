@@ -1,6 +1,7 @@
 package com.yuan.lifefinance.tool.httptools;
 
-import android.util.Log;
+
+import com.yuan.lifefinance.tool.tools.LogUtil;
 
 import org.json.JSONObject;
 
@@ -160,7 +161,7 @@ public class NetworkFactory {
 
         @Override
         public void onFailure(Call<ResponseBody> call, Throwable t) {
-            Log.e("MycallBack","error:"+t.toString()+"\n");
+            LogUtil.e("MycallBack","error:"+t.toString()+"\n");
             if(responseCallBack != null){
                 responseCallBack.onFailure(requestOb,t,"");
             }
@@ -200,7 +201,7 @@ public class NetworkFactory {
     }
 
     //post执行具体业务接口
-    public void runBusinessInterface(Object requestOb,final String url, String methodName,final String params, final ResponseCallBack<JSONObject> callBack){
+    public void runBusinessInterface(Object requestOb,String url, String methodName,final String params, final ResponseCallBack<JSONObject> callBack){
         Call<ResponseBody> call =  getNetworkService(getUrlHead(url)).httpPost(getPathName(methodName),getHeadParam(url),getRequestBody(params));
         call.enqueue(new MycallBack(requestOb,callBack,getPathName(methodName),params));
     }
@@ -208,21 +209,29 @@ public class NetworkFactory {
     //get请求具体接口
     //http://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData?symbol=sz002095&scale=60&ma=no&datalen=1023
     public void runBusinessInterface(Object requestOb,String url,final ResponseCallBack<JSONObject> callBack){
-        url = url.replace("?","###");
-        Log.d("runBusinessInterface",url+"");
-        String[] urls = url.split("###");
-        Log.d("runBusinessInterface",urls[0]+"");
         Map<String,Object> map = new HashMap<>();
-        String[] values = urls[1].split("&");
-        for(int i = 0; i<values.length;i++){
-            Log.d("runBusinessInterface",values[i]);
-            String[] value_temp = values[i].split("=");
-            Log.d("runBusinessInterface",value_temp.length+"");
-            map.put(value_temp[0],value_temp[1]);
+        try {
+            url = url.replace("?","###");
+            LogUtil.d("runBusinessInterface",url+"");
+            String[] urls = url.split("###");
+            LogUtil.d("runBusinessInterface",urls[0]+"");
+            String[] values = urls[1].split("&");
+            for(int i = 0; i<values.length;i++){
+                LogUtil.d("runBusinessInterface",values[i]);
+                String[] value_temp = values[i].split("=");
+                LogUtil.d("runBusinessInterface",value_temp.length+"");
+                map.put(value_temp[0],value_temp[1]);
+            }
+            Call<ResponseBody> call =  getNetworkService(baseDefaultUrl)
+                    .httpGet(urls[0],map);
+            call.enqueue(new MycallBack(requestOb,callBack,getPathName(urls[0]),null));
         }
-        Call<ResponseBody> call =  getNetworkService(baseDefaultUrl)
-                .httpGet(urls[0],map);
-        call.enqueue(new MycallBack(requestOb,callBack,getPathName(urls[0]),null));
+        catch (Exception ex){
+            Call<ResponseBody> call =  getNetworkService(baseDefaultUrl)
+                    .httpGet(url,map);
+            call.enqueue(new MycallBack(requestOb,callBack,getPathName(url),null));
+        }
+
     }
 
     //业务接口分割线=========================================================================================================
@@ -233,7 +242,7 @@ public class NetworkFactory {
             }
             return;
         }
-        Log.d("MycallBack","下发参数："+param);
+        LogUtil.d("MycallBack","下发参数："+param);
         runBusinessInterface(requestOb,baseDefaultUrl,methodName,param,callBack);
     }
 

@@ -3,7 +3,8 @@ package com.yuan.lifefinance.tool.httptools;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
+
+import com.yuan.lifefinance.tool.tools.LogUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,7 +45,7 @@ public class LocalCertificates {
      * @param inputStream
      */
     private static void addCertificate(@NonNull InputStream inputStream) throws IOException {
-        Log.i(TAG, "#addCertificate inputStream = " + inputStream);
+        LogUtil.i(TAG, "#addCertificate inputStream = " + inputStream);
         int ava;// 数据当次可读长度
         int len = 0;// 数据总长度
         ArrayList<byte[]> data = new ArrayList<>();

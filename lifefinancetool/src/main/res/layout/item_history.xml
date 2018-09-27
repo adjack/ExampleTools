@@ -95,6 +95,17 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_nowPrice"
+        android:layout_toRightOf="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="60dp"
+        android:textColor="#9400D3"/>
+
     <LinearLayout
         android:layout_toRightOf="@+id/linear_01"
         android:layout_width="wrap_content"

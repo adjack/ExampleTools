@@ -1,6 +1,6 @@
 package com.yuan.lifefinance.tool.httptools;
 
-import android.util.Log;
+import com.yuan.lifefinance.tool.tools.LogUtil;
 
 import okhttp3.Interceptor;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -13,7 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 public class HttpLogger implements HttpLoggingInterceptor.Logger{
     @Override
     public void log(String message) {
-        Log.d("ResponseBodyError", message);
+        LogUtil.d("ResponseBodyError", message);
     }
 
     public static Interceptor getHttpInterceptor(){

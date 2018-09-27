@@ -6,8 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.github.yuweiguocn.library.greendao.MigrationHelper;
 
 import org.greenrobot.greendao.database.Database;
-import org.greenrobot.greendao.database.DatabaseOpenHelper;
-import org.greenrobot.greendao.internal.DaoConfig;
 
 /**
  * Created by jack on 2018/5/30

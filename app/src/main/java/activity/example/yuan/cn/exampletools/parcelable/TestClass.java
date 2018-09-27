@@ -81,6 +81,8 @@ public class TestClass implements Parcelable {
 
         public TestClass(Parcel in)
         {
+            //如果元素数据是list类型的时候需要： lits = new ArrayList<?> in.readList(list);
+            //否则会出现空指针异常.并且读出和写入的数据类型必须相同.如果不想对部分关键字进行序列化,可以使用transient关键字来修饰以及static修饰.
             bookName = in.readString();
             author = in.readString();
             publishDate = in.readInt();

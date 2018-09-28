@@ -22,7 +22,7 @@
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:paddingLeft="30dp"
+        android:paddingLeft="35dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <com.yuan.lifefinance.tool.view.MyCustomTextView
@@ -38,8 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp">
         <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
@@ -63,8 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp">
         <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
@@ -88,8 +88,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp">
         <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
@@ -114,8 +114,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp">
         <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
@@ -140,8 +140,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp">
         <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
@@ -166,8 +166,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp">
         <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:id="@+id/tv_006"
             android:layout_width="70dp"
@@ -203,8 +203,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp">
         <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"

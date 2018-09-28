@@ -21,6 +21,7 @@ import com.yuan.lifefinance.tool.tools.FileTools;
 import com.yuan.lifefinance.tool.tools.LogUtil;
 import com.yuan.lifefinance.tool.tools.PermissionTools;
 import com.yuan.lifefinance.tool.tools.StringInputUtils;
+import com.yuan.lifefinance.tool.tools.TimeTools;
 import com.yuan.lifefinance.tool.view.CustomHintDialog;
 
 import java.io.File;
@@ -66,7 +67,6 @@ public class MainActivity extends BaseActivity implements PermissionTools.Permis
     @Override
     void initData() {
         initView();
-
         permissionTools = PermissionTools.getInstance(this, permissionlist, this);
         permissionTools.requestRunPermission(false);
         setDate();
@@ -132,7 +132,7 @@ public class MainActivity extends BaseActivity implements PermissionTools.Permis
         super.onResume();
         if(tv_time != null){
             nowDate = "";
-            tv_time.setText("日期："+getNowDate());
+            tv_time.setText("日期："+TimeTools.dealTime(getNowDate()));
         }
     }
 
@@ -259,7 +259,7 @@ public class MainActivity extends BaseActivity implements PermissionTools.Permis
         tv_rValue.setText("");
         nowDate = "";
         nowDate = getNowDate();
-        tv_time.setText("日期："+getNowDate());
+        tv_time.setText("日期："+ TimeTools.dealTime(getNowDate()));
     }
 
 

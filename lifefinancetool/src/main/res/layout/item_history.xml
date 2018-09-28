@@ -6,26 +6,26 @@
     android:paddingTop="25dp"
     android:background="#FFFFF0"
     android:orientation="vertical" >
-    <TextView
+    <com.yuan.lifefinance.tool.view.MyCustomTextView
         android:id="@+id/tv_name"
         android:layout_width="85dp"
         android:layout_height="wrap_content"
-        android:text="中天科技是"
-        android:layout_marginTop="5dp"
+        android:text="中天科技"
+        android:layout_marginTop="3dp"
         android:layout_marginLeft="20dp"
         android:textStyle="bold"
         android:textSize="16sp"
         android:textColor="#d7000f"/>
-    <TextView
+    <com.yuan.lifefinance.tool.view.MyCustomTextView
         android:id="@+id/tv_timeInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="201801253652"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
         android:layout_alignParentRight="true"/>
 
-    <TextView
+    <com.yuan.lifefinance.tool.view.MyCustomTextView
         android:id="@+id/tv_cost"
         android:layout_below="@+id/tv_name"
         android:layout_marginTop="8dp"
@@ -36,10 +36,10 @@
         android:textSize="13sp"
         android:textColor="#000"/>
 
-    <TextView
+    <com.yuan.lifefinance.tool.view.MyCustomTextView
         android:id="@+id/tv_stopLoss"
         android:layout_below="@+id/tv_cost"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,19 +47,43 @@
         android:text="止损：11"
         android:textColor="#006400"/>
     <LinearLayout
+        android:layout_below="@+id/tv_stopLoss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="22dp">
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
+            android:id="@+id/tv_rValueFlag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R->"
+            android:textSize="12sp"
+            android:textColor="#d7000f"/>
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
+            android:id="@+id/tv_rValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5.2"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="#d7000f"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_toRightOf="@+id/tv_name"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="21dp"
         android:layout_marginTop="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:text="预期："
             android:textSize="13sp"
             android:textColor="#d7000f"/>
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:id="@+id/tv_bili"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,19 +96,19 @@
     <LinearLayout
         android:id="@+id/linear_01"
         android:layout_toRightOf="@+id/tv_name"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="35dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:id="@+id/tv_mostPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="13sp"
             android:textColor="#d7000f"
             android:text="最高：20"/>
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:id="@+id/tv_salePrice"
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
@@ -95,40 +119,17 @@
 
     </LinearLayout>
 
-    <TextView
+    <com.yuan.lifefinance.tool.view.MyCustomTextView
         android:id="@+id/tv_nowPrice"
         android:layout_toRightOf="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         android:textStyle="bold"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="21dp"
         android:layout_marginTop="60dp"
         android:textColor="#9400D3"/>
 
-    <LinearLayout
-        android:layout_toRightOf="@+id/linear_01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="20dp">
-        <TextView
-            android:id="@+id/tv_rValueFlag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="R->"
-            android:textSize="12sp"
-            android:textColor="#d7000f"/>
-        <TextView
-            android:id="@+id/tv_rValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="5.2"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:textColor="#d7000f"/>
-    </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -136,13 +137,13 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         android:orientation="horizontal">
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:id="@+id/tv_incomeFlag"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:text="收益:"
             android:textSize="11sp"/>
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:id="@+id/tv_income"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -153,13 +154,14 @@
     </LinearLayout>
     <View
         android:id="@+id/view01"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/tv_stopLoss"
         android:layout_width="match_parent"
         android:layout_height="25dp"/>
     <View
         android:layout_below="@+id/view01"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_height="10dp"
         android:background="#fff"/>
     <LinearLayout
         android:id="@+id/linear_DayNum"
@@ -170,7 +172,7 @@
         android:layout_marginTop="60dp"
         android:visibility="gone"
         android:orientation="horizontal">
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:id="@+id/tv_Flag2"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -179,7 +181,7 @@
             android:textColor="#d7000f"
             android:textSize="11sp"
             />
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:id="@+id/tv_DayNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -187,7 +189,7 @@
             android:textColor="#d7000f"
             android:layout_marginTop="2dp"
             android:textSize="20sp"/>
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:id="@+id/tv_Flag3"
             android:layout_width="wrap_content"
             android:layout_height="30dp"

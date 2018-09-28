@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#436EEE">
+        android:background="@color/title_color">
         <ImageView
             android:id="@+id/iv_return"
             android:layout_width="25dp"
@@ -18,11 +18,12 @@
             android:clickable="true"
             android:layout_centerVertical="true"
             android:src="@drawable/icon_return_up"/>
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="添加个股"
+            android:textSize="15sp"
             android:layout_centerInParent="true"
             android:textColor="#fff"/>
 
@@ -62,10 +63,10 @@
         android:orientation="horizontal"
         android:paddingLeft="30dp"
         android:paddingRight="30dp">
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:textColor="#666"
+            android:textColor="#000"
             android:textStyle="bold"
             android:text="股票名称"/>
         <EditText
@@ -87,10 +88,10 @@
         android:orientation="horizontal"
         android:paddingLeft="30dp"
         android:paddingRight="30dp">
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:textColor="#666"
+            android:textColor="#000"
             android:textStyle="bold"
             android:text="股票代码"/>
         <EditText
@@ -139,10 +140,10 @@
         android:orientation="horizontal"
         android:paddingLeft="30dp"
         android:paddingRight="30dp">
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:textColor="#666"
+            android:textColor="#000"
             android:textStyle="bold"
             android:text="目标价格"/>
         <EditText
@@ -165,10 +166,10 @@
         android:orientation="horizontal"
         android:paddingLeft="30dp"
         android:paddingRight="30dp">
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:textColor="#666"
+            android:textColor="#000"
             android:textStyle="bold"
             android:text="止损价格"/>
         <EditText
@@ -193,15 +194,15 @@
         android:orientation="horizontal"
         android:paddingLeft="30dp"
         android:paddingRight="30dp">
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:id="@+id/tv_006"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:textColor="#666"
+            android:textColor="#000"
             android:textStyle="bold"
             android:layout_centerVertical="true"
             android:text="最低R比率"/>
-        <TextView
+        <com.yuan.lifefinance.tool.view.MyCustomTextView
             android:id="@+id/tv_rValue"
             android:layout_toRightOf="@+id/tv_006"
             android:layout_marginLeft="20dp"
@@ -226,7 +227,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -234,15 +236,15 @@
             android:gravity="center"
             android:orientation="horizontal">
             <Button
-                android:layout_marginBottom="10dp"
                 android:id="@+id/button1"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:onClick="onclick"
                 android:text="添加到备选"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/shape_bg_style02"/>
+                android:textColor="#fff"
+                android:background="@drawable/button_style01"/>
 
             <Button
                 android:layout_marginBottom="10dp"
@@ -255,7 +257,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentBottom="true"
-                android:background="@drawable/shape_bg_style02"
+                android:background="@drawable/button_shape_01"
                 android:visibility="gone"/>
 
             <Button

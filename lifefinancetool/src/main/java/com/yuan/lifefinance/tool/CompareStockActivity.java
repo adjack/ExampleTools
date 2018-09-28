@@ -11,6 +11,7 @@ import com.yuan.lifefinance.tool.greendao.DBManager;
 import com.yuan.lifefinance.tool.tools.DoubleTools;
 import com.yuan.lifefinance.tool.tools.LogUtil;
 import com.yuan.lifefinance.tool.tools.StringInputUtils;
+import com.yuan.lifefinance.tool.tools.TimeTools;
 import com.yuan.lifefinance.tool.view.CustomHintDialog;
 
 import java.text.SimpleDateFormat;
@@ -62,7 +63,7 @@ public class CompareStockActivity extends BaseActivity{
     }
 
     private void setDate(){
-        tv_time.setText("日期："+getNowDate());
+        tv_time.setText("日期："+ TimeTools.dealTime(getNowDate()));
     }
 
     String nowDate = "";
@@ -158,6 +159,6 @@ public class CompareStockActivity extends BaseActivity{
         tv_rValue.setText("");
         nowDate = "";
         nowDate = getNowDate();
-        tv_time.setText("日期："+getNowDate());
+        tv_time.setText("日期："+TimeTools.dealTime(getNowDate()));
     }
 }

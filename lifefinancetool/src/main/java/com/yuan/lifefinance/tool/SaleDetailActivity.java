@@ -16,6 +16,7 @@ import com.yuan.lifefinance.tool.greendao.DBManager;
 import com.yuan.lifefinance.tool.greendao.StockInfo;
 import com.yuan.lifefinance.tool.tools.ActivityUtils;
 import com.yuan.lifefinance.tool.tools.StringInputUtils;
+import com.yuan.lifefinance.tool.tools.TimeTools;
 import com.yuan.lifefinance.tool.view.CustomHintDialog;
 
 import java.io.File;
@@ -82,7 +83,7 @@ public class SaleDetailActivity extends Activity{
         super.onResume();
         if(tv_time != null){
             nowDate = "";
-            tv_time.setText("日期："+getNowDate());
+            tv_time.setText("日期："+TimeTools.dealTime(getNowDate()));
         }
     }
 
@@ -99,7 +100,7 @@ public class SaleDetailActivity extends Activity{
             tv_rValue.setTextColor(rvalue < 3?Color.parseColor("#008B45"):Color.RED);
 
             timeInfoBuy = getIntent().getStringExtra("timeInfoBuy");
-            tv_time.setText("日期："+getNowDate());
+            tv_time.setText("日期："+ TimeTools.dealTime(getNowDate()));
         }
         catch (Exception ex){}
     }

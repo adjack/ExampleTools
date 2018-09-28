@@ -77,13 +77,13 @@ public class StockHistoryAdapter extends ListBaseAdapter<StockInfo> {
         try {
             double value2 = mDataList.get(pos).getMostPrice()- Double.valueOf(mDataList.get(pos).getCost());
             double value3 = Double.valueOf(DoubleTools.dealMaximumFractionDigits(value2/Double.valueOf(mDataList.get(pos).getCost())*100,2));
-            tv_bili.setText(DoubleTools.dealMaximumFractionDigits(value3,2)+"%");
+            tv_bili.setText(DoubleTools.dealMaximumFractionDigits(value3,1)+"%");
         }
         catch (Exception ex){
         }
         tv_mostPrice.setText("目标："+mDataList.get(pos).getMostPrice()+" ¥");
         initRValueColor(tv_rValueFlag,tv_rValue,mDataList.get(pos).getRValue());
-        tv_timeInfo.setText(dealTime(mDataList.get(pos).getTimeInfoBuy()));
+        tv_timeInfo.setText(TimeTools.dealTime(mDataList.get(pos).getTimeInfoBuy()));
 
         tv_salePrice.setText(dealSalePrice(mDataList.get(pos).getSalePrice()));
         LogUtil.d("getIncome","getIncome:"+mDataList.get(pos).getIncome()+"/"+mDataList.get(pos).getIncome());
@@ -157,17 +157,6 @@ public class StockHistoryAdapter extends ListBaseAdapter<StockInfo> {
         }
         return "卖出价格："+salePrice+" ¥";
 
-    }
-
-    private String dealTime(String timeV){
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHH:mm:ss");
-        SimpleDateFormat formatNew = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date date = null;
-        try {
-            date = format.parse(timeV);
-        } catch (ParseException e) {
-        }
-        return formatNew.format(date);
     }
 
     private long dealBugTime(String timeV){

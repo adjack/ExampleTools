@@ -2,7 +2,10 @@ package com.yuan.lifefinance.tool.tools;
 
 import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by 123 on 2018/9/27.
@@ -76,5 +79,17 @@ public class TimeTools {
                 break;
         }
         return -1;
+    }
+
+    //转换时间
+    public static String dealTime(String timeV){
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHH:mm:ss");
+        SimpleDateFormat formatNew = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date = null;
+        try {
+            date = format.parse(timeV);
+        } catch (ParseException e) {
+        }
+        return formatNew.format(date);
     }
 }

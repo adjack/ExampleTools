@@ -220,8 +220,6 @@ public class TempStockInfoActivity extends BaseActivity {
                         tempStockInfo.setDiscrib3(DoubleTools.dealMaximumFractionDigits(openPrice,2));
                         mDataAdapter.notifyDataSetChanged();
                     }
-
-
                 }catch (Exception ex){}
 
             }

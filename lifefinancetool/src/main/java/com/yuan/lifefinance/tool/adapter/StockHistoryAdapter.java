@@ -130,7 +130,16 @@ public class StockHistoryAdapter extends ListBaseAdapter<StockInfo> {
 
                         }
                     };
-                    if(TimeTools.canSendNotif()){countDownTimerList[pos].start();}
+                    if(TimeTools.canSendNotif()){
+                        countDownTimerList[pos].start();
+                    }
+                    else{//显示一次
+                        StockInfo stockInfo = DBManager.getInstance().selectStockInfoById(id);
+                        if(stockInfo != null){
+                            String[] prices = stockInfo.getDiscrib2().split("_");
+                            dealNowPrice(tv_nowPrice,StringInputUtils.value(prices[0]),StringInputUtils.value(prices[1]));
+                        }
+                    }
                 }
                 catch (Exception ex){}
             }

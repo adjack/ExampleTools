@@ -18,6 +18,7 @@ import com.yuan.lifefinance.tool.httptools.NetworkFactory;
 import com.yuan.lifefinance.tool.httptools.ResponseCallBack;
 import com.yuan.lifefinance.tool.tools.LogUtil;
 import com.yuan.lifefinance.tool.tools.StringInputUtils;
+import com.yuan.lifefinance.tool.tools.TimeTools;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -46,7 +47,7 @@ public class TempStockPriceService extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         while (true) {
-            if (canSendNotif()) {//服务时间段
+            if (TimeTools.canSendNotif()) {//服务时间段
                 //查找已买个股的列表
                 List<TempStockInfo> tempStockInfos = DBManager.getInstance().selectTempStockInfo(1,200);
                 for (int i = 0; i < tempStockInfos.size(); i++) {
@@ -129,39 +130,39 @@ public class TempStockPriceService extends IntentService {
     }
 
 
-    private boolean canSendNotif() {
-        Calendar calendar = Calendar.getInstance();
-        if (getDayOfWeek(calendar) <= 5) {//周一到周五
-            int hour = calendar.get(Calendar.HOUR);
-            if (calendar.get(Calendar.AM_PM) == Calendar.AM) {//上午
-                if (hour >= 9 && hour <= 11) {
-                    if (hour == 9 || hour == 11) {
-                        if (hour == 9) {
-                            if (calendar.get(Calendar.MINUTE) >= 30) {
-                                return true;
-                            }
-                        }
-
-                        if (hour == 11) {
-                            if (calendar.get(Calendar.MINUTE) <= 30) {
-                                return true;
-                            }
-                        }
-                    } else {
-                        return true;
-                    }
-                }
-            } else {
-                if (hour >= 1 && hour <= 3) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+//    private boolean canSendNotif() {
+//        Calendar calendar = Calendar.getInstance();
+//        if (getDayOfWeek(calendar) <= 5) {//周一到周五
+//            int hour = calendar.get(Calendar.HOUR);
+//            if (calendar.get(Calendar.AM_PM) == Calendar.AM) {//上午
+//                if (hour >= 9 && hour <= 11) {
+//                    if (hour == 9 || hour == 11) {
+//                        if (hour == 9) {
+//                            if (calendar.get(Calendar.MINUTE) >= 30) {
+//                                return true;
+//                            }
+//                        }
+//
+//                        if (hour == 11) {
+//                            if (calendar.get(Calendar.MINUTE) <= 30) {
+//                                return true;
+//                            }
+//                        }
+//                    } else {
+//                        return true;
+//                    }
+//                }
+//            } else {
+//                if (hour >= 1 && hour <= 3) {
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
     private void sendNotif(int id, String title,String contentText) {
-        if (!canSendNotif()) {
+        if (!TimeTools.canSendNotif()) {
             LogUtil.d("canSendNotif", "不在服务时间段");
             return;
         }

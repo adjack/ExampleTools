@@ -2,11 +2,14 @@
 
 buildscript {
     repositories {
-        jcenter()
-        google()
+//        jcenter()
+//        google()
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.1'
 
@@ -17,9 +20,12 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
+//        jcenter()
+//        google()
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
         maven { url "https://jitpack.io" }
-        google()
     }
 }
 

@@ -68,6 +68,9 @@ public class ExampleUnitTest {
         System.out.println( Math.sin(degrees));
 
 //        System.out.println( Math.cos(5));
+
+
+        //
     }
 
     private String getVisitRate(double value1,double value2){
@@ -84,8 +87,43 @@ public class ExampleUnitTest {
 
     @Test
     public void addTestNum(){
-        //要素：先考虑涨幅空间--》关注级别3买确认--》短期压力位明确--》震荡做T--》目标位出货【参考筹码和5分钟背驰位置】
+        double targetValue = 0.06;//每次目标
+        double warehousePosition = 0.33;//仓位
+        double sum = 88220;
+        double tempSum = 88220;
+        int monthNum = 1;//12*2;
 
+        int[] month_Num = new int[monthNum];
+        double[][] value =new double[monthNum][6];
+        //======================================================
+        month_Num[0] = 6;//201905开始
+        value[0] = new double[]{0.08,0,0,0,0,0};//201905开始
+        //======================================================
+
+        for(int j=0;j<monthNum;j++){
+            for(int i=0;i<month_Num[j];i++){
+                tempSum = tempSum + tempSum*targetValue*warehousePosition;
+            }
+            System.err.println("-----------------------------------");
+            System.err.println(getDate(j));
+            System.err.println("第"+(j+1)+"阶段预测[总共有"+month_Num[j]+"次机会]--->"+dealNum(tempSum));
+            int tempNum = 0;
+            for(int i=0;i<month_Num[j];i++){
+                sum = sum + sum*value[j][i];
+                if(value[j][i]!=0){tempNum++;}
+                System.err.println("     阶段->"+dealNum(sum)+"   ("+(value[j][i]*100)+"%)");
+            }
+            System.err.println("第"+(j+1)+"阶段实际[进行到"+tempNum+"次机会]--->"+dealNum(sum));
+            System.err.println("-----------------------------------");
+//            try {Thread.sleep(10);}catch (Exception ex){}
+
+        }
+        System.err.println("总共"+monthNum+"个月最终预测值->"+dealNum(tempSum));
+    }
+
+    private String getDate(int index){
+        int iniMonth = 5+index;//初始月份
+        return "[2019-"+String.format("%02d",iniMonth)+"月底]";
     }
 
     @Test
@@ -287,9 +325,9 @@ public class ExampleUnitTest {
     public void addition_isCorrect2(){
         //<<2019-3-17/2024-03-17  ：初始：60000>>预计：30%
         //时间节点：2019-03-30  ：待定-------------------[78,000][61800[1]--64100[2]--66000[3]--64333[1]--64750[2]--65500[3]----58500[4]]
-        //时间节点：2019-06-30  ：待定-------------------[101,400][106200[1]--[102880[2]--[100800[3]--[96200[4]--[[1]--[[1]--[[1]--[[1]--[[1]--[[1]--[[1]]
-        //时间节点：2019-09-30  ：待定-------------------[131,820]
-        //时间节点：2019-12-31  ：待定-------------------[171,366]
+        //时间节点：2019-06-30  ：待定-------------------[101,400][106200[1]--[102880[2]--[100800[3]--[96200[4]--[92500[1]--[87503[2]--[[3]--[[4]--[[5]--[[1]--[[2]--[[3]--[[4]]
+        //时间节点：2019-09-30  ：待定-------------------[131,820][[1]--[[2]--[[3]--[[4]--[[1]--[[2]--[[3]--[[4]--[[5]--[1]--[[2]--[[3]--[[4]]
+        //时间节点：2019-12-31  ：待定-------------------[171,366][[1]--[[2]--[[3]--[[4]--[[1]--[[2]--[[3]--[[4]--[[5]--[1]--[[2]--[[3]--[[4]]
 
         //时间节点：2020-03-31  ：待定-------------------[222,776]
         //时间节点：2020-06-30  ：待定-------------------[289,609]
@@ -312,7 +350,7 @@ public class ExampleUnitTest {
         //时间节点：2023-12-31  ：待定-------------------[11,402,978]
 
 
-        double totalSum = 100000;
+        double totalSum = 87000;
         int yearNum = 5;
         double values = 0.10;
         yearNum = yearNum*4;

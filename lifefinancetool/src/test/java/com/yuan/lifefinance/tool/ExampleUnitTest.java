@@ -2,6 +2,8 @@ package com.yuan.lifefinance.tool;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,47 @@ import static org.junit.Assert.assertEquals;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+
+    @Test
+    public void addition_isCorredasd(){
+        System.out.println(dealDouble(-1.12,2));
+        System.out.println(dealDouble(.12,2));
+        System.out.println(dealDouble(0.0,2));
+        System.out.println(dealDouble(0.1,2));
+        System.out.println(dealDouble(-0.12,2));
+        System.out.println(dealDouble(12.12,2));
+        System.out.println(dealDouble(-1.12,2));
+    }
+
+    private String dealDouble(double data,int newScale){
+        try {
+            DecimalFormat df = null;
+            if(newScale == 2){
+                df = new DecimalFormat("#.00");
+                if(Double.valueOf(df.format(data)) == 0){
+                    return "0.00";
+                }
+            }
+            else{
+                df = new DecimalFormat("#.0");
+                if(Double.valueOf(df.format(data)) == 0){
+                    return "0.0";
+                }
+            }
+            if(data > 0 && data < 1 &&!df.format(data).startsWith("0")){
+                return "0"+df.format(data);
+            }
+
+            if(data < 0 && Math.abs(data) < 1 &&!df.format(data).startsWith("-0")){
+                return "-"+Math.abs(data);
+            }
+
+            return df.format(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return data+"";
+        }
+    }
     @Test
     public void addition_isCorrect1(){
         //2019-3-17/2024-3-17
@@ -69,7 +112,6 @@ public class ExampleUnitTest {
 
 //        System.out.println( Math.cos(5));
 
-
         //
     }
 
@@ -86,18 +128,55 @@ public class ExampleUnitTest {
     }
 
     @Test
+    public void addTestNumeqe(){
+//        System.err.println(returnDouble(12.0,2));
+        DecimalFormat df = new DecimalFormat("#.00");
+        System.out.println(Double.valueOf(df.format(.0))==0);
+
+        String[] vakv = {"fdsfw","gfs是发DVD","fefwc","fevefca","ewc","cahw华东师范"};
+        for(int i = 0;i<vakv.length;i++){
+            System.out.println(dealValueMoreSpace(vakv[i])+"[3029-281-2e726]");
+        }
+
+
+
+
+
+    }
+
+    private String dealValueMoreSpace(String str){
+        String result = str;
+        for(int i = 0;i<70-str.length();i++){
+            result = result + " ";
+        }//0004574049
+        return result;
+    }
+    public static double returnDouble(double data,int newScale) {
+        try {
+            BigDecimal b = new BigDecimal(data);
+            double f1 = b.setScale(newScale, BigDecimal.ROUND_HALF_UP).doubleValue();
+            return f1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return data;
+        }
+    }
+
+    @Test
     public void addTestNum(){
         double targetValue = 0.06;//每次目标
         double warehousePosition = 0.33;//仓位
-        double sum = 88220;
-        double tempSum = 88220;
+        double sum = 81889;
+        double tempSum = 81889;
         int monthNum = 1;//12*2;
 
         int[] month_Num = new int[monthNum];
-        double[][] value =new double[monthNum][6];
+        double[][] value =new double[monthNum][];
+        String[][] strlist =new String[monthNum][];
         //======================================================
-        month_Num[0] = 6;//201905开始
-        value[0] = new double[]{0.08,0,0,0,0,0};//201905开始
+        month_Num[0] = 6;//201905开始[长期占用资金1300]//-243
+        value[0] = new double[]{0.0,-0.0,-0.0,-0.0,0,0};//201905开始
+        strlist[0] = DicText.getMonth6NameArray();
         //======================================================
 
         for(int j=0;j<monthNum;j++){
@@ -106,24 +185,26 @@ public class ExampleUnitTest {
             }
             System.err.println("-----------------------------------");
             System.err.println(getDate(j));
-            System.err.println("第"+(j+1)+"阶段预测[总共有"+month_Num[j]+"次机会]--->"+dealNum(tempSum));
+            System.err.println("第"+(j+1)+"阶段预测目标[总共有"+month_Num[j]+"次机会]--->"+dealNum(tempSum));
             int tempNum = 0;
             for(int i=0;i<month_Num[j];i++){
                 sum = sum + sum*value[j][i];
-                if(value[j][i]!=0){tempNum++;}
-                System.err.println("     阶段->"+dealNum(sum)+"   ("+(value[j][i]*100)+"%)");
+                if(value[j][i]!=0){
+                    tempNum++;
+                    System.err.println(dealValueMoreSpace("     阶段"+(tempNum)+"结果 ---> "+dealNum(sum)+"   ("+(dealNum2(value[j][i]*100))+"%)     ")+strlist[j][i]);
+                }
             }
-            System.err.println("第"+(j+1)+"阶段实际[进行到"+tempNum+"次机会]--->"+dealNum(sum));
+            System.err.println("第"+(j+1)+"阶段实际结果[进行到"+tempNum+"次机会]--->"+dealNum(sum));
             System.err.println("-----------------------------------");
 //            try {Thread.sleep(10);}catch (Exception ex){}
 
         }
-        System.err.println("总共"+monthNum+"个月最终预测值->"+dealNum(tempSum));
+        System.err.println("总共"+monthNum+"个月最终预测目标值->"+dealNum(tempSum));
     }
 
     private String getDate(int index){
-        int iniMonth = 5+index;//初始月份
-        return "[2019-"+String.format("%02d",iniMonth)+"月底]";
+        int iniMonth = 6+index;//初始月份
+        return "[2019-"+String.format("%02d",iniMonth)+"开始]";
     }
 
     @Test
@@ -325,7 +406,7 @@ public class ExampleUnitTest {
     public void addition_isCorrect2(){
         //<<2019-3-17/2024-03-17  ：初始：60000>>预计：30%
         //时间节点：2019-03-30  ：待定-------------------[78,000][61800[1]--64100[2]--66000[3]--64333[1]--64750[2]--65500[3]----58500[4]]
-        //时间节点：2019-06-30  ：待定-------------------[101,400][106200[1]--[102880[2]--[100800[3]--[96200[4]--[92500[1]--[87503[2]--[[3]--[[4]--[[5]--[[1]--[[2]--[[3]--[[4]]
+        //时间节点：2019-06-30  ：待定-------------------[101,400][106200[1]--[102880[2]--[100800[3]--[96200[4]--[92500[1]--[87503[2]--[88087[3]--[84700[4]--[84814[5]--[80600[1]--[[2]--[[3]--[[4]]
         //时间节点：2019-09-30  ：待定-------------------[131,820][[1]--[[2]--[[3]--[[4]--[[1]--[[2]--[[3]--[[4]--[[5]--[1]--[[2]--[[3]--[[4]]
         //时间节点：2019-12-31  ：待定-------------------[171,366][[1]--[[2]--[[3]--[[4]--[[1]--[[2]--[[3]--[[4]--[[5]--[1]--[[2]--[[3]--[[4]]
 
@@ -399,6 +480,12 @@ public class ExampleUnitTest {
     public String dealNum(double d){
         NumberFormat nf = NumberFormat.getNumberInstance();
         nf.setMaximumFractionDigits(0);
+        return ""+nf.format(d);
+    }
+
+    public String dealNum2(double d){
+        NumberFormat nf = NumberFormat.getNumberInstance();
+        nf.setMaximumFractionDigits(2);
         return nf.format(d);
     }
 

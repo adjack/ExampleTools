@@ -1,8 +1,7 @@
-package com.image.download;
+package activity.example.yuan.cn.exampletools.adapter;
 
 import java.util.List;
 
-import com.example.imagedownload.R;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,6 +13,9 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import activity.example.yuan.cn.exampletools.R;
+import activity.example.yuan.cn.exampletools.utils.ImageDownLoader;
 
 public class ImageGridViewAdapter extends BaseAdapter implements OnScrollListener {
 
@@ -73,7 +75,7 @@ public class ImageGridViewAdapter extends BaseAdapter implements OnScrollListene
 		if (bitmap != null) {
 			imageView.setImageBitmap(bitmap);
 		} else {
-			imageView.setImageResource(R.drawable.empty_photo);
+			imageView.setImageResource(R.mipmap.ic_launcher);
 		}
 	}
 
@@ -117,7 +119,7 @@ public class ImageGridViewAdapter extends BaseAdapter implements OnScrollListene
 					continue;
 				}
 				imageView.setImageDrawable(context.getResources().getDrawable(
-						R.drawable.empty_photo));
+						R.mipmap.ic_launcher));
 				loader.loadImage(url, imageView.getWidth(),
 						imageView.getHeight(),
 						new ImageDownLoader.AsyncImageLoaderListener() {

@@ -13,12 +13,16 @@ public class MoreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_more);
+        setContentView(R.layout.activity_move_view);
     }
 
-    public void clickCustomView(View view){
-        startActivity(new Intent(this, CustomViewActivity1.class));
-    }
+//    public void clickCustomView(View view){
+//        startActivity(new Intent(this, CustomViewActivity1.class));
+//    }
+//
+//    public void moveViewClick(View view){
+//        startActivity(new Intent(this, MoveViewActivity.class));
+//    }
 
 
 }

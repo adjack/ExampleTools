@@ -1,13 +1,13 @@
-package com.image.download;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import com.example.imagedownload.R;
+package activity.example.yuan.cn.exampletools;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.GridView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import activity.example.yuan.cn.exampletools.adapter.ImageGridViewAdapter;
 
 public class PhotoActivity extends Activity {
 

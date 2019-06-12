@@ -4,31 +4,26 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Message
 import android.os.SystemClock
-import android.view.View
-
 import com.github.jdsjlzx.recyclerview.LRecyclerView
 import com.github.jdsjlzx.recyclerview.LRecyclerViewAdapter
 import com.yuan.lifefinance.tool.adapter.StockHistoryAdapter
 import com.yuan.lifefinance.tool.greendao.DBManager
 import com.yuan.lifefinance.tool.greendao.StockInfo
 import com.yuan.lifefinance.tool.tools.LogUtil
-
+import kotlinx.android.synthetic.main.activity_history_stocklist.*
 import java.lang.ref.WeakReference
-import java.util.ArrayList
-
-import butterknife.BindView
+import java.util.*
 
 /**
  * 正在买的个股列表
  */
 class HistoryStockListActivity : BaseActivity() {
-    internal var stockInfos: MutableList<StockInfo> = ArrayList()
-    internal var pageIndex = 1
-    internal var pageSize = 10
-    internal var maxNum = 0
+    private var stockInfos: MutableList<StockInfo> = ArrayList()
+    private var pageIndex = 1
+    private var pageSize = 10
+    private var maxNum = 0
     private var onFall = true
-    @BindView(R.id.lrecycle_list)
-    internal var lrecycle_list: LRecyclerView? = null
+    private var lrecycle_list: LRecyclerView? = null
     private var mAdapter: LRecyclerViewAdapter? = null
     private var mDataAdapter: StockHistoryAdapter? = null
 
@@ -44,7 +39,7 @@ class HistoryStockListActivity : BaseActivity() {
     }
 
     internal override fun initData() {
-        findViewById<View>(R.id.iv_return).setOnClickListener { v -> finish() }
+        iv_return.setOnClickListener { finish() }
         myHandler = MyHandler(this)
 
         mDataAdapter = StockHistoryAdapter(this)
@@ -89,7 +84,7 @@ class HistoryStockListActivity : BaseActivity() {
                         stockInfos.add(stockInfo)
                     }
                     LogUtil.d("HistoryInfoActivity_log", "stockInfos.size:" + stockInfos.size)
-                    myHandler!!.sendEmptyMessage(1)
+                    myHandler?.sendEmptyMessage(1)
                 }
             }.start()
         } catch (ex: Exception) {
@@ -98,20 +93,15 @@ class HistoryStockListActivity : BaseActivity() {
     }
 
     private class MyHandler(activity: HistoryStockListActivity) : Handler() {
-        internal var weakReference: WeakReference<HistoryStockListActivity>
-
-        init {
-            weakReference = WeakReference(activity)
-        }
-
+        var weakReference: WeakReference<HistoryStockListActivity> = WeakReference(activity)
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             if (weakReference.get() != null) {
                 val instance = weakReference.get()
-                LogUtil.d("HistoryStockListActivity", "前：" + instance.pageIndex + "/" + instance.stockInfos.size)
-                instance.mDataAdapter!!.clear()
-                instance.mDataAdapter!!.addAll(instance.stockInfos)
-                instance.lrecycle_list!!.refreshComplete(instance.pageSize)
+                LogUtil.d("HistoryStockListActivity", "前：" + instance?.pageIndex + "/" + instance?.stockInfos?.size)
+                instance?.mDataAdapter?.clear()
+                instance?.mDataAdapter?.addAll(instance?.stockInfos)
+                instance?.lrecycle_list?.refreshComplete(instance?.pageSize)
             }
         }
     }

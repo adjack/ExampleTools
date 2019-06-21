@@ -175,7 +175,7 @@ public class ExampleUnitTest {
         String[][] strlist =new String[monthNum][];
         //======================================================
         month_Num[0] = 6;//201905开始[长期占用资金1300]//-243
-        value[0] = new double[]{0.02,-0.0,-0.0,-0.0,0,0};//201905开始
+        value[0] = new double[]{0.0001,-0.0075,-0.0,-0.0,0,0};//201905开始
         strlist[0] = DicText.getMonth6NameArray();
         //======================================================
 

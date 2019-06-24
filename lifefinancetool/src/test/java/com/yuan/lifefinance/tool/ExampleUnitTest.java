@@ -104,14 +104,18 @@ public class ExampleUnitTest {
 //        int b =0;
 //        System.out.println(getVisitRate(a,b));
 
-        double degrees = 10;
-        double radians = Math.toRadians(degrees);
-
-        System.out.println( Math.sin(Math.toRadians(degrees)));
-        System.out.println( Math.sin(degrees));
+//        double degrees = 10;
+//        double radians = Math.toRadians(degrees);
+//
+//        System.out.println( Math.sin(Math.toRadians(degrees)));
+//        System.out.println( Math.sin(degrees));
 
 //        System.out.println( Math.cos(5));
 
+        double value1= 10000;//初始金额
+        double rate= 0.20;//利润
+//        System.out.println( value1*(1+rate));
+        System.out.println( "盈利："+rate*100+"%后亏损 "+Double.valueOf(getVisitRate(value1*rate,(value1*(1+rate))))*100+"% 既可回到原位 ");
         //
     }
 
@@ -121,7 +125,8 @@ public class ExampleUnitTest {
                 return "0";
             }
             NumberFormat nf = NumberFormat.getInstance();
-            nf.setMaximumFractionDigits(4);
+            nf.setMaximumFractionDigits(3);
+//            System.out.println(nf.format(value1/value2));
             return nf.format(value1/value2);
         }catch (Exception ex){}
         return  "";
@@ -175,7 +180,7 @@ public class ExampleUnitTest {
         String[][] strlist =new String[monthNum][];
         //======================================================
         month_Num[0] = 6;//201905开始[长期占用资金1300]//-243
-        value[0] = new double[]{0.0001,-0.0075,-0.0,-0.0,0,0};//201905开始
+        value[0] = new double[]{0.01,-0.75,-2.7,-0.0,0,0};//201905开始
         strlist[0] = DicText.getMonth6NameArray();
         //======================================================
 
@@ -188,10 +193,10 @@ public class ExampleUnitTest {
             System.err.println("第"+(j+1)+"阶段预测目标[总共有"+month_Num[j]+"次机会]--->"+dealNum(tempSum));
             int tempNum = 0;
             for(int i=0;i<month_Num[j];i++){
-                sum = sum + sum*value[j][i];
+                sum = sum + sum*value[j][i]/100;
                 if(value[j][i]!=0){
                     tempNum++;
-                    System.err.println(dealValueMoreSpace("     阶段"+(tempNum)+"结果 ---> "+dealNum(sum)+"   ("+(dealNum2(value[j][i]*100))+"%)     ")+strlist[j][i]);
+                    System.err.println(dealValueMoreSpace("     阶段"+(tempNum)+"结果 ---> "+dealNum(sum)+"   ("+(dealNum2(value[j][i]))+"%)     ")+strlist[j][i]);
                 }
             }
             System.err.println("第"+(j+1)+"阶段实际结果[进行到"+tempNum+"次机会]--->"+dealNum(sum));

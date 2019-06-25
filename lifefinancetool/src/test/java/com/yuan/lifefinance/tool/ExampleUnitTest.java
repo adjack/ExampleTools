@@ -112,11 +112,28 @@ public class ExampleUnitTest {
 
 //        System.out.println( Math.cos(5));
 
-        double value1= 10000;//初始金额
-        double rate= 0.20;//利润
-//        System.out.println( value1*(1+rate));
-        System.out.println( "盈利："+rate*100+"%后亏损 "+Double.valueOf(getVisitRate(value1*rate,(value1*(1+rate))))*100+"% 既可回到原位 ");
+        double value1= 50000;//初始金额
+        double rate= 0.30;//利润
+        System.out.println("实际："+getValue(value1));
+        double temp1 = Double.valueOf(getVisitRate(value1*rate,(value1*(1+rate))));
+//        System.out.println( "盈利："+rate*100+"%后亏损 "+temp1*100+"% 既可回到原位 ");
         //
+    }
+
+    private double getValue(double value1){
+        double num = value1;
+        double temp = value1;
+        double values = 0;
+        for (int i=0;i<3;i++){
+            num = num + num*0.1;
+            temp = temp + temp*0.1;
+            double temp1 = num*0.1 - value1*0.1;
+            num = num - temp1;
+            values = values + temp1;
+            System.out.println( "本盈利阶段需卖出："+temp1);
+        }
+        System.out.println( "总共："+temp+"    额外："+values);
+        return  num;
     }
 
     private String getVisitRate(double value1,double value2){
@@ -180,7 +197,7 @@ public class ExampleUnitTest {
         String[][] strlist =new String[monthNum][];
         //======================================================
         month_Num[0] = 6;//201905开始[长期占用资金1300]//-243
-        value[0] = new double[]{0.01,-0.75,-2.7,-0.0,0,0};//201905开始
+        value[0] = new double[]{0.01,-0.75,-2.7,-0.28,0,0};//201905开始
         strlist[0] = DicText.getMonth6NameArray();
         //======================================================
 

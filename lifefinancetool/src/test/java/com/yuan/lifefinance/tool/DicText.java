@@ -104,14 +104,14 @@ public class DicText {
         List<StockInfo> list = new ArrayList<>();
         StockInfo stockInfo = new StockInfo(16.25,1900,16.61,3.0,"20190636  10:21");
         stockInfo.setStokeName("四维图新");list.add(stockInfo);
-        stockInfo = new StockInfo(16.56,1000,16.82,2.0,"20190621  10:40");list.add(stockInfo);
-        stockInfo = new StockInfo(16.40,600,16.86,1.0,"20190621  10:50");list.add(stockInfo);
-        stockInfo = new StockInfo(15.86,1000,15.92,1.0,"20190625  11:00");list.add(stockInfo);
-        stockInfo = new StockInfo(15.95,1000,16.04,1.0,"20190625  14:00");list.add(stockInfo);
-        stockInfo = new StockInfo(16.12,1000,16.46,1.0,"20190626  10:30");list.add(stockInfo);
-        stockInfo = new StockInfo(15.96,1000,16.30,1.0,"20190627  10:30");list.add(stockInfo);
-        stockInfo = new StockInfo(16.24,1000,16.37,1.0,"20190627  10:40");list.add(stockInfo);
-        stockInfo = new StockInfo(16.27,1000,16.06,1.0,"20190628  10:30");list.add(stockInfo);
+        stockInfo = setStockInfo(stockInfo,16.56,1000,16.82,2.0,"20190621  10:40");list.add(stockInfo);
+        stockInfo = setStockInfo(stockInfo,16.41,600,16.86,1.0,"20190621  10:50");list.add(stockInfo);
+        stockInfo = setStockInfo(stockInfo,15.86,1000,15.92,1.0,"20190625  11:00");list.add(stockInfo);
+        stockInfo = setStockInfo(stockInfo,15.95,1000,16.04,1.0,"20190625  14:00");list.add(stockInfo);
+        stockInfo = setStockInfo(stockInfo,16.12,1000,16.46,1.0,"20190626  10:30");list.add(stockInfo);
+        stockInfo = setStockInfo(stockInfo,15.96,1000,16.31,1.0,"20190627  10:30");list.add(stockInfo);
+        stockInfo = setStockInfo(stockInfo,16.24,1000,16.37,1.0,"20190627  10:40");list.add(stockInfo);
+        stockInfo = setStockInfo(stockInfo,16.27,1000,16.06,1.0,"20190628  10:30");list.add(stockInfo);
         return list;
     }
 
@@ -182,6 +182,12 @@ public class DicText {
         //20190630:漳州核电厂1号组开工【沃尔核材、中核科技、台海核电、中广核级、兰石重装】
 
     }
+
+    private static StockInfo setStockInfo(StockInfo stockInfo,double cost, int stockNum, double salePrice, double buyHour,String date){
+        StockInfo stockInfo1 = new StockInfo(cost,stockNum,salePrice,buyHour,date);
+        stockInfo1.setStokeName(stockInfo.getStokeName());
+        return stockInfo1;
+    };
     static class StockInfo{
         private String stokeName;//名称
         private double cost;//成本

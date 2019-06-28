@@ -186,8 +186,8 @@ public class ExampleUnitTest {
 
     @Test
     public void testlongTermTrackT(){
-        List<DicText.StockInfo> value = DicText.longTermTrack1_7();//获取7月份操作
-        System.out.println("名称          买入      数量      卖出      操作时间           持股时间     盈利");
+        List<DicText.StockInfo> value = DicText.longTermTrack1_6();//获取7月份操作
+        System.out.println("名称          买入      数量        卖出      操作时间           持股时间       盈利");
 //        System.err.println("----------------------------------------------------------------------------------");
         for(int i=0; i<value.size(); i++){
             System.out.println(value.get(i).getStokeName()+"      "
@@ -202,7 +202,13 @@ public class ExampleUnitTest {
 
     private String getPriceValue(double cost,double salePrice){
         double value = (salePrice - cost)/cost*100;
-        return (value>=0?"+":"-")+dealNum2(value)+"%";
+        if((value+"").contains("-") || (value+"").contains("+")){
+            return dealNum2(value)+"%";
+        }
+        else {
+            return (value>=0?"+":"-")+dealNum2(value)+"%";
+        }
+
     }
 
 

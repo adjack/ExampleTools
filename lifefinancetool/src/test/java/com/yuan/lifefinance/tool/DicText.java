@@ -1,8 +1,11 @@
 package com.yuan.lifefinance.tool;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DicText {
-    //测试
-    //6月备注【81889】
+
+
     public static String[] getMonth6NameArray(){
 
         String[] value = {
@@ -56,7 +59,12 @@ public class DicText {
 //               6-21&最近两天筹码松动，属于加仓后的继续上涨，关注回调机会
             
                 "",
-                "2019-06-[14-？]四维图新"//目标价格【/20.00、17.50、16.90】止损价格【16.45】 最终收益：
+              };
+        return value;
+    }
+
+    //长线跟踪
+    public static List<StockInfo> longTermTrack1_6(){//"2019-06-[14-？]四维图新"//目标价格【/20.00、17.50、16.90】止损价格【16.45】 最终收益：
 //               6-12&四维图新需要等待30分钟的3买介入，13日开盘继续上冲延续30分钟上涨，继续等待
 //               6-14&今天杀跌之后，30分钟回调有3买概率，早盘杀跌-3%杀入部分仓位，下午如果5分钟低位出现背驰，可以继续加仓，尾盘继续杀跌，继续买入部分仓位，依旧有3买概率，因为这个位置不买，一旦
 //                   周一再上冲就不会有买点了，所以此时进场主动买套
@@ -85,15 +93,37 @@ public class DicText {
 //                    计算机板块叫强势，结合四维跌了几天了，今天有机会5分钟出3买，可以回调买做T,10:30->计算计算板块上涨，有机会出现3买，暂时持股四维图新不操作，等待5分钟出3买
 //                    5分钟放量上攻30分钟中枢高位16.43认为有压力，16.46卖出1000股做T完成，当前C阶段只考虑买和关注5分钟3卖出现，继续等待5分钟是否能出3买，
 //                    13:30->午后维持5分钟震荡概率大，5分钟3买今天应该出不了了,继续低位买入16.12买入1000股做T，大盘日线依旧上升走势，没有走坏，继续持股，C阶段需要根据30分钟底分型设置止损，
-//                    同时需要关注1分钟是否出3卖，尾盘16.17卖出100股结束做T，1分钟维持低位震荡，有向下杀跌趋势，一旦如此就可能挑战止损点，为了降低风险再减仓1000股
+//                    同时需要关注1分钟是否出3卖，尾盘16.17卖出1000股结束做T，1分钟维持低位震荡，有向下杀跌趋势，一旦如此就可能挑战止损点，为了降低风险再减仓1000股
 //              6-27&关注止损点15.81，早盘1分钟走势中枢破位后继续拉回整理，15.96买入1000做T,由于板块个股继续强势，大盘30分钟3买概率形成加大，16.24继续买入1000股，午后1:20->16.30卖出1000股，
 //                  理由是依旧无量。1:30->5分钟开始放量，16.45位置有中枢压力，60分钟依旧围绕这个位置有震荡。当前大盘1分钟杀跌是有风险的，16.37卖出1000股今天T成功
 //              6-28&开盘后5分钟继续维持中枢震荡，趋势依旧没坏，16.27买入1000股做T，这个位置需要关注1分钟的3卖是否出现，11点出现1分钟3卖，接下来可能会出现5分钟5卖，关注5分钟的反弹减仓出局，因为
 //                  无法确认5分钟的反弹高度，所以16.06卖出1400股，16.09卖出700股，减少持仓是为了防守，虽然暂时没有出现5分钟3卖，但必须要提前减仓去防守，纠正：1分钟暂时是没有3卖的，但是有概率，
 //                  5分钟依旧处于杀跌，3卖暂时没出现。这个位置需要谨慎观察，14:26->当前处于30分钟震荡，5分钟依旧可以看做一笔杀跌还未反弹，16.04买入900股做T，这个位置有风险，根据30分钟底部要防范破
-//                  止损。整板块有回拉动作，所以买入部分仓位，风险可控，一旦买错，依旧可以出局
-        };
-        return value;
+//                  止损。整板块有回拉动作，所以买入部分仓位，风险可控，一旦买错，依旧可以出局，当前等待大盘1分钟是否能出3买，一旦1分钟再拉回5分钟出3卖概率加大
+
+        List<StockInfo> list = new ArrayList<>();
+        StockInfo stockInfo = new StockInfo(16.25,1900,16.61,3.0,"20190636  10:21");
+        stockInfo.setStokeName("四维图新");list.add(stockInfo);
+        stockInfo = new StockInfo(16.56,1000,16.82,2.0,"20190621  10:40");list.add(stockInfo);
+        stockInfo = new StockInfo(16.40,600,16.86,1.0,"20190621  10:50");list.add(stockInfo);
+        stockInfo = new StockInfo(15.86,1000,15.92,1.0,"20190625  11:00");list.add(stockInfo);
+        stockInfo = new StockInfo(15.95,1000,16.04,1.0,"20190625  14:00");list.add(stockInfo);
+        stockInfo = new StockInfo(16.12,1000,16.46,1.0,"20190626  10:30");list.add(stockInfo);
+        stockInfo = new StockInfo(15.96,1000,16.30,1.0,"20190627  10:30");list.add(stockInfo);
+        stockInfo = new StockInfo(16.24,1000,16.37,1.0,"20190627  10:40");list.add(stockInfo);
+        stockInfo = new StockInfo(16.27,1000,16.06,1.0,"20190628  10:30");list.add(stockInfo);
+        return list;
+    }
+
+    public static List<StockInfo> longTermTrack1_7(){//"2019-06-[14-？]四维图新"//目标价格【/20.00、17.50、16.90】止损价格【16.45】 最终收益：
+
+        List<StockInfo> list = new ArrayList<>();
+        StockInfo stockInfo = new StockInfo(12.00,1000,12.5,1.5,"20190620*10:36");
+        stockInfo.setStokeName("四维图新");
+        list.add(stockInfo);
+        stockInfo = new StockInfo(12.00,1000,12.5,1.5,"20190628*10:21");
+        list.add(stockInfo);
+        return list;
     }
 
     //总结日志
@@ -152,7 +182,73 @@ public class DicText {
         //20190630:漳州核电厂1号组开工【沃尔核材、中核科技、台海核电、中广核级、兰石重装】
 
     }
+    static class StockInfo{
+        private String stokeName;//名称
+        private double cost;//成本
+        private int stockNum;//数量
+        private double salePrice;//出售价格
+        private double buyHour;//持股时间(h)
+        String date;//buyTime
+
+        public StockInfo(double cost, int stockNum, double salePrice, double buyHour,String date) {
+            this.cost = cost;
+            this.stockNum = stockNum;
+            this.salePrice = salePrice;
+            this.buyHour = buyHour;
+            this.date = date;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public String getStokeName() {
+            return stokeName;
+        }
+
+        public void setStokeName(String stokeName) {
+            this.stokeName = stokeName;
+        }
+
+        public double getCost() {
+            return cost;
+        }
+
+        public void setCost(double cost) {
+            this.cost = cost;
+        }
+
+        public int getStockNum() {
+            return stockNum;
+        }
+
+        public void setStockNum(int stockNum) {
+            this.stockNum = stockNum;
+        }
+
+        public double getSalePrice() {
+            return salePrice;
+        }
+
+        public void setSalePrice(double salePrice) {
+            this.salePrice = salePrice;
+        }
+
+        public double getBuyHour() {
+            return buyHour;
+        }
+
+        public void setBuyHour(double buyHour) {
+            this.buyHour = buyHour;
+        }
+    }
 }
+
+
 
 
 /**

@@ -185,6 +185,28 @@ public class ExampleUnitTest {
     }
 
     @Test
+    public void testlongTermTrackT(){
+        List<DicText.StockInfo> value = DicText.longTermTrack1_7();//获取7月份操作
+        System.out.println("名称          买入      数量      卖出      操作时间           持股时间     盈利");
+//        System.err.println("----------------------------------------------------------------------------------");
+        for(int i=0; i<value.size(); i++){
+            System.out.println(value.get(i).getStokeName()+"      "
+                    +value.get(i).getCost()+"      "
+                    +value.get(i).getStockNum()+"      "
+                    +value.get(i).getSalePrice()+"      "
+                    +value.get(i).getDate()+"      "
+                    +value.get(i).getBuyHour()+"(h)      "
+                    +getPriceValue(value.get(i).getCost(),value.get(i).getSalePrice()));
+        }
+    }
+
+    private String getPriceValue(double cost,double salePrice){
+        double value = (salePrice - cost)/cost*100;
+        return (value>=0?"+":"-")+dealNum2(value)+"%";
+    }
+
+
+    @Test
     public void addTestNum(){
         double targetValue = 0.06;//每次目标
         double warehousePosition = 0.33;//仓位
@@ -197,7 +219,7 @@ public class ExampleUnitTest {
         String[][] strlist =new String[monthNum][];
         //======================================================
         month_Num[0] = 6;//201905开始[长期占用资金1300]//-243
-        value[0] = new double[]{0.01,-0.75,-2.7,-0.28,0,0};//201905开始
+        value[0] = new double[]{0.01,-0.75,-2.7,-0.28,0,0.0};//201905开始
         strlist[0] = DicText.getMonth6NameArray();
         //======================================================
 
@@ -428,7 +450,7 @@ public class ExampleUnitTest {
     public void addition_isCorrect2(){
         //<<2019-3-17/2024-03-17  ：初始：60000>>预计：30%
         //时间节点：2019-03-30  ：待定-------------------[78,000][61800[1]--64100[2]--66000[3]--64333[1]--64750[2]--65500[3]----58500[4]]
-        //时间节点：2019-06-30  ：待定-------------------[101,400][106200[1]--[102880[2]--[100800[3]--[96200[4]--[92500[1]--[87503[2]--[88087[3]--[84700[4]--[84814[5]--[80600[1]--[81100[2]--[81367[3]--[[4]]
+        //时间节点：2019-06-30  ：待定-------------------[101,400][106200[1]--[102880[2]--[100800[3]--[96200[4]--[92500[1]--[87503[2]--[88087[3]--[84700[4]--[84814[5]--[80600[1]--[81100[2]--[81367[3]--[80285[4]]
         //时间节点：2019-09-30  ：待定-------------------[131,820][[1]--[[2]--[[3]--[[4]--[[1]--[[2]--[[3]--[[4]--[[5]--[1]--[[2]--[[3]--[[4]]
         //时间节点：2019-12-31  ：待定-------------------[171,366][[1]--[[2]--[[3]--[[4]--[[1]--[[2]--[[3]--[[4]--[[5]--[1]--[[2]--[[3]--[[4]]
 

@@ -186,21 +186,46 @@ public class ExampleUnitTest {
 
     @Test
     public void testlongTermTrackT(){
-        List<DicText.StockInfo> value = DicText.longTermTrack1_6();//获取7月份操作
-        System.out.println("名称          买入      数量        卖出      操作时间           持股时间       盈利");
+        List<DicText.StockInfo> value = DicText.longTermTrack1_7();//获取7月份操作
+        System.out.println("名称          买入      数量        卖出      操作时间           持股时间       盈利      金额     [7月操作记录]");
 //        System.err.println("----------------------------------------------------------------------------------");
+        double resultValue = 0;
         for(int i=0; i<value.size(); i++){
             System.out.println(value.get(i).getStokeName()+"      "
-                    +value.get(i).getCost()+"      "
-                    +value.get(i).getStockNum()+"      "
-                    +value.get(i).getSalePrice()+"      "
+                    +setStockPriceShow(value.get(i).getCost())+"      "
+                    +setStockNumShow(value.get(i).getStockNum())+""
+                    +setStockPriceShow(value.get(i).getSalePrice())+"      "
                     +value.get(i).getDate()+"      "
                     +value.get(i).getBuyHour()+"(h)      "
-                    +getPriceValue(value.get(i).getCost(),value.get(i).getSalePrice()));
+                    +getPriceRateValue(value.get(i).getCost(),value.get(i).getSalePrice())+"      "
+                    +getPriceValue(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum()));
+            resultValue = resultValue + getPriceValueTotal(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum());
         }
+        System.out.println("                                                                                           Total:"+dealNum2(resultValue));
     }
 
-    private String getPriceValue(double cost,double salePrice){
+    private String setStockNumShow(int num){
+        if(num>=1000){
+            return num+"      ";
+        }
+        else{
+            return num+"       ";
+        }
+    }
+    private String setStockPriceShow(double value){
+        String[] strs = (value+"").replace(".","#").split("#");
+        String result = "";
+        if(strs[1].length() >1){
+            result =  value+"";
+        }
+        else{
+            result =  value+"0";
+        }
+
+        return result.length() < 5?" "+result:result+"";
+    }
+
+    private String getPriceRateValue(double cost,double salePrice){
         double value = (salePrice - cost)/cost*100;
         if((value+"").contains("-") || (value+"").contains("+")){
             return dealNum2(value)+"%";
@@ -208,7 +233,21 @@ public class ExampleUnitTest {
         else {
             return (value>=0?"+":"-")+dealNum2(value)+"%";
         }
+    }
 
+    private String getPriceValue(double cost,double salePrice,int stockNum){
+        double value = (salePrice - cost)*stockNum;
+        if((value+"").contains("-") || (value+"").contains("+")){
+            return dealNum2(value)+"";
+        }
+        else {
+            return (value>=0?"+":"-")+dealNum2(value)+"";
+        }
+    }
+
+    private double getPriceValueTotal(double cost,double salePrice,int stockNum){
+        double value = (salePrice - cost)*stockNum;
+        return value;
     }
 
 
@@ -216,8 +255,8 @@ public class ExampleUnitTest {
     public void addTestNum(){
         double targetValue = 0.06;//每次目标
         double warehousePosition = 0.33;//仓位
-        double sum = 81889;
-        double tempSum = 81889;
+        double sum = 80200;
+        double tempSum = 80200;
         int monthNum = 1;//12*2;
 
         int[] month_Num = new int[monthNum];
@@ -225,8 +264,9 @@ public class ExampleUnitTest {
         String[][] strlist =new String[monthNum][];
         //======================================================
         month_Num[0] = 6;//201905开始[长期占用资金1300]//-243
-        value[0] = new double[]{0.01,-0.75,-2.7,-0.28,0,0.0};//201905开始
-        strlist[0] = DicText.getMonth6NameArray();
+        value[0] = new double[]{0.01,-0.75,-2.7,-0.28,0,0.0};//81889 getMonth6NameArray
+        value[0] = new double[]{0.00,-0.0,-0.0,-0.0,0,0.0};//getMonth7NameArray
+        strlist[0] = DicText.getMonth7NameArray();
         //======================================================
 
         for(int j=0;j<monthNum;j++){

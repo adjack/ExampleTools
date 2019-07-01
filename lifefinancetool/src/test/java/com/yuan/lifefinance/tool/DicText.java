@@ -62,6 +62,40 @@ public class DicText {
               };
         return value;
     }
+    public static String[] getMonth7NameArray(){
+
+        String[] value = {
+
+                "2019-06-[20-21中钨高新]",//目标价格【8.28】止损价格【7.33】 最终收益：
+//               6-20&板块看尾盘龙头个股继续涨停，筹码看属于加仓后的整理，博跟涨
+//               6-21&上午：大盘上涨，未跟涨，当前处于5分钟弱势震荡，继续持股，大盘5分钟要背驰趋势，注意风险，13:50->30分钟有下杀趋势7.47卖出全仓
+
+                "2019-06-[11-24综艺股份]",//目标价格【9.70、8.00】止损价格【7.00】 最终收益：-2268
+//               6-11&：半导体板块，国产芯片，多概念龙头，周线符合成交量形态个股，当前涨幅不大，可以适当低吸，今天跑输板块，处于板块下游，明天有希望领涨板块
+
+//               6-12&止损：7.38：午盘有杀跌趋势，先卖出做T尾盘需要买回，2点股价开始下杀，证券拉盘后发现情况不对，又买回了部分[粗心导致]，发现半导体板块异动，需要酌情加仓，加仓完毕
+//               总结：今天跑输板块，走势上看属于垫底，但由于前些天涨幅不小，可以理解为洗获利盘，明天依旧关注高位15分钟的中枢震荡，守住止损后可适当T，收盘成交量维持上量标准
+
+//               6-13&止损[关注15分钟中枢震荡7.34止损]：60分钟中枢上轨附近，突破有难度，关注15分钟中枢走势，开盘依旧处于中枢震荡，10点开始震荡向下跌破15的趋势，一旦成立60分钟
+//                    确定调整，需要关注15分钟是否能回拉成功，当前大盘继续缩量砸盘，关注1分钟杀跌是否背驰，再跌即将到达支撑，考虑T,10点半半导体板块开始异动买入部分做T，11点卖出半仓，5分钟反弹有终结趋势
+//                    尾盘继续减仓，5分钟趋势杀跌可能还有机会破新低，明天5分钟背驰位有低位入场机会，已经回调多日有上涨需求，板块继续有涨停个股，继续看好此股机会，收盘成交量维持上量标准
+
+//               6-14&止损[关注15分钟1买]：开盘高开之后依旧处于5分钟下跌中枢，等待5分钟跌破机会，继续回调，当前60分钟杀跌一笔有机会形成类2买，7.07买入部分仓位做T，2点弱势杀跌，尾盘放量杀跌，退出观望，
+//               6-17&早上小幅上冲后午盘回落，午盘：走势较差，60分钟继续调整，5分钟大概率形成3卖，一旦形成日线确认成笔杀跌，下午出局回避，尾盘全部卖出，等待低点再介入
+//               6-18&早盘低开后继续杀跌，有机会6.5左右支撑位置反弹，但是因为无量，慎重关注不入场，因为短线操作必须要有量才行，这是原则，
+
+                "2019-06-[24-亚盛集团]",//目标价格【4.30】止损价格【3.78】
+//               6-24&大盘有机会转日线回调，当前农业股逆势上涨，结合临近本周的农业消息利好，有望反弹一波，所以买入。走势看5分钟属于类2买突破
+//               6-35&5分钟类2买再次拉回中枢，走势较弱，等待5分钟反弹出局，走势跟预期不符合，3.73卖出全部
+
+                "2019-06-[18-中曼石油]",//目标价格【23.00】止损价格【17.75】
+//               6-18&次新板块，当前处于筹码突破后的洗盘阶段，配合大盘缩量杀跌，关注5分钟的背驰机会
+//               6-21&最近两天筹码松动，属于加仓后的继续上涨，关注回调机会
+
+                "",
+        };
+        return value;
+    }
 
     //长线跟踪
     public static List<StockInfo> longTermTrack1_6(){//"2019-06-[14-？]四维图新"//目标价格【/20.00、17.50、16.90】止损价格【16.45】 最终收益：
@@ -102,27 +136,29 @@ public class DicText {
 //                  止损。整板块有回拉动作，所以买入部分仓位，风险可控，一旦买错，依旧可以出局，当前等待大盘1分钟是否能出3买，一旦1分钟再拉回5分钟出3卖概率加大
 
         List<StockInfo> list = new ArrayList<>();
-        StockInfo stockInfo = new StockInfo(16.25,1900,16.61,3.0,"20190636  10:21");
-        stockInfo.setStokeName("四维图新");list.add(stockInfo);
-        stockInfo = setStockInfo(stockInfo,16.56,1000,16.82,2.0,"20190621  10:40");list.add(stockInfo);
-        stockInfo = setStockInfo(stockInfo,16.41,600,16.86,1.0,"20190621  10:50");list.add(stockInfo);
-        stockInfo = setStockInfo(stockInfo,15.86,1000,15.92,1.0,"20190625  11:00");list.add(stockInfo);
-        stockInfo = setStockInfo(stockInfo,15.95,1000,16.04,1.0,"20190625  14:00");list.add(stockInfo);
-        stockInfo = setStockInfo(stockInfo,16.12,1000,16.46,1.0,"20190626  10:30");list.add(stockInfo);
-        stockInfo = setStockInfo(stockInfo,15.96,1000,16.31,1.0,"20190627  10:30");list.add(stockInfo);
-        stockInfo = setStockInfo(stockInfo,16.24,1000,16.37,1.0,"20190627  10:40");list.add(stockInfo);
-        stockInfo = setStockInfo(stockInfo,16.27,1000,16.06,1.0,"20190628  10:30");list.add(stockInfo);
+        StockInfo stockInfo = new StockInfo("四维图新");
+        list.add(setStockInfo(stockInfo,16.25,1900,16.61,3.0,"20190616  10:21"));
+        list.add(setStockInfo(stockInfo,16.56,1000,16.82,2.0,"20190621  10:40"));
+        list.add(setStockInfo(stockInfo,16.41,600,16.86,1.0,"20190621  10:50"));
+        list.add(setStockInfo(stockInfo,15.86,1000,15.92,1.0,"20190625  11:00"));
+        list.add(setStockInfo(stockInfo,15.95,1000,16.04,1.0,"20190625  14:00"));
+        list.add(setStockInfo(stockInfo,16.12,1000,16.46,1.0,"20190626  10:30"));
+        list.add(setStockInfo(stockInfo,15.96,1000,16.31,1.0,"20190627  10:30"));
+        list.add(setStockInfo(stockInfo,16.24,1000,16.37,1.0,"20190627  10:40"));
+        list.add(setStockInfo(stockInfo,16.27,1000,16.06,1.0,"20190628  10:30"));
         return list;
     }
 
-    public static List<StockInfo> longTermTrack1_7(){//"2019-06-[14-？]四维图新"//目标价格【/20.00、17.50、16.90】止损价格【16.45】 最终收益：
+    public static List<StockInfo> longTermTrack1_7(){//"2019-06-[14-？]四维图新"//目标价格【/19.10、17.67、17.00】止损价格【】 最终收益：
+//                  7-01&早盘收到消息面影响高开，接下来关注30分钟是否有类2买向上突破走势，开盘后高开到30分钟中枢上轨遇到抛压，需要等待是否能出现5分钟3买，当前计算计算机板块强势，买入2000股做T
+//                      11:02->30分钟的压力位置，卖出2000股做T的股份,午后，5分钟有回调趋势，但当前位置的回调是有可能出现5分钟3买的，买入700股做T，临近尾盘，5分钟3买成功，当前位置5分钟1卖卖出700
+//                      股做T成功,当前需要关注30分钟突破之后5分钟的线段力度，当前进入到D阶段，收盘全线大涨，
+//                  7-02&
 
         List<StockInfo> list = new ArrayList<>();
-        StockInfo stockInfo = new StockInfo(12.00,1000,12.5,1.5,"20190620*10:36");
-        stockInfo.setStokeName("四维图新");
-        list.add(stockInfo);
-        stockInfo = new StockInfo(12.00,1000,12.5,1.5,"20190628*10:21");
-        list.add(stockInfo);
+        StockInfo stockInfo = new StockInfo("四维图新");
+        list.add(setStockInfo(stockInfo,16.45,2000,16.79,1.0,"20190701  09:42"));
+        list.add(setStockInfo(stockInfo,16.70,700,17.08,1.0,"20190701  13:44"));
         return list;
     }
 
@@ -196,6 +232,17 @@ public class DicText {
         private double buyHour;//持股时间(h)
         String date;//buyTime
 
+        public StockInfo(String stokeName) {
+            this.stokeName = stokeName;
+        }
+        public StockInfo(String stokeName,double cost, int stockNum, double salePrice, double buyHour,String date) {
+            this.stokeName = stokeName;
+            this.cost = cost;
+            this.stockNum = stockNum;
+            this.salePrice = salePrice;
+            this.buyHour = buyHour;
+            this.date = date;
+        }
         public StockInfo(double cost, int stockNum, double salePrice, double buyHour,String date) {
             this.cost = cost;
             this.stockNum = stockNum;

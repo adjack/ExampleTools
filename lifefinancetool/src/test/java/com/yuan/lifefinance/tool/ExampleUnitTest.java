@@ -187,7 +187,7 @@ public class ExampleUnitTest {
     @Test
     public void testlongTermTrackT(){
         List<DicText.StockInfo> value = DicText.longTermTrack1_7();//获取7月份操作
-        System.out.println("名称          买入      数量        卖出      操作时间           持股时间       盈利      金额     [7月操作记录]");
+        System.out.println("名称          买入       数量       卖出      操作时间           持股时间       盈利       金额    阶段    [7月操作记录]");
 //        System.err.println("----------------------------------------------------------------------------------");
         double resultValue = 0;
         for(int i=0; i<value.size(); i++){
@@ -198,7 +198,8 @@ public class ExampleUnitTest {
                     +value.get(i).getDate()+"      "
                     +value.get(i).getBuyHour()+"(h)      "
                     +getPriceRateValue(value.get(i).getCost(),value.get(i).getSalePrice())+"      "
-                    +getPriceValue(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum()));
+                    +getPriceValue(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum())+"     "
+                    +value.get(i).getDisc()+"      ");
             resultValue = resultValue + getPriceValueTotal(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum());
         }
         System.out.println("                                                                                           Total:"+dealNum2(resultValue));

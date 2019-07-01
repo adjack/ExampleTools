@@ -3,6 +3,7 @@ package com.yuan.lifefinance.tool;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DicText {
 
 
@@ -134,18 +135,17 @@ public class DicText {
 //                  无法确认5分钟的反弹高度，所以16.06卖出1400股，16.09卖出700股，减少持仓是为了防守，虽然暂时没有出现5分钟3卖，但必须要提前减仓去防守，纠正：1分钟暂时是没有3卖的，但是有概率，
 //                  5分钟依旧处于杀跌，3卖暂时没出现。这个位置需要谨慎观察，14:26->当前处于30分钟震荡，5分钟依旧可以看做一笔杀跌还未反弹，16.04买入900股做T，这个位置有风险，根据30分钟底部要防范破
 //                  止损。整板块有回拉动作，所以买入部分仓位，风险可控，一旦买错，依旧可以出局，当前等待大盘1分钟是否能出3买，一旦1分钟再拉回5分钟出3卖概率加大
-
         List<StockInfo> list = new ArrayList<>();
         StockInfo stockInfo = new StockInfo("四维图新");
-        list.add(setStockInfo(stockInfo,16.25,1900,16.61,3.0,"20190616  10:21"));
-        list.add(setStockInfo(stockInfo,16.56,1000,16.82,2.0,"20190621  10:40"));
-        list.add(setStockInfo(stockInfo,16.41,600,16.86,1.0,"20190621  10:50"));
-        list.add(setStockInfo(stockInfo,15.86,1000,15.92,1.0,"20190625  11:00"));
-        list.add(setStockInfo(stockInfo,15.95,1000,16.04,1.0,"20190625  14:00"));
-        list.add(setStockInfo(stockInfo,16.12,1000,16.46,1.0,"20190626  10:30"));
-        list.add(setStockInfo(stockInfo,15.96,1000,16.31,1.0,"20190627  10:30"));
-        list.add(setStockInfo(stockInfo,16.24,1000,16.37,1.0,"20190627  10:40"));
-        list.add(setStockInfo(stockInfo,16.27,1000,16.06,1.0,"20190628  10:30"));
+        list.add(setStockInfo(stockInfo,16.25,1900,16.61,3.0,"20190616  10:21","II"));
+        list.add(setStockInfo(stockInfo,16.56,1000,16.82,2.0,"20190621  10:40","II"));
+        list.add(setStockInfo(stockInfo,16.41,600,16.86,1.0,"20190621  10:50","II"));
+        list.add(setStockInfo(stockInfo,15.86,1000,15.92,1.0,"20190625  11:00","II"));
+        list.add(setStockInfo(stockInfo,15.95,1000,16.04,1.0,"20190625  14:00","II"));
+        list.add(setStockInfo(stockInfo,16.12,1000,16.46,1.0,"20190626  10:30","II"));
+        list.add(setStockInfo(stockInfo,15.96,1000,16.31,1.0,"20190627  10:30","II"));
+        list.add(setStockInfo(stockInfo,16.24,1000,16.37,1.0,"20190627  10:40","II"));
+        list.add(setStockInfo(stockInfo,16.27,1000,16.06,1.0,"20190628  10:30","II"));
         return list;
     }
 
@@ -157,8 +157,8 @@ public class DicText {
 
         List<StockInfo> list = new ArrayList<>();
         StockInfo stockInfo = new StockInfo("四维图新");
-        list.add(setStockInfo(stockInfo,16.45,2000,16.79,1.0,"20190701  09:42"));
-        list.add(setStockInfo(stockInfo,16.70,700,17.08,1.0,"20190701  13:44"));
+        list.add(setStockInfo(stockInfo,16.45,2000,16.79,1.0,"20190701  09:42","II"));
+        list.add(setStockInfo(stockInfo,16.70,700,17.08,1.0,"20190701  13:44","II"));
         return list;
     }
 
@@ -194,10 +194,13 @@ public class DicText {
           为了确保不遗漏整个上涨过程的关键离场点，我统计了如下几条操作流程
           前提：我们需要关注日线跌幅是否过大，只有过大这样的反转趋势才有利润空间，操作过程如下：
 
+          一：日线1买反弹阶段I
           A.【关注30分钟3买准备买入，条件：1.等待5分钟1买入场，参考黄金分割位  2.底分型设置止损】这个过程是为了确定周线开始上涨一笔
             【防范：要严格止损，仓位3层】
           B.【关注30分钟的一卖出局，可参考压力位 条件：1.等待5分钟的一卖  2.1分钟出现3卖】这个阶段有可能形成中枢震荡，前提是不能出现1分钟1卖
             【防范：1分钟出现3卖就要出局】************B阶段这个过程可能会出现反复震荡，需要参考5分钟是否出现3卖*****************
+
+          二：2买/类2买震荡阶段II
           C.【等待日线杀跌完成买入， 条件：1.30分钟的1买 2.或者30分钟一笔跌到位参考5分钟1买  3.5分钟出3买后的30分钟2买】这个位置要重点关注日线的止损位置，一旦跌破可能也是整个趋势的终结
             【防范：要严格防范30分钟出现3卖，仓位8层，严格止损】这个过程是重仓的买入阶段，但要谨慎关注30分钟3卖，一旦出现整段趋势可能就终结了
             【防范：5分钟一旦出现3卖，如果杀跌幅度不大且依旧处于30分钟中枢内部，是有可能继续形成30分钟类2买的，但是必须保证不能再破5分钟新低，不然要出局】
@@ -206,6 +209,11 @@ public class DicText {
             【防范：1分钟的3卖要减仓观望，但跟B阶段不同的是这个位置杀跌可能有30分钟类2买机会，重点关注T】
           E【CD步骤有可能反复震荡，重点关注30分钟是否能出3买】这个过程可以针对30分钟震荡做T
             【防范：30分钟3卖】
+
+          三：日线突破中枢阶段III
+          F【关注30分钟的一卖减仓】这个过程一旦日线回调是不能T的，是出货后等待日线3买的阶段，只能做下日线3买
+           【防范：5分钟出3卖后是可能跌回日线中枢趋势终结的，一旦发生要出局，然后等待日线3买】
+           【防范：30分钟出3卖后一旦发生要出局，整段趋势终结】
 
 
 
@@ -219,8 +227,8 @@ public class DicText {
 
     }
 
-    private static StockInfo setStockInfo(StockInfo stockInfo,double cost, int stockNum, double salePrice, double buyHour,String date){
-        StockInfo stockInfo1 = new StockInfo(cost,stockNum,salePrice,buyHour,date);
+    private static StockInfo setStockInfo(StockInfo stockInfo,double cost, int stockNum, double salePrice, double buyHour,String date,String disc){
+        StockInfo stockInfo1 = new StockInfo(cost,stockNum,salePrice,buyHour,date,disc);
         stockInfo1.setStokeName(stockInfo.getStokeName());
         return stockInfo1;
     };
@@ -231,6 +239,7 @@ public class DicText {
         private double salePrice;//出售价格
         private double buyHour;//持股时间(h)
         String date;//buyTime
+        String disc;//阶段描述
 
         public StockInfo(String stokeName) {
             this.stokeName = stokeName;
@@ -243,16 +252,25 @@ public class DicText {
             this.buyHour = buyHour;
             this.date = date;
         }
-        public StockInfo(double cost, int stockNum, double salePrice, double buyHour,String date) {
+        public StockInfo(double cost, int stockNum, double salePrice, double buyHour,String date,String disc) {
             this.cost = cost;
             this.stockNum = stockNum;
             this.salePrice = salePrice;
             this.buyHour = buyHour;
             this.date = date;
+            this.disc = disc;
         }
 
         public String getDate() {
             return date;
+        }
+
+        public String getDisc() {
+            return disc;
+        }
+
+        public void setDisc(String disc) {
+            this.disc = disc;
         }
 
         public void setDate(String date) {

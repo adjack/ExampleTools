@@ -187,7 +187,7 @@ public class ExampleUnitTest {
     @Test
     public void testlongTermTrackT(){
         List<DicText.StockInfo> value = DicText.longTermTrack1_7();//获取7月份操作
-        System.out.println("名称          买入       数量       卖出      操作时间           持股时间       盈利       金额    阶段    [7月操作记录]");
+        System.out.println("名称          买入       数量       卖出      操作时间           持股时间       盈利        金额[手续费]           阶段    [7月操作记录]");
 //        System.err.println("----------------------------------------------------------------------------------");
         double resultValue = 0;
         for(int i=0; i<value.size(); i++){
@@ -198,11 +198,36 @@ public class ExampleUnitTest {
                     +value.get(i).getDate()+"      "
                     +value.get(i).getBuyHour()+"(h)      "
                     +getPriceRateValue(value.get(i).getCost(),value.get(i).getSalePrice())+"      "
-                    +getPriceValue(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum())+"     "
-                    +value.get(i).getDisc()+"      ");
+                    +getPriceValue(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum())+"    "
+                    +dealDisc(value.get(i).getDisc())+"      ");
             resultValue = resultValue + getPriceValueTotal(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum());
         }
         System.out.println("                                                                                           Total:"+dealNum2(resultValue));
+    }
+
+    @Test
+    public void otherValue(){
+        System.out.println(getOtherValue(7.33,7.50,2000));
+    }
+
+    private String getOtherValue(double cost,double sale,double num){
+        double value1 = (num/10000)*2  + cost*num/10000*0.487  + cost*num/10000*3;
+        double value2 = (num/10000)*2  + sale*num/10000*0.487  + sale*num/10000*3 +sale*num/10000*10;
+        return dealNum2(value1+value2);
+    }
+
+    private String dealDisc(String disc){//3.28
+        String other = "";
+        if("I".equals(disc)){
+            other = " [阶段：安全反弹]";
+        }
+        else if("II".equals(disc)){
+            other = " [阶段：可上可下]";
+        }
+        else if("III".equals(disc)){
+            other = " [阶段：危险出货]*";
+        }
+        return disc + other;
     }
 
     private String setStockNumShow(int num){
@@ -228,6 +253,9 @@ public class ExampleUnitTest {
 
     private String getPriceRateValue(double cost,double salePrice){
         double value = (salePrice - cost)/cost*100;
+        if(value == 0){
+            return "+0.00%";
+        }
         if((value+"").contains("-") || (value+"").contains("+")){
             return dealNum2(value)+"%";
         }
@@ -237,17 +265,31 @@ public class ExampleUnitTest {
     }
 
     private String getPriceValue(double cost,double salePrice,int stockNum){
+        String result="";
         double value = (salePrice - cost)*stockNum;
+        if(value >= 0){
+            value = value - Double.valueOf(getOtherValue(cost,salePrice,stockNum));
+        }
+        else{
+            value = Math.abs(value) + Double.valueOf(getOtherValue(cost,salePrice,stockNum));
+            value = value - value*2;
+        }
         if((value+"").contains("-") || (value+"").contains("+")){
-            return dealNum2(value)+"";
+            result =  dealNum2(value)+"";
         }
         else {
-            return (value>=0?"+":"-")+dealNum2(value)+"";
+            result =  (value>=0?"+":"-")+dealNum2(value)+"";
         }
+        result = result+" ["+getOtherValue(cost,salePrice,stockNum)+"]";
+        String temp = "";
+        for(int i=0;i<20-result.length();i++){
+            temp = temp + " ";
+        }
+        return result+temp;
     }
 
     private double getPriceValueTotal(double cost,double salePrice,int stockNum){
-        double value = (salePrice - cost)*stockNum;
+        double value = (salePrice - cost)*stockNum - Double.valueOf(getOtherValue(cost,salePrice,stockNum));
         return value;
     }
 

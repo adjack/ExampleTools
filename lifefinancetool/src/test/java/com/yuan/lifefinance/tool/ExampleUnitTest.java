@@ -202,7 +202,7 @@ public class ExampleUnitTest {
                     +dealDisc(value.get(i).getDisc())+"      ");
             resultValue = resultValue + getPriceValueTotal(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum());
         }
-        System.out.println("                                                                                           Total:"+dealNum2(resultValue));
+        System.out.println("                                                                                                    Total:"+dealNum2(resultValue));
     }
 
     @Test
@@ -253,15 +253,23 @@ public class ExampleUnitTest {
 
     private String getPriceRateValue(double cost,double salePrice){
         double value = (salePrice - cost)/cost*100;
+        String result = "";
         if(value == 0){
-            return "+0.00%";
+            result =  "+0.00%";
         }
         if((value+"").contains("-") || (value+"").contains("+")){
-            return dealNum2(value)+"%";
+            result =  dealNum2(value)+"%";
         }
         else {
-            return (value>=0?"+":"-")+dealNum2(value)+"%";
+            result =  (value>=0?"+":"-")+dealNum2(value)+"%";
         }
+
+        String temp = "";
+        for(int i=0;i<7-result.length();i++){
+            temp = temp + " ";
+        }
+
+        return result+temp;
     }
 
     private String getPriceValue(double cost,double salePrice,int stockNum){

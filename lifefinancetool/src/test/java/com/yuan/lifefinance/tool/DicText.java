@@ -161,7 +161,7 @@ public class DicText {
 //                      中枢震荡，因为已经出现了5分钟3卖，需要关注30分钟反弹出局
 //                  总结：无量不做T,不达到上量标准做T失败概率大
 //                  7-05&开盘低开继续维持5分钟杀跌趋势，关注30分钟反弹出局机会，早盘计算机板块相对较强，重点等30分钟反弹，阶段E，午后反弹为了避免风险，卖出昨天部分仓位T，当前位置有可能趋势终结，
-//                      16.30止损，收盘继续弱势回调，暂未形成有效反弹，继续持股按止损等待30分钟反弹出局
+//                      16.30止损，收盘继续弱势回调，30分钟已经成笔，关注5分钟是否能破位杀跌的风险，严格关注止损
         List<StockInfo> list = new ArrayList<>();
         StockInfo stockInfo = new StockInfo("四维图新");
         list.add(setStockInfo(stockInfo,16.45,2000,16.79,1.0,"20190701  09:42","II"));
@@ -172,7 +172,7 @@ public class DicText {
         list.add(setStockInfo(stockInfo,16.77,1000,16.52,2.0,"20190703  09:51","II"));
         list.add(setStockInfo(stockInfo,16.59,800,16.52,2.0,"20190703  10:36","II"));
         list.add(setStockInfo(stockInfo,16.64,1200,16.47,5.0,"20190704  09:49","II"));
-        list.add(setStockInfo(stockInfo,16.64,1100,16.44,6.0,"20190704  09:49","II"));
+//        list.add(setStockInfo(stockInfo,16.64,1100,16.44,6.0,"20190704  09:49","II"));
         return list;
     }
 

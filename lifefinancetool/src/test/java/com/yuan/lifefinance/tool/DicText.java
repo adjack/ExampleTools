@@ -180,6 +180,7 @@ public class DicText {
         list.add(setStockInfo(stockInfo,16.59,800,16.52,2.0,"20190703  10:36","II"));
         list.add(setStockInfo(stockInfo,16.64,1200,16.47,5.0,"20190704  09:49","II"));
         list.add(setStockInfo(stockInfo,15.49,1300,15.25,2.0,"20190708  11:00","II"));
+        //      阶段目标15.70  止损
         StockInfo stockInfo1 = new StockInfo("天齐锂业");
 //      阶段目标27.80   止损26.07  仓位400
 //        list.add(setStockInfo(stockInfo1,26.41,1300,15.25,2.0,"20190708  11:00","I"));

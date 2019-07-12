@@ -186,7 +186,7 @@ public class ExampleUnitTest {
 
     @Test
     public void testlongTermTrackT(){
-        List<DicText.StockInfo> value = DicText.longTermTrack2_7();//获取7月份操作
+        List<DicText.StockInfo> value = DicText.longTermTrack2_7();//获取7月份操作     edf
         System.out.println("名称          买入       数量       卖出      操作时间           持股时间       盈利        金额[手续费]           阶段    [7月操作记录]");
 //        System.err.println("----------------------------------------------------------------------------------");
         double resultValue = 0;

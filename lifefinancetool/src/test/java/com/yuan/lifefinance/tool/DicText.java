@@ -1,5 +1,7 @@
 package com.yuan.lifefinance.tool;
 
+import com.yuan.lifefinance.tool.greendao.StockInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,9 +168,9 @@ public class DicText {
 //                  7-08&受利空影响开盘继续砸盘，等待30分钟反弹出局，11点1分钟背驰位置买入做T，午后继续杀跌，但杀跌幅度相对较小，关注5分钟背驰后做T博30分钟反弹，尾盘保持仓位关注明天30分钟反弹
 //                  总结：跌破重要点位马上出局，不能因为利好而迟疑，今天无量，应该不做T，错误操作，没有明确的目标，执行力不够，每个操作阶段应该需要设置日线目标，这点没有做到
 //                  7-09&【17.29-14.15】关注30分钟反弹，止损14.90，当前处于F阶段，早盘开盘后继续5分钟砸盘，当前属于30分钟急跌，可以等5分钟背驰位置博反弹
+//                  7-10&等待5分钟1买背驰
+//                  7-11&等待5分钟1买背驰
 
-//=================="2019-07-[09-？]天齐锂业"//级别：周线一笔，目标价格【27.80】止损价格【26.07】 最终收益：
-//                   7-09&买入部分天齐锂业，打点底仓，长线关注
         List<StockInfo> list = new ArrayList<>();
         StockInfo stockInfo = new StockInfo("四维图新");
         list.add(setStockInfo(stockInfo,16.45,2000,16.79,1.0,"20190701  09:42","II"));
@@ -180,11 +182,21 @@ public class DicText {
         list.add(setStockInfo(stockInfo,16.59,800,16.52,2.0,"20190703  10:36","II"));
         list.add(setStockInfo(stockInfo,16.64,1200,16.47,5.0,"20190704  09:49","II"));
         list.add(setStockInfo(stockInfo,15.49,1300,15.25,2.0,"20190708  11:00","II"));
-        //      阶段目标15.70  止损
-        StockInfo stockInfo1 = new StockInfo("天齐锂业");
-//      阶段目标27.80   止损25.83  仓位400
-//        list.add(setStockInfo(stockInfo1,26.41,1300,15.25,2.0,"20190708  11:00","I"));
 
+//      阶段目标15.70  等待30分钟反弹
+//        list.add(setStockInfo(stockInfo,14.01,1300,14.95,2.0,"20190708  11:00","II"));
+
+        return list;
+    }
+
+    public static List<StockInfo> longTermTrack2_7(){
+        //================="2019-07-[09-？]天齐锂业"//级别：周线一笔，目标价格【27.80】止损价格【26.07】 最终收益：
+//                  7-09&买入部分天齐锂业，打点底仓，长线关注
+//                  7-12&等待5分钟出2类买的机会,买入800做T，继续等待
+        List<StockInfo> list = new ArrayList<>();
+        StockInfo stockInfo1 = new StockInfo("天齐锂业");
+//      阶段目标27.80   止损25.83
+//        list.add(setStockInfo(stockInfo1,26.44,800,15.25,2.0,"20190712  10:00","无"));
         return list;
     }
 

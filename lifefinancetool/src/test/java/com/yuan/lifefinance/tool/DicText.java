@@ -174,6 +174,7 @@ public class DicText {
 
         List<StockInfo> list = new ArrayList<>();
         StockInfo stockInfo = new StockInfo("四维图新");
+//------[开店买股2000]  20190701-》16.45
         list.add(setStockInfo(stockInfo,16.45,2000,16.79,1.0,"20190701  09:42","II"));
         list.add(setStockInfo(stockInfo,16.70,700,17.08,1.0,"20190701  13:44","II"));
         list.add(setStockInfo(stockInfo,17.02,1000,17.22,0.4,"20190702  09:35","II"));
@@ -183,10 +184,12 @@ public class DicText {
         list.add(setStockInfo(stockInfo,16.59,800,16.52,2.0,"20190703  10:36","II"));
         list.add(setStockInfo(stockInfo,16.64,1200,16.47,5.0,"20190704  09:49","II"));
         list.add(setStockInfo(stockInfo,15.49,1300,15.25,2.0,"20190708  11:00","II"));
+// -----[卖店卖股2000]  暂无考证
 
+//------[开店买股2000]  20190715-》14.72
 //      阶段目标15.70  止损14.72
-        list.add(setStockInfo(stockInfo,14.72,1900,0,2.0,"20190715  14:50","II"));
-
+//        list.add(setStockInfo(stockInfo,14.72,2000,0,2.0,"20190715  14:50","II"));
+// -----[卖店卖股2000]  待定？
         return list;
     }
 
@@ -198,18 +201,23 @@ public class DicText {
 //                      60分钟底部中枢的构建过程
         List<StockInfo> list = new ArrayList<>();
         StockInfo stockInfo1 = new StockInfo("天齐锂业");
+//------[开店买股？]  20190716-》？
 //      阶段目标27.80   止损25.83
-//        list.add(setStockInfo(stockInfo1,26.44,800,15.25,2.0,"20190712  10:00","无"));
+        list.add(setStockInfo(stockInfo1,26.44,800,15.25,2.0,"20190712  10:00","无"));
+// -----[卖店卖股？]  待定？
         return list;
     }
 
     public static List<StockInfo> longTermTrack3_7(){
-        //================="2019-07-[15-？]天齐锂业"//级别：周线一笔
+        //================="2019-07-[15-？]中国人寿"//级别：周线一笔
 //                  7-15&今天属于高位横盘，并未跟涨大盘，当前处于月线突破趋势，今天买入博明天安全上升的反弹
         List<StockInfo> list = new ArrayList<>();
         StockInfo stockInfo1 = new StockInfo("中国人寿");
 //      阶段目标【博新高】   止损30.40
-        list.add(setStockInfo(stockInfo1,30.67,1100,0,2.0,"20190715  14:50","I"));
+//      [开店买股1100]  20190715-》30.67
+        list.add(setStockInfo(stockInfo1,30.67,1100,0,0,"20190715  14:50","I"));
+//      [卖店卖股1100]  20190716-》待定？
+
         return list;
     }
 

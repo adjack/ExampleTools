@@ -170,6 +170,7 @@ public class DicText {
 //                  7-09&【17.29-14.15】关注30分钟反弹，止损14.90，当前处于F阶段，早盘开盘后继续5分钟砸盘，当前属于30分钟急跌，可以等5分钟背驰位置博反弹
 //                  7-10&等待5分钟1买背驰
 //                  7-11&等待5分钟1买背驰
+//                  7-15&最近相对于板块整体跌幅巨大，猜测当大盘企稳反弹，应该有波大反弹，当前关注30分钟是否出3卖,尾盘增加持仓
 
         List<StockInfo> list = new ArrayList<>();
         StockInfo stockInfo = new StockInfo("四维图新");
@@ -183,8 +184,8 @@ public class DicText {
         list.add(setStockInfo(stockInfo,16.64,1200,16.47,5.0,"20190704  09:49","II"));
         list.add(setStockInfo(stockInfo,15.49,1300,15.25,2.0,"20190708  11:00","II"));
 
-//      阶段目标15.70  等待30分钟反弹
-//        list.add(setStockInfo(stockInfo,14.01,1300,14.95,2.0,"20190708  11:00","II"));
+//      阶段目标15.70  止损14.72
+        list.add(setStockInfo(stockInfo,14.72,1900,0,2.0,"20190715  14:50","II"));
 
         return list;
     }
@@ -193,10 +194,22 @@ public class DicText {
         //================="2019-07-[09-？]天齐锂业"//级别：周线一笔，目标价格【27.80】止损价格【26.07】 最终收益：
 //                  7-09&买入部分天齐锂业，打点底仓，长线关注
 //                  7-12&等待5分钟出2类买的机会,买入800做T，继续等待
+//                  7-15&早盘一破止损出局观望，但当前破位杀跌正好处于回补前期跳空缺口，回补后应该有希望短线反弹，暂时观望，等待15分钟背驰信号，关注
+//                      60分钟底部中枢的构建过程
         List<StockInfo> list = new ArrayList<>();
         StockInfo stockInfo1 = new StockInfo("天齐锂业");
 //      阶段目标27.80   止损25.83
 //        list.add(setStockInfo(stockInfo1,26.44,800,15.25,2.0,"20190712  10:00","无"));
+        return list;
+    }
+
+    public static List<StockInfo> longTermTrack3_7(){
+        //================="2019-07-[15-？]天齐锂业"//级别：周线一笔
+//                  7-15&今天属于高位横盘，并未跟涨大盘，当前处于月线突破趋势，今天买入博明天安全上升的反弹
+        List<StockInfo> list = new ArrayList<>();
+        StockInfo stockInfo1 = new StockInfo("中国人寿");
+//      阶段目标【博新高】   止损30.40
+        list.add(setStockInfo(stockInfo1,30.67,1100,0,2.0,"20190715  14:50","I"));
         return list;
     }
 

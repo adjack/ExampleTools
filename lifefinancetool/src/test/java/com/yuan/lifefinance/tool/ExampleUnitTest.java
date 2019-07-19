@@ -414,15 +414,26 @@ public class ExampleUnitTest {
         return subAry;
     }
 
+    @Test
+    public void addTestdwf(){
+        byte[] values = changgeBytesReturn(null,1000);
+        System.out.println(values.length);
+
+    }
 
     public byte[] changgeBytesReturn(byte[] inputValue,int index){
-        String str= bytesToHexString(inputValue);
-        int value1 = (int)Long.parseLong(str.substring(0,2),16);
+//        String str= bytesToHexString(inputValue);
+        String str="383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B61733132333536343634357364663634367336343835613535363464663466353435343536353434363536353461667364647366383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B61733132333536343634357364663634367336343835613535363464663466353435343536353434363536353461667364647366383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B61733132333536343634357364663634367336343835613535363464663466353435343536353434363536353461667364647366383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B6173313233353634363435736466363436733634383561353536346466346635";
+
+        int value1 = (int)Long.parseLong(str.substring(0,2),16);//55
         byte[] tempValue1_bytes = hexStringToByteArray(str.substring(4,4+(value1-1)*2));
-        int value2 = (int)Long.parseLong(str.substring(2,4),16);
+
+        int value2 = (int)Long.parseLong(str.substring(2,4),16);//56
         byte[] tempValue2_bytes = hexStringToByteArray(str.substring(4+(value1-1)*2,4+(value1-1)*2+(value2-1)*2));
+
         String tempValue = str.substring((value1+value2)*2);//非零的数值
-        String[] realValue = new String[value1+value2-2+tempValue.length()/2];
+
+        String[] realValue = new String[value1+value2-2+tempValue.length()/2];//真实数据的总长度
 
         for(int i=0;i<tempValue1_bytes.length;i++){//前部分
             int temp_index = tempValue1_bytes[i] & 0xFF;

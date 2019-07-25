@@ -16,10 +16,24 @@ import java.util.List;
  */
 public class HotdotDis {
     @Test
+    public void test012(){
+        double a = 576000 - 100000;//贷款额
+        double i = 0.0562/12;//月利率
+        int n=12*20;//月数
+
+        //每月还款额
+        double y = a*i*Math.pow((1+i),n)/(Math.pow(1+i,n)-1);
+        System.err.println("提前还贷后最终月供："+y);
+
+        //总利息//632000
+        double x = a*n*i*Math.pow((1+i),n)/(Math.pow(1+i,n)-1)-a;
+        System.err.println("提前还款剩余总利息："+x);
+
+        System.err.println("未提前还款剩余利息："+(632000-(20*2761+700)));
+    }
+    @Test
     public void test01(){
         List<HotdotDisBean> list = dis();
-//        System.err.println(dealStr(list.get(0).getHotdotArea1(),45)+"#");
-//        System.err.println(dealStr(list.get(1).getHotdotArea1(),45)+"#");
 
         System.out.println("       时间                 日线描述            5分钟描述                                  板块热点                               成交量    操作建议");
         for(int i=0;i<list.size();i++){
@@ -34,8 +48,8 @@ public class HotdotDis {
         List<HotdotDisBean> list=new ArrayList<>();
         list.add(new HotdotDisBean("20190724 15:00 周三","日线2买-失败","5分钟3买-失败",
                 "光学光电子3.3/非汽车交运3.0/计算机设备2.79/半导体及元件2.68","无","不操作"));
-        list.add(new HotdotDisBean("20190724 10:00 周四","日线2买-成功","5分钟3买-成功",
-                "会飞的俗话发3.3/都是的3.0/为房地产2.79/嗯嗯擦2.68","无","做日线一笔反弹"));
+        list.add(new HotdotDisBean("20190725 15:00 周四","日线2买-失败","5分钟3买-失败",
+                "电子制造2.53/半导体及元件1.99/食品加工1.77/物流1.63","无",""));
         return list;
     }
 
@@ -44,7 +58,7 @@ public class HotdotDis {
         for(int i=0;i<spaceLength-str.length();i++){
             spacestr = spacestr+" ";
         }
-        System.err.println(str.length()+"/"+spacestr.length());
+//        System.err.println(str.length()+"/"+spacestr.length());
         return str+spacestr;
     }
 }

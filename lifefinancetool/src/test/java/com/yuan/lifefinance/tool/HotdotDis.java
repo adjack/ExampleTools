@@ -16,11 +16,24 @@ import java.util.List;
  */
 public class HotdotDis {
     @Test
-    public void test012(){
-        double a = 576000 - 100000;//贷款额
-        double i = 0.0562/12;//月利率
-        int n=12*20;//月数
+    public void test011(){
+//        byte[] a = {1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,
+//                1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8};
+//        byte[] a1 = EncryptUtils.encryptAES2Base64(a,a);
+//        for (int i=0; i<a1.length; i++){
+//            System.err.println(a1[i]);
+//        }
 
+
+
+    }
+    @Test
+    public void test012(){
+        double vlu = 60000;
+        double a = 576000 - 60000;//贷款额
+        double i = 0.0562/12;//月利率
+        int n=12*16;//月数
+        System.err.println("    提前还款的金额："+vlu);
         //每月还款额
         double y = a*i*Math.pow((1+i),n)/(Math.pow(1+i,n)-1);
         System.err.println("提前还贷后最终月供："+y);

@@ -29,10 +29,10 @@ public class HotdotDis {
     }
     @Test
     public void test012(){
-        double vlu = 60000;
-        double a = 576000 - 60000;//贷款额
+        double vlu = 200000;
+        double a = 572000 - vlu;//贷款额
         double i = 0.0562/12;//月利率
-        int n=12*16;//月数
+        int n=12*30;//月数
         System.err.println("    提前还款的金额："+vlu);
         //每月还款额
         double y = a*i*Math.pow((1+i),n)/(Math.pow(1+i,n)-1);

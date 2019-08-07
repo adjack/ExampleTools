@@ -220,6 +220,17 @@ public class DicText {
         return list;
     }
 
+    public static List<StockInfo> longTermTrack1_8(){
+        //================="2019-08-[01-？]士兰微"//级别：2日线一笔，目标价格【】止损价格【】 最终收益：
+//                  8-02&买入部分士兰微，目标2日线级别，月线延续突破反弹
+        List<StockInfo> list = new ArrayList<>();
+        StockInfo stockInfo1 = new StockInfo("士兰微");
+//        list.add(setStockInfo(stockInfo1,23.94,400,23.92,1.0,"20190723  10:00","无"));
+
+// -----[卖店卖股？]  待定？
+        return list;
+    }
+
     public static List<StockInfo> longTermTrack3_7(){
         //================="2019-07-[15-16]中国人寿"//级别：周线一笔  结果：-788
 //                  7-15&今天属于高位横盘，并未跟涨大盘，当前处于月线突破趋势，今天买入博明天安全上升的反弹
@@ -229,10 +240,25 @@ public class DicText {
 //      阶段目标【博新高】   止损30.40
 //      [开店买股1100]  20190715-》30.67
         list.add(setStockInfo(stockInfo1,30.67,1100,0,0,"20190715  14:50","I"));
+        list.add(setStockInfo(stockInfo1,30.67,1100,0,1,"20190806  10:50","I"));
 //      [卖店卖股1100]  20190716-》30.01
 
         return list;
     }
+
+    public static List<StockInfo> longTermTrackAll_8(){
+        List<StockInfo> list = new ArrayList<>();
+        list.add(new StockInfo("<>士兰微",13.47,200,13.86,1,"20190806  10:15","I"));
+        list.add(new StockInfo("中国人寿",28.24,100,28.26,1,"20190806  10:15","I"));
+        list.add(new StockInfo("中国人寿",27.72,100,28.38,1,"20190806  10:15","I"));
+        list.add(new StockInfo("中国人寿",28.11,200,27.94,1,"20190807  10:45","I"));
+        list.add(new StockInfo("天齐锂业",23.88,200,24.29,1,"20190807  09:38","I"));
+        list.add(new StockInfo("<>士兰微",13.50,200,13.86,6,"20190806  13:15","I"));
+
+
+        return list;
+    }
+
 
     //总结日志
     public void getSummaryDiary(){
@@ -316,13 +342,14 @@ public class DicText {
         public StockInfo(String stokeName) {
             this.stokeName = stokeName;
         }
-        public StockInfo(String stokeName,double cost, int stockNum, double salePrice, double buyHour,String date) {
+        public StockInfo(String stokeName,double cost, int stockNum, double salePrice, double buyHour,String date,String disc) {
             this.stokeName = stokeName;
             this.cost = cost;
             this.stockNum = stockNum;
             this.salePrice = salePrice;
             this.buyHour = buyHour;
             this.date = date;
+            this.disc = disc;
         }
         public StockInfo(double cost, int stockNum, double salePrice, double buyHour,String date,String disc) {
             this.cost = cost;

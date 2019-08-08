@@ -254,6 +254,8 @@ public class DicText {
         list.add(new StockInfo("中国人寿",28.11,200,27.94,1,"20190807  10:45","I"));
         list.add(new StockInfo("天齐锂业",23.88,200,24.29,1,"20190807  09:38","I"));
         list.add(new StockInfo("<>士兰微",13.50,200,13.86,6,"20190806  13:15","I"));
+        list.add(new StockInfo("<>士兰微",13.67,700,13.80,3,"20190808  09:45","I"));
+        list.add(new StockInfo("天齐锂业",23.84,200,23.91,2,"20190807  10:38","I"));
 
 
         return list;

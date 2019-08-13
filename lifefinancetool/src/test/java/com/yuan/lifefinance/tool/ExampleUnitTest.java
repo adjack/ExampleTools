@@ -191,24 +191,46 @@ public class ExampleUnitTest {
         System.out.println("名称          买入       数量       卖出      操作时间           持股时间       盈利        金额[手续费]           阶段     [月操作记录]");
 //        System.err.println("----------------------------------------------------------------------------------");
         double resultValue = 0;
+        int failNum = 0;
+        double totalPrice = 0;//统计总收益比例
         for(int i=0; i<value.size(); i++){
+            totalPrice = totalPrice + (value.get(i).getSalePrice() - value.get(i).getCost())/value.get(i).getCost()*100;
+            String priceRateValue = getPriceRateValue(value.get(i).getCost(),value.get(i).getSalePrice());
+            if(priceRateValue.startsWith("-")) failNum++;
             System.out.println(value.get(i).getStokeName()+"      "
                     +setStockPriceShow(value.get(i).getCost())+"      "
                     +setStockNumShow(value.get(i).getStockNum())+""
                     +setStockPriceShow(value.get(i).getSalePrice())+"      "
                     +value.get(i).getDate()+"      "
                     +value.get(i).getBuyHour()+"(h)      "
-                    +getPriceRateValue(value.get(i).getCost(),value.get(i).getSalePrice())+"      "
+                    +priceRateValue+"      "
                     +getPriceValue(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum())+"    "
                     +dealDisc(value.get(i).getDisc())+"      ");
             resultValue = resultValue + getPriceValueTotal(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum());
         }
-        System.out.println("                                                                                                    Total:"+dealNum2(resultValue));
+        System.out.println("                                                                                                    Total:"+dealNum2(resultValue)+ "     "+(value.size()-failNum)+"/"+value.size()+"     "+totalPrice);
     }
 
     @Test
     public void otherValue(){
-        System.out.println(getOtherValue(7.33,7.50,2000));
+        byte[] temp = {0x1A,0x01};
+        String tempValue1 = Integer.toBinaryString(Integer.parseInt("1A",16));
+        String tempValue2 = Integer.toBinaryString(Integer.parseInt("01",16));
+
+        int a = 0x1a01;
+        int part1 = (a >> (9+3))&0x0f;  // 4个1
+        int part2 = (a >> ( 3 ))&0x1ff ; //0x1ff 就是9个1
+        int part3 = a & 0x07; // 0x07 就是3个1
+
+        System.out.println(a+"/"+part1+"/"+part2+"/"+part3);
+//        System.out.println(getOtherValue(7.33,7.50,2000));
+    }
+
+    public static int bytes2Char(byte[] bytes )
+    {
+        int int1=bytes[0]&0xff;
+        int int2=(bytes[1]&0xff)<<8;
+        return int1|int2;
     }
 
     private String getOtherValue(double cost,double sale,double num){
@@ -417,14 +439,20 @@ public class ExampleUnitTest {
 
     @Test
     public void addTestdwf(){
-        byte[] values = changgeBytesReturn(null,1000);
-        System.out.println(values.length);
+//        byte[] values = changgeBytesReturn(null,1000);
+//        System.out.println(values.length);
+        byte[] vadda = {0x66,0x73,0x00,0x61,0x32,0x00,0x65,0x39,0x00,0x32,0x61,0x00,0x68,0x68,0x00,0x64,0x66,0x61,0x66,0x64,0x00,0x73,0x39,0x38,0x37,0x36,0x75,0x68,0x62,0x65,0x72,0x00,0x26,0x26,0x00,0x26,0x26,0x25,0x00,0x25,0x35,0x62,0x73,0x00,0x64,0x73,0x00,0x00,0x6F,0x6F,0x00,0x64,0x70,0x73};
+        System.out.println(bytesToHexString(vadda));
+        byte[] temp = changgeBytes(vadda);
+        System.out.println(bytesToHexString(temp));
+        temp = changgeBytesReturn(temp);
+        System.out.println(bytesToHexString(temp));
 
     }
 
     public byte[] changgeBytesReturn(byte[] inputValue,int index){
-//        String str= bytesToHexString(inputValue);
-        String str="383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B61733132333536343634357364663634367336343835613535363464663466353435343536353434363536353461667364647366383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B61733132333536343634357364663634367336343835613535363464663466353435343536353434363536353461667364647366383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B61733132333536343634357364663634367336343835613535363464663466353435343536353434363536353461667364647366383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B6173313233353634363435736466363436733634383561353536346466346635";
+        String str= bytesToHexString(inputValue);
+//        String str="383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B61733132333536343634357364663634367336343835613535363464663466353435343536353434363536353461667364647366383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B61733132333536343634357364663634367336343835613535363464663466353435343536353434363536353461667364647366383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B61733132333536343634357364663634367336343835613535363464663466353435343536353434363536353461667364647366383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B6173313233353634363435736466363436733634383561353536346466346635";
 
         int value1 = (int)Long.parseLong(str.substring(0,2),16);//55
         byte[] tempValue1_bytes = hexStringToByteArray(str.substring(4,4+(value1-1)*2));
@@ -457,7 +485,36 @@ public class ExampleUnitTest {
         return hexStringToByteArray(result);
     }
 
+    //解析不大于250个字节的
+    public byte[] changgeBytesReturn(byte[] inputValue){
+        String str= bytesToHexString(inputValue);
 
+        int value1 = (int)Long.parseLong(str.substring(0,2),16);//55
+        byte[] tempValue1_bytes = hexStringToByteArray(str.substring(2,2+(value1-1)*2));
+
+        String tempValue = str.substring((value1)*2);//非零的数值
+
+        String[] realValue = new String[value1-1+tempValue.length()/2];//真实数据的总长度
+
+        for(int i=0;i<tempValue1_bytes.length;i++){//前部分
+            int temp_index = tempValue1_bytes[i] & 0xFF;
+            realValue[temp_index-1]="00";
+        }
+
+        String result = "";
+        int loopIndex = 0;
+        for(int i=0;i<realValue.length;i++){
+            if(realValue[i] == null){
+                realValue[i] = tempValue.substring(loopIndex*2,loopIndex*2+2);
+                loopIndex++;
+            }
+            result = result + realValue[i];
+        }
+        return hexStringToByteArray(result);
+    }
+
+
+    //加密
     public byte[] changgeBytes(byte[] inputValue,int index){
         try {
             String str = bytesToHexString(inputValue);
@@ -465,6 +522,21 @@ public class ExampleUnitTest {
             String[] tempValue2 = stringZeroNum(str.substring(index));
             String newStr = tempValue1[0]+tempValue2[0]+tempValue1[1]+tempValue2[1];
             newStr = newStr+tempValue1[2]+tempValue2[2];
+            return hexStringToByteArray(newStr);
+//            return hexStringToByte(newStr);
+        }
+        catch (Exception ex){
+            return inputValue;
+        }
+    }
+
+    //250个字节之内加密
+    public byte[] changgeBytes(byte[] inputValue){
+        try {
+            String str = bytesToHexString(inputValue);
+            String[] tempValue1 = stringZeroNum(str);
+            String newStr = tempValue1[0]+tempValue1[1];
+            newStr = newStr+tempValue1[2];
             return hexStringToByteArray(newStr);
 //            return hexStringToByte(newStr);
         }

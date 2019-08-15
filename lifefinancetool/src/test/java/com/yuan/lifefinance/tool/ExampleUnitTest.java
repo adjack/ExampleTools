@@ -186,29 +186,33 @@ public class ExampleUnitTest {
 
     @Test
     public void testlongTermTrackT(){
-        List<DicText.StockInfo> value = DicText.longTermTrack2_7();//获取7月份操作
-        value = DicText.longTermTrackAll_8();//8月总体操作
+        List<List<DicText.StockInfo>> totalvalue = DicText.longTermTrackAll_8();//8月总体操作
         System.out.println("名称          买入       数量       卖出      操作时间           持股时间       盈利        金额[手续费]           阶段     [月操作记录]");
 //        System.err.println("----------------------------------------------------------------------------------");
-        double resultValue = 0;
-        int failNum = 0;
-        double totalPrice = 0;//统计总收益比例
-        for(int i=0; i<value.size(); i++){
-            totalPrice = totalPrice + (value.get(i).getSalePrice() - value.get(i).getCost())/value.get(i).getCost()*100;
-            String priceRateValue = getPriceRateValue(value.get(i).getCost(),value.get(i).getSalePrice());
-            if(priceRateValue.startsWith("-")) failNum++;
-            System.out.println(value.get(i).getStokeName()+"      "
-                    +setStockPriceShow(value.get(i).getCost())+"      "
-                    +setStockNumShow(value.get(i).getStockNum())+""
-                    +setStockPriceShow(value.get(i).getSalePrice())+"      "
-                    +value.get(i).getDate()+"      "
-                    +value.get(i).getBuyHour()+"(h)      "
-                    +priceRateValue+"      "
-                    +getPriceValue(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum())+"    "
-                    +dealDisc(value.get(i).getDisc())+"      ");
-            resultValue = resultValue + getPriceValueTotal(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum());
+
+        for(int j=0; j<totalvalue.size(); j++){
+            int failNum = 0;
+            double resultValue = 0;
+            double totalPrice = 0;//统计总收益比例
+            List<DicText.StockInfo> value = totalvalue.get(j);
+            for(int i=0; i<value.size(); i++){
+                totalPrice = totalPrice + (value.get(i).getSalePrice() - value.get(i).getCost())/value.get(i).getCost()*100;
+                String priceRateValue = getPriceRateValue(value.get(i).getCost(),value.get(i).getSalePrice());
+                if(priceRateValue.startsWith("-")) failNum++;
+                System.out.println(value.get(i).getStokeName()+"      "
+                        +setStockPriceShow(value.get(i).getCost())+"      "
+                        +setStockNumShow(value.get(i).getStockNum())+""
+                        +setStockPriceShow(value.get(i).getSalePrice())+"      "
+                        +value.get(i).getDate()+"      "
+                        +value.get(i).getBuyHour()+"(h)      "
+                        +priceRateValue+"      "
+                        +getPriceValue(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum())+"    "
+                        +dealDisc(value.get(i).getDisc())+"      ");
+                resultValue = resultValue + getPriceValueTotal(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum());
+            }
+            System.out.println("                                                                                                 Total:"+dealNum2(resultValue)+ "     "+(value.size()-failNum)+"/"+value.size()+"（成功/总数）       总计："+dealNum2(totalPrice)+"%");
+
         }
-        System.out.println("                                                                                                    Total:"+dealNum2(resultValue)+ "     "+(value.size()-failNum)+"/"+value.size()+"     "+totalPrice);
     }
 
     @Test

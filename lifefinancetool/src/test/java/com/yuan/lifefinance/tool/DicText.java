@@ -246,26 +246,45 @@ public class DicText {
         return list;
     }
 
-    public static List<StockInfo> longTermTrackAll_8(){
-        List<StockInfo> list = new ArrayList<>();
-        list.add(new StockInfo("<>士兰微",13.47,200,13.86,1,"20190806  10:15","I"));
-        list.add(new StockInfo("中国人寿",28.24,100,28.26,1,"20190806  10:15","I"));
-        list.add(new StockInfo("中国人寿",27.72,100,28.38,1,"20190806  10:15","I"));
-        list.add(new StockInfo("中国人寿",28.11,200,27.94,1,"20190807  10:45","I"));
-        list.add(new StockInfo("天齐锂业",23.88,200,24.29,1,"20190807  09:38","I"));
-        list.add(new StockInfo("<>士兰微",13.50,200,13.86,6,"20190806  13:15","I"));
-        list.add(new StockInfo("<>士兰微",13.67,700,13.80,3,"20190808  09:45","I"));
-        list.add(new StockInfo("天齐锂业",23.84,200,23.91,2,"20190807  10:38","I"));
-        list.add(new StockInfo("<>士兰微",13.42,200,13.57,2,"20190809  09:45","I"));
-        list.add(new StockInfo("<>士兰微",13.61,300,13.39,3,"20190809  09:45","I"));
-        list.add(new StockInfo("<>士兰微",13.44,200,13.67,3,"20190812  09:45","I"));
-        list.add(new StockInfo("<>士兰微",13.46,200,13.78,3,"20190812  09:45","I"));
-        list.add(new StockInfo("<>士兰微",13.61,200,13.82,1,"20190812  14:45","I"));
-        list.add(new StockInfo("中国人寿",28.34,400,28.04,4,"20190812  10:45","I"));
-        list.add(new StockInfo("天齐锂业",23.44,400,23.20,3,"20190813  09:38","I"));
-        list.add(new StockInfo("中国人寿",27.72,300,28.04,4,"20190813  10:45","I"));
-        //总结：每次个股交易应该保持相同金额，否则成功率大也无法加大收益
-        //        list.add(new StockInfo("<>士兰微",13.75,500,***,4,"20190813  09:45","I"));
+    public static List<List<StockInfo>> longTermTrackAll_8(){
+        List<List<StockInfo>> list = new ArrayList<>();
+        List<StockInfo> subList1 = new ArrayList<>();
+        List<StockInfo> subList2= new ArrayList<>();
+        List<StockInfo> subList3 = new ArrayList<>();
+//        subList1.add(new StockInfo("<>士兰微",13.47,200,13.86,1,"20190806  10:15","I"));
+//        subList1.add(new StockInfo("<>士兰微",13.50,200,13.86,6,"20190806  13:15","I"));
+//        subList1.add(new StockInfo("<>士兰微",13.67,700,13.80,3,"20190808  09:45","I"));
+//        subList1.add(new StockInfo("<>士兰微",13.42,200,13.57,2,"20190809  09:45","I"));
+//        subList1.add(new StockInfo("<>士兰微",13.61,300,13.39,3,"20190809  09:45","I"));
+//        subList1.add(new StockInfo("<>士兰微",13.44,200,13.67,3,"20190812  09:45","I"));
+//        subList1.add(new StockInfo("<>士兰微",13.46,200,13.78,3,"20190812  09:45","I"));
+//        subList1.add(new StockInfo("<>士兰微",13.61,200,13.82,1,"20190812  14:45","I"));
+//        list.add(subList1);
+//
+//        subList2.add(new StockInfo("中国人寿",28.24,100,28.26,1,"20190806  10:15","I"));
+//        subList2.add(new StockInfo("中国人寿",27.72,100,28.38,1,"20190806  10:15","I"));
+//        subList2.add(new StockInfo("中国人寿",28.11,200,27.94,1,"20190807  10:45","I"));
+//        subList2.add(new StockInfo("中国人寿",28.34,400,28.04,4,"20190812  10:45","I"));
+//        subList2.add(new StockInfo("中国人寿",27.72,300,28.04,4,"20190813  10:45","I"));
+//        list.add(subList2);
+//
+//        subList3.add(new StockInfo("天齐锂业",23.88,200,24.29,1,"20190807  09:38","I"));
+//        subList3.add(new StockInfo("天齐锂业",23.84,200,23.91,2,"20190807  10:38","I"));
+//        subList3.add(new StockInfo("天齐锂业",23.44,400,23.20,3,"20190813  09:38","I"));
+//        list.add(subList3);
+        //总结：每次交易做T应该操作买入/卖出等同持有的个股数量，，至少1万元起，否则成功率大也无法加大收益--------------
+        subList1.add(new StockInfo("<>士兰微",13.96,700,14.19,3,"20190814  11:05","I"));
+        subList1.add(new StockInfo("<>士兰微",13.87,700,13.99,5,"20190814  09:55","I"));
+        subList1.add(new StockInfo("<>士兰微",14.03,700,13.81,4,"20190815  10:44","I"));
+        subList1.add(new StockInfo("<>士兰微",13.98,700,14.08,4,"20190815  14:30","I"));
+        list.add(subList1);
+
+        subList2.add(new StockInfo("中国人寿",27.38,400,27.79,4,"20190815  09:45","I"));
+        list.add(subList2);
+
+        subList3.add(new StockInfo("天齐锂业",23.43,400,23.49,2,"20190813  11:08","I"));
+        subList3.add(new StockInfo("天齐锂业",23.23,500,22.94,2,"20190815  10:08","I"));
+        list.add(subList3);
 
         return list;
     }

@@ -210,7 +210,9 @@ public class ExampleUnitTest {
                         +dealDisc(value.get(i).getDisc())+"      ");
                 resultValue = resultValue + getPriceValueTotal(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum());
             }
-            System.out.println("                                                                                                 Total:"+dealNum2(resultValue)+ "     "+(value.size()-failNum)+"/"+value.size()+"（成功/总数）       总计："+dealNum2(totalPrice)+"%");
+            System.out.println("=================================================================================>"+dealStrLength("Total:"+dealNum2(resultValue),20)+ "     "
+                    +dealStrLength((value.size()-failNum)+"/"+value.size()+"（成功/总数）",16)+      "       总计："
+                    +dealNum2(totalPrice)+"%");
 
         }
     }
@@ -297,6 +299,15 @@ public class ExampleUnitTest {
         }
 
         return result+temp;
+    }
+
+    private String dealStrLength(String value,int length){
+
+        String temp = "";
+        for(int i=0;i<length-value.length();i++){
+            temp = temp + " ";
+        }
+        return value+temp;
     }
 
     private String getPriceValue(double cost,double salePrice,int stockNum){

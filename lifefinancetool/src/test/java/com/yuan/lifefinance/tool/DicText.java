@@ -277,9 +277,12 @@ public class DicText {
         subList1.add(new StockInfo("<>士兰微",13.87,700,13.99,5,"20190814  09:55","I"));
         subList1.add(new StockInfo("<>士兰微",14.03,700,13.81,4,"20190815  10:44","I"));
         subList1.add(new StockInfo("<>士兰微",13.98,700,14.08,4,"20190815  14:30","I"));
+        subList1.add(new StockInfo("<>士兰微",14.18,700,14.26,4,"20190816  14:01","15分钟压力位卖空"));
         list.add(subList1);
 
         subList2.add(new StockInfo("中国人寿",27.38,400,27.79,4,"20190815  09:45","I"));
+        subList2.add(new StockInfo("中国人寿",28.05,400,28.26,4,"20190816  10:33","博15分钟反弹。目标28.47"));
+
         list.add(subList2);
 
         subList3.add(new StockInfo("天齐锂业",23.43,400,23.49,2,"20190813  11:08","I"));

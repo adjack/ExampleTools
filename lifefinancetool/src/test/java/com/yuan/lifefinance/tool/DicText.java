@@ -251,6 +251,7 @@ public class DicText {
         List<StockInfo> subList1 = new ArrayList<>();
         List<StockInfo> subList2= new ArrayList<>();
         List<StockInfo> subList3 = new ArrayList<>();
+        List<StockInfo> subList4 = new ArrayList<>();
 //        subList1.add(new StockInfo("<>士兰微",13.47,200,13.86,1,"20190806  10:15","I"));
 //        subList1.add(new StockInfo("<>士兰微",13.50,200,13.86,6,"20190806  13:15","I"));
 //        subList1.add(new StockInfo("<>士兰微",13.67,700,13.80,3,"20190808  09:45","I"));
@@ -291,7 +292,12 @@ public class DicText {
         subList3.add(new StockInfo("天齐锂业",23.43,400,23.49,2,"20190813  11:08","I"));
         subList3.add(new StockInfo("天齐锂业",23.23,500,22.94,2,"20190815  10:08","I"));
         subList3.add(new StockInfo("天齐锂业",23.39,500,23.84,2,"20190819  10:08","大盘上涨环境下博30分钟反弹T"));
+//        subList3.add(new StockInfo("天齐锂业",24.33,500,0,2,"20190820  10:32","大盘回调时有机会补涨做T"));
+
         list.add(subList3);
+
+//        subList4.add(new StockInfo("紫光国微",50.01,300,50.32,2,"20190820  10:21","防范15分钟趋势终结做T"));//当天只买回200股，第二天再操作
+        list.add(subList4);
 
         return list;
     }

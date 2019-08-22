@@ -281,7 +281,7 @@ public class DicText {
         subList1.add(new StockInfo("<>士兰微",14.18,700,14.26,4,"20190816  14:01","15分钟压力位卖空"));
         subList1.add(new StockInfo("<>士兰微",14.73,700,14.22,6,"20190819  09:41","15分钟回调低位再买回"));
         subList1.add(new StockInfo("<>士兰微",14.60,700,14.50,7,"20190819  09:41","15分钟回调低位再买回"));
-
+//        subList1.add(new StockInfo("<>士兰微",14.74,700,0,7,"20190822  09:51","15分钟回调后有反弹，可能跟股北方华创"));
         list.add(subList1);
 
         subList2.add(new StockInfo("中国人寿",27.38,400,27.79,4,"20190815  09:45","I"));
@@ -293,11 +293,14 @@ public class DicText {
         subList3.add(new StockInfo("天齐锂业",23.23,500,22.94,2,"20190815  10:08","I"));
         subList3.add(new StockInfo("天齐锂业",23.39,500,23.84,2,"20190819  10:08","大盘上涨环境下博30分钟反弹T"));
         subList3.add(new StockInfo("天齐锂业",24.33,500,23.52,5,"20190820  10:32","大盘回调时有机会补涨做T"));
-//        subList3.add(new StockInfo("天齐锂业",0,300,23.51,2,"20190821  09:42","防止30分钟再次破位杀跌"));
+//        subList3.add(new StockInfo("天齐锂业",0,300,23.51,6,"20190821  09:42","防止30分钟再次破位杀跌"));
+//        subList3.add(new StockInfo("天齐锂业",0,200,23.28,2,"20190822  10:17","5分钟再次破位，再次减仓防范风险"));
 
         list.add(subList3);
 
         subList4.add(new StockInfo("紫光国微",50.81,300,51.38,2,"20190821  13:37","防范15分钟高点回路"));
+        subList4.add(new StockInfo("紫光国微",49.36,200,49.85,2,"20190822  10:06","卖空T防范15分钟反创新低，60分钟加速调整"));
+
         list.add(subList4);
 
         return list;

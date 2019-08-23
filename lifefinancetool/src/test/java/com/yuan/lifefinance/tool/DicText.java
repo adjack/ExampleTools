@@ -300,6 +300,8 @@ public class DicText {
 
         subList4.add(new StockInfo("紫光国微",50.81,300,51.38,2,"20190821  13:37","防范15分钟高点回路"));
         subList4.add(new StockInfo("紫光国微",49.36,200,49.85,2,"20190822  10:06","卖空T防范15分钟反创新低，60分钟加速调整"));
+//        subList4.add(new StockInfo("紫光国微",0,200,49.04,2,"20190822  10:06","卖空T防范5分钟反创新低，60分钟加速调整"));
+
 
         list.add(subList4);
 

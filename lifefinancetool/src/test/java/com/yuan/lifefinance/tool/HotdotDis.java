@@ -20,12 +20,86 @@ public class HotdotDis {
 //        byte[] a = {1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,
 //                1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8};
 //        byte[] a1 = EncryptUtils.encryptAES2Base64(a,a);
-//        for (int i=0; i<a1.length; i++){
-//            System.err.println(a1[i]);
-//        }
+        double[] point1 = {100,200,340,300};//左上角坐标   右下角坐标
+        double a = 500;//图片宽
+        double b = 1000;//图片长
 
+        double[] point2 = XXXXX(a,b,point1);
+        point2 = YYYYY(point1);
+        for (int i=0; i<point2.length; i++){
+            System.err.print(point2[i]+"     ");
+        }
 
+    }
 
+    private double[] YYYYY(double[] point) {
+        double height = point[3]-point[1];//框的高度
+        if(point[1] >= height){
+            point[1] = point[1] - height;
+        }
+        else{
+            point[1] = 0;
+        }
+        return  point;
+    }
+
+    private double[] XXXXX(double picw,double pich,double[] point1){
+        double[] point2 = {0,0,0,0};//扩大后新的左上角坐标   右下角坐标
+        try {
+            double value1 = picw- point1[2];//右边距大小
+            double value2 = pich- point1[3];//下边距的大小
+
+            double width = point1[2]-point1[0];//内框宽
+            double height = point1[3]-point1[1];//内框高
+
+            double va1 = width/4;//水平倍数
+            double va2 = height/2;//垂直倍数
+            if(value1>=point1[0]){//判断保证水平方向扩大有足够的空间
+                //扩大一倍需要两个坐标分别增加一半大小
+                if(point1[0]>=va1){
+                    point2[0] = point1[0]-va1;
+                    point2[2] = point1[2]+va1;
+                }
+                else{//左上角坐标x边距不够
+                    point2[0] = 0;
+                    point2[2] = point1[2] + point1[0];
+                }
+            }else{
+                if(value1>=va1){
+                    point2[0] = point1[0]-va1;
+                    point2[2] = point1[2]+va1;
+                }
+                else{//左上角坐标x边距不够
+                    point2[0] = point1[0] - value1;
+                    point2[2] = point1[2] + value1;
+                }
+            }
+
+            if(value2>=point1[1]){//判断保证垂直方向扩大有足够的空间
+                //扩大一倍需要两个坐标分别增加一半大小
+                if(point1[1]>=va2){
+                    point2[1] = point1[1]-va2;
+                    point2[3] = point1[3]+va2;
+                }
+                else{//左上角坐标y边距不够
+                    point2[1] = 0;
+                    point2[3] = point1[3] + point1[1];
+                }
+            }else{
+                if(value1>=va2){
+                    point2[1] = point1[1]-va2;
+                    point2[3] = point1[3]+va2;
+                }
+                else{//左上角坐标y边距不够
+                    point2[1] = point1[1] - value2;
+                    point2[3] = point1[3] + value2;
+                }
+            }
+        }
+        catch (Exception ex){
+        }
+
+        return point2;
     }
     @Test
     public void test012(){

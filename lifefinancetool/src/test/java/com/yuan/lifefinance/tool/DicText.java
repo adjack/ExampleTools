@@ -1,6 +1,8 @@
 package com.yuan.lifefinance.tool;
 
 public class DicText {
+	
+	//测试
 
     //6月备注【81889】
     public static String[] getMonth6NameArray(){

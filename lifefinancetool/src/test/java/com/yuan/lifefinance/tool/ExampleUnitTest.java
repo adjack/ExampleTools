@@ -104,15 +104,36 @@ public class ExampleUnitTest {
 //        int b =0;
 //        System.out.println(getVisitRate(a,b));
 
-        double degrees = 10;
-        double radians = Math.toRadians(degrees);
-
-        System.out.println( Math.sin(Math.toRadians(degrees)));
-        System.out.println( Math.sin(degrees));
+//        double degrees = 10;
+//        double radians = Math.toRadians(degrees);
+//
+//        System.out.println( Math.sin(Math.toRadians(degrees)));
+//        System.out.println( Math.sin(degrees));
 
 //        System.out.println( Math.cos(5));
 
+        double value1= 50000;//初始金额
+        double rate= 0.30;//利润
+        System.out.println("实际："+getValue(value1));
+        double temp1 = Double.valueOf(getVisitRate(value1*rate,(value1*(1+rate))));
+//        System.out.println( "盈利："+rate*100+"%后亏损 "+temp1*100+"% 既可回到原位 ");
         //
+    }
+
+    private double getValue(double value1){
+        double num = value1;
+        double temp = value1;
+        double values = 0;
+        for (int i=0;i<3;i++){
+            num = num + num*0.1;
+            temp = temp + temp*0.1;
+            double temp1 = num*0.1 - value1*0.1;
+            num = num - temp1;
+            values = values + temp1;
+            System.out.println( "本盈利阶段需卖出："+temp1);
+        }
+        System.out.println( "总共："+temp+"    额外："+values);
+        return  num;
     }
 
     private String getVisitRate(double value1,double value2){
@@ -121,7 +142,8 @@ public class ExampleUnitTest {
                 return "0";
             }
             NumberFormat nf = NumberFormat.getInstance();
-            nf.setMaximumFractionDigits(4);
+            nf.setMaximumFractionDigits(3);
+//            System.out.println(nf.format(value1/value2));
             return nf.format(value1/value2);
         }catch (Exception ex){}
         return  "";
@@ -163,11 +185,167 @@ public class ExampleUnitTest {
     }
 
     @Test
+    public void testlongTermTrackT(){
+        List<List<DicText.StockInfo>> totalvalue = DicText.longTermTrackAll_8();//8月总体操作
+        System.out.println("名称          买入       数量       卖出      操作时间           持股时间       盈利        金额[手续费]           阶段     [月操作记录]");
+//        System.err.println("----------------------------------------------------------------------------------");
+
+        for(int j=0; j<totalvalue.size(); j++){
+            int failNum = 0;
+            double resultValue = 0;
+            double totalPrice = 0;//统计总收益比例
+            List<DicText.StockInfo> value = totalvalue.get(j);
+            for(int i=0; i<value.size(); i++){
+                totalPrice = totalPrice + (value.get(i).getSalePrice() - value.get(i).getCost())/value.get(i).getCost()*100;
+                String priceRateValue = getPriceRateValue(value.get(i).getCost(),value.get(i).getSalePrice());
+                if(priceRateValue.startsWith("-")) failNum++;
+                System.out.println(value.get(i).getStokeName()+"      "
+                        +setStockPriceShow(value.get(i).getCost())+"      "
+                        +setStockNumShow(value.get(i).getStockNum())+""
+                        +setStockPriceShow(value.get(i).getSalePrice())+"      "
+                        +value.get(i).getDate()+"      "
+                        +value.get(i).getBuyHour()+"(h)      "
+                        +priceRateValue+"      "
+                        +getPriceValue(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum())+"    "
+                        +dealDisc(value.get(i).getDisc())+"      ");
+                resultValue = resultValue + getPriceValueTotal(value.get(i).getCost(),value.get(i).getSalePrice(),value.get(i).getStockNum());
+            }
+            System.out.println("=================================================================================>"+dealStrLength("Total:"+dealNum2(resultValue),20)+ "     "
+                    +dealStrLength((value.size()-failNum)+"/"+value.size()+"（成功/总数）",16)+      "       总计："
+                    +dealNum2(totalPrice)+"%");
+
+        }
+    }
+
+    @Test
+    public void otherValue(){
+        byte[] temp = {0x1A,0x01};
+        String tempValue1 = Integer.toBinaryString(Integer.parseInt("1A",16));
+        String tempValue2 = Integer.toBinaryString(Integer.parseInt("01",16));
+
+        int a = 0x1a01;
+        int part1 = (a >> (9+3))&0x0f;  // 4个1
+        int part2 = (a >> ( 3 ))&0x1ff ; //0x1ff 就是9个1
+        int part3 = a & 0x07; // 0x07 就是3个1
+
+        System.out.println(a+"/"+part1+"/"+part2+"/"+part3);
+//        System.out.println(getOtherValue(7.33,7.50,2000));
+    }
+
+    public static int bytes2Char(byte[] bytes )
+    {
+        int int1=bytes[0]&0xff;
+        int int2=(bytes[1]&0xff)<<8;
+        return int1|int2;
+    }
+
+    private String getOtherValue(double cost,double sale,double num){
+        double value1 = (num/10000)*2  + cost*num/10000*0.487  + cost*num/10000*3;
+        double value2 = (num/10000)*2  + sale*num/10000*0.487  + sale*num/10000*3 +sale*num/10000*10;
+        return dealNum2(value1+value2);
+    }
+
+    private String dealDisc(String disc){//3.28
+        String other = "";
+        if("I".equals(disc)){
+            other = " [阶段：安全反弹]";
+        }
+        else if("II".equals(disc)){
+            other = " [阶段：可上可下]";
+        }
+        else if("III".equals(disc)){
+            other = " [阶段：危险出货]*";
+        }
+        return disc + other;
+    }
+
+    private String setStockNumShow(int num){
+        if(num>=1000){
+            return num+"      ";
+        }
+        else{
+            return num+"       ";
+        }
+    }
+    private String setStockPriceShow(double value){
+        String[] strs = (value+"").replace(".","#").split("#");
+        String result = "";
+        if(strs[1].length() >1){
+            result =  value+"";
+        }
+        else{
+            result =  value+"0";
+        }
+
+        return result.length() < 5?" "+result:result+"";
+    }
+
+    private String getPriceRateValue(double cost,double salePrice){
+        double value = (salePrice - cost)/cost*100;
+        String result = "";
+        if(value == 0){
+            result =  "+0.00%";
+        }
+        if((value+"").contains("-") || (value+"").contains("+")){
+            result =  dealNum2(value)+"%";
+        }
+        else {
+            result =  (value>=0?"+":"-")+dealNum2(value)+"%";
+        }
+
+        String temp = "";
+        for(int i=0;i<7-result.length();i++){
+            temp = temp + " ";
+        }
+
+        return result+temp;
+    }
+
+    private String dealStrLength(String value,int length){
+
+        String temp = "";
+        for(int i=0;i<length-value.length();i++){
+            temp = temp + " ";
+        }
+        return value+temp;
+    }
+
+    private String getPriceValue(double cost,double salePrice,int stockNum){
+        String result="";
+        double value = (salePrice - cost)*stockNum;
+        if(value >= 0){
+            value = value - Double.valueOf(getOtherValue(cost,salePrice,stockNum));
+        }
+        else{
+            value = Math.abs(value) + Double.valueOf(getOtherValue(cost,salePrice,stockNum));
+            value = value - value*2;
+        }
+        if((value+"").contains("-") || (value+"").contains("+")){
+            result =  dealNum2(value)+"";
+        }
+        else {
+            result =  (value>=0?"+":"-")+dealNum2(value)+"";
+        }
+        result = result+" ["+getOtherValue(cost,salePrice,stockNum)+"]";
+        String temp = "";
+        for(int i=0;i<20-result.length();i++){
+            temp = temp + " ";
+        }
+        return result+temp;
+    }
+
+    private double getPriceValueTotal(double cost,double salePrice,int stockNum){
+        double value = (salePrice - cost)*stockNum - Double.valueOf(getOtherValue(cost,salePrice,stockNum));
+        return value;
+    }
+
+
+    @Test
     public void addTestNum(){
         double targetValue = 0.06;//每次目标
         double warehousePosition = 0.33;//仓位
-        double sum = 81889;
-        double tempSum = 81889;
+        double sum = 80200;
+        double tempSum = 80200;
         int monthNum = 1;//12*2;
 
         int[] month_Num = new int[monthNum];
@@ -175,8 +353,9 @@ public class ExampleUnitTest {
         String[][] strlist =new String[monthNum][];
         //======================================================
         month_Num[0] = 6;//201905开始[长期占用资金1300]//-243
-        value[0] = new double[]{0.0,-0.0,-0.0,-0.0,0,0};//201905开始
-        strlist[0] = DicText.getMonth6NameArray();
+        value[0] = new double[]{0.01,-0.75,-2.7,-0.28,0,0.0};//81889 getMonth6NameArray
+        value[0] = new double[]{0.00,-0.0,-0.0,-0.0,0,0.0};//getMonth7NameArray
+        strlist[0] = DicText.getMonth7NameArray();
         //======================================================
 
         for(int j=0;j<monthNum;j++){
@@ -188,10 +367,10 @@ public class ExampleUnitTest {
             System.err.println("第"+(j+1)+"阶段预测目标[总共有"+month_Num[j]+"次机会]--->"+dealNum(tempSum));
             int tempNum = 0;
             for(int i=0;i<month_Num[j];i++){
-                sum = sum + sum*value[j][i];
+                sum = sum + sum*value[j][i]/100;
                 if(value[j][i]!=0){
                     tempNum++;
-                    System.err.println(dealValueMoreSpace("     阶段"+(tempNum)+"结果 ---> "+dealNum(sum)+"   ("+(dealNum2(value[j][i]*100))+"%)     ")+strlist[j][i]);
+                    System.err.println(dealValueMoreSpace("     阶段"+(tempNum)+"结果 ---> "+dealNum(sum)+"   ("+(dealNum2(value[j][i]))+"%)     ")+strlist[j][i]);
                 }
             }
             System.err.println("第"+(j+1)+"阶段实际结果[进行到"+tempNum+"次机会]--->"+dealNum(sum));
@@ -273,15 +452,32 @@ public class ExampleUnitTest {
         return subAry;
     }
 
+    @Test
+    public void addTestdwf(){
+//        byte[] values = changgeBytesReturn(null,1000);
+//        System.out.println(values.length);
+        byte[] vadda = {0x66,0x73,0x00,0x61,0x32,0x00,0x65,0x39,0x00,0x32,0x61,0x00,0x68,0x68,0x00,0x64,0x66,0x61,0x66,0x64,0x00,0x73,0x39,0x38,0x37,0x36,0x75,0x68,0x62,0x65,0x72,0x00,0x26,0x26,0x00,0x26,0x26,0x25,0x00,0x25,0x35,0x62,0x73,0x00,0x64,0x73,0x00,0x00,0x6F,0x6F,0x00,0x64,0x70,0x73};
+        System.out.println(bytesToHexString(vadda));
+        byte[] temp = changgeBytes(vadda);
+        System.out.println(bytesToHexString(temp));
+        temp = changgeBytesReturn(temp);
+        System.out.println(bytesToHexString(temp));
+
+    }
 
     public byte[] changgeBytesReturn(byte[] inputValue,int index){
         String str= bytesToHexString(inputValue);
-        int value1 = (int)Long.parseLong(str.substring(0,2),16);
+//        String str="383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B61733132333536343634357364663634367336343835613535363464663466353435343536353434363536353461667364647366383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B61733132333536343634357364663634367336343835613535363464663466353435343536353434363536353461667364647366383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B61733132333536343634357364663634367336343835613535363464663466353435343536353434363536353461667364647366383973646673646A6B6A6B646673613265393261686864666166647339383736756862657226262626252535627364736F6F6470736F736B6173313233353634363435736466363436733634383561353536346466346635";
+
+        int value1 = (int)Long.parseLong(str.substring(0,2),16);//55
         byte[] tempValue1_bytes = hexStringToByteArray(str.substring(4,4+(value1-1)*2));
-        int value2 = (int)Long.parseLong(str.substring(2,4),16);
+
+        int value2 = (int)Long.parseLong(str.substring(2,4),16);//56
         byte[] tempValue2_bytes = hexStringToByteArray(str.substring(4+(value1-1)*2,4+(value1-1)*2+(value2-1)*2));
+
         String tempValue = str.substring((value1+value2)*2);//非零的数值
-        String[] realValue = new String[value1+value2-2+tempValue.length()/2];
+
+        String[] realValue = new String[value1+value2-2+tempValue.length()/2];//真实数据的总长度
 
         for(int i=0;i<tempValue1_bytes.length;i++){//前部分
             int temp_index = tempValue1_bytes[i] & 0xFF;
@@ -304,7 +500,36 @@ public class ExampleUnitTest {
         return hexStringToByteArray(result);
     }
 
+    //解析不大于250个字节的
+    public byte[] changgeBytesReturn(byte[] inputValue){
+        String str= bytesToHexString(inputValue);
 
+        int value1 = (int)Long.parseLong(str.substring(0,2),16);//55
+        byte[] tempValue1_bytes = hexStringToByteArray(str.substring(2,2+(value1-1)*2));
+
+        String tempValue = str.substring((value1)*2);//非零的数值
+
+        String[] realValue = new String[value1-1+tempValue.length()/2];//真实数据的总长度
+
+        for(int i=0;i<tempValue1_bytes.length;i++){//前部分
+            int temp_index = tempValue1_bytes[i] & 0xFF;
+            realValue[temp_index-1]="00";
+        }
+
+        String result = "";
+        int loopIndex = 0;
+        for(int i=0;i<realValue.length;i++){
+            if(realValue[i] == null){
+                realValue[i] = tempValue.substring(loopIndex*2,loopIndex*2+2);
+                loopIndex++;
+            }
+            result = result + realValue[i];
+        }
+        return hexStringToByteArray(result);
+    }
+
+
+    //加密
     public byte[] changgeBytes(byte[] inputValue,int index){
         try {
             String str = bytesToHexString(inputValue);
@@ -312,6 +537,21 @@ public class ExampleUnitTest {
             String[] tempValue2 = stringZeroNum(str.substring(index));
             String newStr = tempValue1[0]+tempValue2[0]+tempValue1[1]+tempValue2[1];
             newStr = newStr+tempValue1[2]+tempValue2[2];
+            return hexStringToByteArray(newStr);
+//            return hexStringToByte(newStr);
+        }
+        catch (Exception ex){
+            return inputValue;
+        }
+    }
+
+    //250个字节之内加密
+    public byte[] changgeBytes(byte[] inputValue){
+        try {
+            String str = bytesToHexString(inputValue);
+            String[] tempValue1 = stringZeroNum(str);
+            String newStr = tempValue1[0]+tempValue1[1];
+            newStr = newStr+tempValue1[2];
             return hexStringToByteArray(newStr);
 //            return hexStringToByte(newStr);
         }
@@ -406,8 +646,8 @@ public class ExampleUnitTest {
     public void addition_isCorrect2(){
         //<<2019-3-17/2024-03-17  ：初始：60000>>预计：30%
         //时间节点：2019-03-30  ：待定-------------------[78,000][61800[1]--64100[2]--66000[3]--64333[1]--64750[2]--65500[3]----58500[4]]
-        //时间节点：2019-06-30  ：待定-------------------[101,400][106200[1]--[102880[2]--[100800[3]--[96200[4]--[92500[1]--[87503[2]--[88087[3]--[84700[4]--[84814[5]--[80600[1]--[[2]--[[3]--[[4]]
-        //时间节点：2019-09-30  ：待定-------------------[131,820][[1]--[[2]--[[3]--[[4]--[[1]--[[2]--[[3]--[[4]--[[5]--[1]--[[2]--[[3]--[[4]]
+        //时间节点：2019-06-30  ：待定-------------------[101,400][106200[1]--[102880[2]--[100800[3]--[96200[4]--[92500[1]--[87503[2]--[88087[3]--[84700[4]--[84814[5]--[80600[1]--[81100[2]--[81367[3]--[80285[4]]
+        //时间节点：2019-09-30  ：待定-------------------[131,820][78500[1]--[71800[2]--[67850[3]--[65000[4]--[62000[1]--[57300[2]--[58500[3]--[[4]--[[5]--[1]--[[2]--[[3]--[[4]]
         //时间节点：2019-12-31  ：待定-------------------[171,366][[1]--[[2]--[[3]--[[4]--[[1]--[[2]--[[3]--[[4]--[[5]--[1]--[[2]--[[3]--[[4]]
 
         //时间节点：2020-03-31  ：待定-------------------[222,776]

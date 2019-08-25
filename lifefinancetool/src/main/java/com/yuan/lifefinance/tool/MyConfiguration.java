@@ -5,8 +5,14 @@ package com.yuan.lifefinance.tool;
  */
 
 public class MyConfiguration {
-    public static final int isTest = 0;//1:正式  0：测试 2：临时验证 3：UAT  4:本地
+    public static final int isTest = 1;//1:正式  0：测试 2：临时验证 3：UAT  4:本地
     public static final boolean openLog = true;
+    public static String baseUrl = "";
+    {
+        if(isTest == 1){
+            baseUrl = "";
+        }
+    }
 
     private static MyConfiguration wyjrConfiguration;
 

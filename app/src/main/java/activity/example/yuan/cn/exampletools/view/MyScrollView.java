@@ -15,9 +15,16 @@ import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
 import activity.example.yuan.cn.exampletools.R;
+import activity.example.yuan.cn.exampletools.utils.Colors;
 
 
 public class MyScrollView extends LinearLayout implements OnClickListener{
+
+	public void setColor(Colors color){
+		if(color == Colors.green){
+
+		}
+	}
 
 	private ImageButton ib_function_open;
 	private LinearLayout linear_content;

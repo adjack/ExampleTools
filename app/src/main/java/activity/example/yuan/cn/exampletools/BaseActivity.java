@@ -23,7 +23,9 @@ import android.view.Window;
 import java.util.ArrayList;
 import java.util.List;
 
+import activity.example.yuan.cn.exampletools.utils.Colors;
 import activity.example.yuan.cn.exampletools.utils.ScreenSizeUtil;
+import activity.example.yuan.cn.exampletools.view.MyScrollView;
 import butterknife.ButterKnife;
 
 
@@ -76,6 +78,7 @@ public class BaseActivity extends AppCompatActivity {
         //初始化绑定id
         ButterKnife.bind(this);
         initScrollBack();
+
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.yuan.lifefinance.tool.httptools;
 
-
 import com.yuan.lifefinance.tool.tools.LogUtil;
 
 import org.json.JSONObject;
@@ -19,38 +18,19 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 /**
- * Created by jack on 2018/4/11.
+ * Created by Administrator on 2018/10/5.
  */
-public class NetworkFactory {
+
+public enum Https {
+    instance;
     private String baseDefaultUrl = "http://money.finance.sina.com.cn/";
     private static final int DEFAULT_TIMEOUT = 12;
-//    private NetworkService networkService;
-    private static volatile NetworkFactory instance = null;
+    //    private NetworkService networkService;
     private  OkHttpClient.Builder builder;
-    private NetworkFactory() {
+    Https() {
         initOkHttpClientBuilder();
         initRetrofitBuilder();
     }
-
-    public static NetworkFactory getInstance() {
-        if(instance == null){
-            synchronized (NetworkFactory.class){
-                if(instance == null){
-                    instance = new NetworkFactory();
-                }
-            }
-        }
-        return instance;
-    }
-
-    //采用静态内内部类方式
-    public static NetworkFactory getInstance2() {
-        return SingletonHolder.instance;
-    }
-    private static class SingletonHolder{
-        private static final NetworkFactory instance = new NetworkFactory();
-    }
-
     private void initOkHttpClientBuilder(){
         if(builder == null){
             builder = new OkHttpClient.Builder();
@@ -133,7 +113,7 @@ public class NetworkFactory {
     /**
      * 处理接口返回的数据
      */
-    class MycallBack implements Callback<ResponseBody>{
+    class MycallBack implements Callback<ResponseBody> {
         public ResponseCallBack<JSONObject> responseCallBack;
         private String methodName;
         private String param;
@@ -273,5 +253,4 @@ public class NetworkFactory {
         }
         runBusinessInterface(requestOb,url,callBack);
     }
-
 }

@@ -29,6 +29,7 @@ public abstract class BaseActivity extends Activity{
         setContentView(mContextView);
         mUnbinder = ButterKnife.bind(this);
         initData();
+
     }
 
     abstract int bindLayout();

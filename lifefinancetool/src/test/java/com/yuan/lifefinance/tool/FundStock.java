@@ -7,7 +7,7 @@ import org.junit.Test;
  * author:admin
  * create_date:2019/7/29 10:03
  * <p>
- * describe:TODO
+ * describe:基金操作
  */
 public class FundStock {
     @Test

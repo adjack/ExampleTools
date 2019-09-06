@@ -302,6 +302,7 @@ public class DicText {
         List<StockInfo> subList2= new ArrayList<>();
         List<StockInfo> subList3 = new ArrayList<>();
         List<StockInfo> subList4 = new ArrayList<>();
+        List<StockInfo> subList5 = new ArrayList<>();
 //       ------------------------------------------------------------
         subList1.add(new StockInfo("<>士兰微",15.56,700,15.80,2,"20190830  10:31","1.1分钟背驰区域高点卖空弥补之前操作的300股，2.板块个股异动1分钟低位买回"));
         subList1.add(new StockInfo("<>士兰微",15.55,700,15.53,2,"20190830  10:01","1.日线压力附近卖空，2.低位买回"));
@@ -310,11 +311,15 @@ public class DicText {
         subList1.add(new StockInfo("<>士兰微",15.35,700,15.91,2,"20190903  10:24","1.低位买入博补涨T,2.前高卖出T"));
         subList1.add(new StockInfo("<>士兰微",15.98,700,15.94,7,"20190903  13:14","1.大盘有5分钟高位有背驰趋势卖空,2.板块强势频频有个股补涨，买回等待"));
         subList1.add(new StockInfo("<>士兰微",16.10,700,15.88,2,"20190904  10:34","1.加仓博补涨T，2卖出T控制仓位"));
+        subList1.add(new StockInfo("<>士兰微",15.70,700,15.64,1,"20190906  13:44","1.1分钟背驰区域买入做T，2.跌破卖出做T部分"));
 
 //       ------------------------------------------------------------
 //       |[]总结：
 //       ------------------------------------------------------------
         list.add(subList1);
+//        subList5.add(new StockInfo("四维图新",,600,16.75,1,"20190906  13:47","1.大盘回落防范买空"));
+        list.add(subList5);
+
 
         subList4.add(new StockInfo("紫光国微",50.81,300,51.38,2,"20190821  13:37","防范15分钟高点回路"));
         subList4.add(new StockInfo("紫光国微",49.36,200,49.85,2,"20190822  10:06","卖空T防范15分钟反创新低，60分钟加速调整"));

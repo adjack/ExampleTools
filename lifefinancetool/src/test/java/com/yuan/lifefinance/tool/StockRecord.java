@@ -1,5 +1,12 @@
 package com.yuan.lifefinance.tool;
 
+import com.yuan.lifefinance.tool.bean.StockInfoBuyBean;
+
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * copyright:华润创业(深圳)有限公司
  * author:admin
@@ -9,6 +16,8 @@ package com.yuan.lifefinance.tool;
  * 原则：2只以上，分仓操作，周期一个月以上，不追涨，只买跌
  */
 public class StockRecord {
+
+
 //    操作模式：1.大级别【日线级别以上】出现买点，买入底仓，中途用额外资金做T操作,但一旦达到目标，底仓卖完，就没有操作机会
 //              2.大级别没确认买点之前，要随时快进快出
 //    20190805：第一批
@@ -21,7 +30,18 @@ public class StockRecord {
 //                        第一阶段[目标冲击60.65]最终盈利：+1700[20190820--20190904]
 //                        第二阶段[目标冲击60.65新高后60分钟1卖]最终盈利：[20190912--][止损：53.22]
 //            中国人寿->：理由：权重蓝筹，月线有突破趋势 【成本：30.29->700 止损：28.27】【目标->31目标->34.80目标->】
+//                        2019-09-23卖出：最终盈利：-1400[走势太纠结，退出观望，短期重点操作半导体]
 //            天齐锂业->：理由：周线有1买背驰趋势，跌幅巨大，公司属于锂矿龙头 【成本:26.98->1700 止损：23】【目标->25.30目标->27.60目标->35.00】
 
+    public static List<StockInfoBuyBean> getStockInfoBuyList(){
+        List<StockInfoBuyBean> stockInfoBuyBeans = new ArrayList<>();
+        stockInfoBuyBeans.add(new StockInfoBuyBean
+                ("20190905","四维图新",16.56,1200,17.05,22.54,20.01,"20190905"));
+        stockInfoBuyBeans.add(new StockInfoBuyBean
+                ("20190912","紫光国威",57.65,500,56.56,73.07,0,""));
+        stockInfoBuyBeans.add(new StockInfoBuyBean
+                ("20190923","睿能科技",15.36,1100,15.14,73.07,0,""));
+        return stockInfoBuyBeans;
+    }
 
 }

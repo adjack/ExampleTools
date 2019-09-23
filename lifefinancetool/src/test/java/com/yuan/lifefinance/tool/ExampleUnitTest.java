@@ -1,5 +1,7 @@
 package com.yuan.lifefinance.tool;
 
+import com.yuan.lifefinance.tool.bean.StockInfoBuyBean;
+
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -214,6 +216,34 @@ public class ExampleUnitTest {
                     +dealStrLength((value.size()-failNum)+"/"+value.size()+"（成功/总数）",16)+      "       总计："
                     +dealNum2(totalPrice)+"%");
 
+        }
+    }
+
+    @Test
+    public void getStockInfoBuyList(){
+        List<StockInfoBuyBean> stockInfoBuyBeans = StockRecord.getStockInfoBuyList();
+        System.out.println("  买入日期       名称         成本       止损    卖出价格   持仓数量     止损值[合理值]         R比率       卖出时间    收益");
+        for(int i=0; i<stockInfoBuyBeans.size(); i++){
+            String failValue = dealDouble((stockInfoBuyBeans.get(i).getCost()-stockInfoBuyBeans.get(i).getFailPrice())*stockInfoBuyBeans.get(i).getStockNum(),2)+"["+
+                    dealDouble(stockInfoBuyBeans.get(i).getCost()*stockInfoBuyBeans.get(i).getStockNum()*0.02,2)+"]";
+            String rValue = dealDouble((stockInfoBuyBeans.get(i).getTargetPrice()-stockInfoBuyBeans.get(i).getCost())/
+                    (stockInfoBuyBeans.get(i).getCost() - stockInfoBuyBeans.get(i).getFailPrice()),2);
+            String incomeValue = dealDouble((stockInfoBuyBeans.get(i).getSalePrice() - stockInfoBuyBeans.get(i).getCost())
+                    *stockInfoBuyBeans.get(i).getStockNum(),2);
+            if(stockInfoBuyBeans.get(i).getSalePrice() == 0){
+                incomeValue = "";
+            }
+            String result = "  "+stockInfoBuyBeans.get(i).getBuyDate()
+                    +"     "+dealStrLength(stockInfoBuyBeans.get(i).getStokeName(),5)
+                    +"     "+dealStrLength(stockInfoBuyBeans.get(i).getCost()+"",6)
+                    +"     "+dealStrLength(stockInfoBuyBeans.get(i).getFailPrice()+"",6)
+                    +"     "+dealStrLength(stockInfoBuyBeans.get(i).getSalePrice()+"",6)
+                    +"     "+dealStrLength(stockInfoBuyBeans.get(i).getStockNum()+"",6)
+                    +"     "+dealStrLength(failValue+"",6)
+                    +"         "+dealStrLength(rValue+"",6)
+                    +"     "+dealStrLength(stockInfoBuyBeans.get(i).getSaleDate(),10)
+                    +"  "+incomeValue;
+            System.out.println(result);
         }
     }
 

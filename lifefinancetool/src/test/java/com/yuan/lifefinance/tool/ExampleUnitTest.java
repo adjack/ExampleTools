@@ -222,7 +222,7 @@ public class ExampleUnitTest {
     @Test
     public void getStockInfoBuyList(){
         List<StockInfoBuyBean> stockInfoBuyBeans = StockRecord.getStockInfoBuyList();
-        System.out.println("  买入日期       名称         成本       止损    卖出价格   持仓数量     止损值[合理值]         R比率       卖出时间    收益");
+        System.out.println("  买入日期       名称         成本       止损    目标价格    卖出价格   持仓数量     止损值[合理值]         R比率     卖出时间     收益");
         for(int i=0; i<stockInfoBuyBeans.size(); i++){
             String failValue = dealDouble((stockInfoBuyBeans.get(i).getCost()-stockInfoBuyBeans.get(i).getFailPrice())*stockInfoBuyBeans.get(i).getStockNum(),2)+"["+
                     dealDouble(stockInfoBuyBeans.get(i).getCost()*stockInfoBuyBeans.get(i).getStockNum()*0.02,2)+"]";
@@ -237,10 +237,11 @@ public class ExampleUnitTest {
                     +"     "+dealStrLength(stockInfoBuyBeans.get(i).getStokeName(),5)
                     +"     "+dealStrLength(stockInfoBuyBeans.get(i).getCost()+"",6)
                     +"     "+dealStrLength(stockInfoBuyBeans.get(i).getFailPrice()+"",6)
+                    +"     "+dealStrLength(stockInfoBuyBeans.get(i).getTargetPrice()+"",6)
                     +"     "+dealStrLength(stockInfoBuyBeans.get(i).getSalePrice()+"",6)
                     +"     "+dealStrLength(stockInfoBuyBeans.get(i).getStockNum()+"",6)
-                    +"     "+dealStrLength(failValue+"",6)
-                    +"         "+dealStrLength(rValue+"",6)
+                    +"     "+dealStrLength(failValue+"",20)
+                    +"   "+dealStrLength(rValue+"",6)
                     +"     "+dealStrLength(stockInfoBuyBeans.get(i).getSaleDate(),10)
                     +"  "+incomeValue;
             System.out.println(result);

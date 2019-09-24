@@ -340,6 +340,7 @@ public class DicText {
         subList5.add(new StockInfo("四维图新",17.20,600,16.62,6,"20190919  13:14","1.防范风险卖空T，2，板块有利好高开5分钟回调再次买回"));
         subList5.add(new StockInfo("四维图新",17.20,600,16.62,6,"20190919  13:14","1.防范风险卖空T，2，板块有利好高开5分钟回调再次买回"));
 //        subList5.add(new StockInfo("四维图新",0,600,18.31,6,"20190923  14:14","1.60分钟利好冲击卖空防范风险，2"));
+//        subList5.add(new StockInfo("四维图新",0,600,18.41,6,"20190924  11:14","1.60分钟再次冲击为了防范大盘继续卖空T，2"));
 
         list.add(subList5);
 
@@ -351,9 +352,7 @@ public class DicText {
         list.add(subList4);
 
 
-        subList2.add(new StockInfo("中国人寿",27.38,400,27.79,4,"20190815  09:45","I"));
-        subList2.add(new StockInfo("中国人寿",28.05,400,28.26,4,"20190816  10:33","博15分钟反弹。目标28.47"));
-//        subList2.add(new StockInfo("中国人寿",0,400,28.32,4,"20190819  09:45","30分钟前高卖空"));
+        subList2.add(new StockInfo("睿能科技",0,700,15.98,3,"20190924  14:25","1.大盘有回落杀跌风险卖空T  "));
         list.add(subList2);
 
         subList3.add(new StockInfo("天齐锂业",23.43,400,23.49,2,"20190813  11:08","I"));

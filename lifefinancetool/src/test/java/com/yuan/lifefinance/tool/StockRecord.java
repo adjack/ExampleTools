@@ -36,11 +36,11 @@ public class StockRecord {
     public static List<StockInfoBuyBean> getStockInfoBuyList(){
         List<StockInfoBuyBean> stockInfoBuyBeans = new ArrayList<>();
         stockInfoBuyBeans.add(new StockInfoBuyBean
-                ("20190905","四维图新",16.56,1200,17.05,20.11,0,""));
+                ("20190905","四维图新",16.56,1200,17.05,22.41,0,""));
         stockInfoBuyBeans.add(new StockInfoBuyBean
                 ("20190912","紫光国威",57.65,500,56.56,73.07,0,""));
         stockInfoBuyBeans.add(new StockInfoBuyBean
-                ("20190923","睿能科技",15.36,1100,15.14,18.53,0,""));
+                ("20190923","睿能科技",15.36,1100,15.14,18.35,0,""));
         return stockInfoBuyBeans;
     }
 

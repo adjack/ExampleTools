@@ -219,6 +219,7 @@ public class ExampleUnitTest {
         }
     }
 
+    //总体操作记录
     @Test
     public void getStockInfoBuyList(){
         List<StockInfoBuyBean> stockInfoBuyBeans = StockRecord.getStockInfoBuyList();

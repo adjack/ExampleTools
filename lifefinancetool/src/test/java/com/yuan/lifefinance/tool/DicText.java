@@ -353,8 +353,39 @@ public class DicText {
         list.add(subList4);
 
 
-        subList2.add(new StockInfo("睿能科技",15.70,700,15.98,3,"20190924  14:25","1.大盘有回落杀跌风险卖空T  "));
-//               subList2.add(new StockInfo("睿能科技",*,1000,15.50,3,"20190924  14:25","1.大盘30分钟跌破防范卖空T  "));
+        subList2.add(new StockInfo("数据港",0,700,15.98,2,"20191011  13:25","1.个股反弹60分钟处于2卖压力位卖空  "));
+        list.add(subList2);
+
+        subList3.add(new StockInfo("天齐锂业",23.43,400,23.49,2,"20190813  11:08","I"));
+        subList3.add(new StockInfo("天齐锂业",23.23,500,22.94,2,"20190815  10:08","I"));
+        subList3.add(new StockInfo("天齐锂业",23.39,500,23.84,2,"20190819  10:08","大盘上涨环境下博30分钟反弹T"));
+        subList3.add(new StockInfo("天齐锂业",24.33,500,23.52,5,"20190820  10:32","大盘回调时有机会补涨做T"));
+//        subList3.add(new StockInfo("天齐锂业",23.49,300,23.51,6,"20190821  09:42","1.防止30分钟再次破位杀跌.2.20190903买入博弱势上涨"));
+//        subList3.add(new StockInfo("天齐锂业",0,200,23.28,2,"20190822  10:17","5分钟再次破位，再次减仓防范风险"));
+
+        list.add(subList3);
+
+
+        return list;
+    }
+
+    public static List<List<StockInfo>> longTermTrackAll_10(){
+        List<List<StockInfo>> list = new ArrayList<>();
+        List<StockInfo> subList1 = new ArrayList<>();
+        List<StockInfo> subList2= new ArrayList<>();
+        List<StockInfo> subList3 = new ArrayList<>();
+        List<StockInfo> subList4 = new ArrayList<>();
+        List<StockInfo> subList5 = new ArrayList<>();
+//       ------------------------------------------------------------
+        //注：20190904涨幅达到目标附近，暂时退出等回调，重点关注士兰微
+        subList4.add(new StockInfo("紫光国微",56.00,200,56.36,1,"20190917  10:25","1.5分钟急跌，防止5分钟出3卖导致日线终结卖空T 2，1分钟背驰位买回T"));
+        subList4.add(new StockInfo("紫光国微",55.46,200,55.54,1,"20190917  14:45","1.博尾盘反弹买多 2，收盘再卖出T"));
+        subList4.add(new StockInfo("紫光国微",52.73,200,51.70,1,"20190926  11:15","1.5分钟背驰趋势买入做T"));
+
+        list.add(subList4);
+
+
+//        subList2.add(new StockInfo("<>数据港",0,300,0,2,"20191011  13:25","1.个股反弹60分钟处于2卖压力位卖空  "));
         list.add(subList2);
 
         subList3.add(new StockInfo("天齐锂业",23.43,400,23.49,2,"20190813  11:08","I"));

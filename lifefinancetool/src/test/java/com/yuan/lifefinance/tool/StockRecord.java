@@ -41,8 +41,8 @@ public class StockRecord {
                 ("20190905","四维图新",16.56,1200,17.05,22.41,17.26,"20190927"));
         stockInfoBuyBeans.add(new StockInfoBuyBean
                 ("20190912","紫光国威",57.65,500,56.56,73.07,0,""));
-//        stockInfoBuyBeans.add(new StockInfoBuyBean
-//                ("20190912","&&数据港",,,34.90,43.01,0,""));
+        stockInfoBuyBeans.add(new StockInfoBuyBean
+                ("20190925","&&数据港",0,700,34.90,43.01,0,""));
         return stockInfoBuyBeans;
     }
 

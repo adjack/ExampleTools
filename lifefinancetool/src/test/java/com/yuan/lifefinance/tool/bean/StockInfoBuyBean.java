@@ -18,7 +18,7 @@ public class StockInfoBuyBean {
     private double salePrice = 0;//卖出价格
     private String saleDate;//卖出时间
 
-    public StockInfoBuyBean(String buyDate, String stokeName, double cost,int stockNum,  double failPrice, double targetPrice, double salePrice, String saleDate) {
+    public StockInfoBuyBean(String buyDate,double failPrice, String stokeName, double cost,int stockNum, double targetPrice, String saleDate,double salePrice) {
         this.buyDate = buyDate;
         this.stokeName = stokeName;
         this.cost = cost;

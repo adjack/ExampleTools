@@ -35,10 +35,11 @@ public class StockRecord {
 
     public static List<StockInfoBuyBean> getStockInfoBuyList(){
         List<StockInfoBuyBean> stockInfoBuyBeans = new ArrayList<>();
-//        stockInfoBuyBeans.add(new StockInfoBuyBean("20190923",15.14,"睿能科技",15.36,1100,18.35,"20190926",15.15));
-//        stockInfoBuyBeans.add(new StockInfoBuyBean("20190905",17.05,"四维图新",16.56,1200,22.41,"20190927",17.26));
-//        stockInfoBuyBeans.add(new StockInfoBuyBean("20190912",56.56,"紫光国威",57.65,500,73.07,"",0));
-//        stockInfoBuyBeans.add(new StockInfoBuyBean("20190925",34.90,"&&数据港",0,700,43.01,"",0));
+        stockInfoBuyBeans.add(new StockInfoBuyBean("20190923",15.14,"睿能科技",15.36,1100,18.35,"20190926",15.15));
+        stockInfoBuyBeans.add(new StockInfoBuyBean("20190905",17.05,"四维图新",16.56,1200,22.41,"20190927",17.26));
+//        stockInfoBuyBeans.add(new StockInfoBuyBean("20190925",34.30,"饕数据港",34.77,700,43.01,"20191025",32.61));
+        stockInfoBuyBeans.add(new StockInfoBuyBean("20190912",56.56,"紫光国威",57.65,500,73.07,"",0));
+        stockInfoBuyBeans.add(new StockInfoBuyBean("20191025",4.51,"广博股份",4.65,3300,5.33,"",0));
         return stockInfoBuyBeans;
     }
 

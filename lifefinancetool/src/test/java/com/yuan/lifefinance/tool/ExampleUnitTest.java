@@ -234,6 +234,9 @@ public class ExampleUnitTest {
             if(stockInfoBuyBeans.get(i).getSalePrice() == 0){
                 incomeValue = "";
             }
+            if(stockInfoBuyBeans.get(i).getSalePrice() > stockInfoBuyBeans.get(i).getCost()){
+                incomeValue = "+"+incomeValue;
+            }
             String result = "  "+stockInfoBuyBeans.get(i).getBuyDate()
                     +"     "+dealStrLength(stockInfoBuyBeans.get(i).getStokeName(),5)
                     +"     "+dealStrLength(stockInfoBuyBeans.get(i).getCost()+"",6)

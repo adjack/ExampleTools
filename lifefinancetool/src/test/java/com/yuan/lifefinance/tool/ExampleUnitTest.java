@@ -231,11 +231,13 @@ public class ExampleUnitTest {
                     (stockInfoBuyBeans.get(i).getCost() - stockInfoBuyBeans.get(i).getFailPrice()),2);
             String incomeValue = dealDouble((stockInfoBuyBeans.get(i).getSalePrice() - stockInfoBuyBeans.get(i).getCost())
                     *stockInfoBuyBeans.get(i).getStockNum(),2);
+            String tempValue = dealDouble((stockInfoBuyBeans.get(i).getSalePrice() - stockInfoBuyBeans.get(i).getCost())/stockInfoBuyBeans.get(i).getCost()*100,2)+"%";
             if(stockInfoBuyBeans.get(i).getSalePrice() == 0){
                 incomeValue = "";
             }
             if(stockInfoBuyBeans.get(i).getSalePrice() > stockInfoBuyBeans.get(i).getCost()){
                 incomeValue = "+"+incomeValue;
+                tempValue = "+"+tempValue;
             }
             String result = "  "+stockInfoBuyBeans.get(i).getBuyDate()
                     +"     "+dealStrLength(stockInfoBuyBeans.get(i).getStokeName(),5)
@@ -247,7 +249,7 @@ public class ExampleUnitTest {
                     +"     "+dealStrLength(failValue+"",20)
                     +"   "+dealStrLength(rValue+"",6)
                     +"     "+dealStrLength(stockInfoBuyBeans.get(i).getSaleDate(),10)
-                    +"  "+incomeValue;
+                    +"  "+dealStrLength(incomeValue,10)+"        "+tempValue+"";
             System.out.println(result);
         }
     }

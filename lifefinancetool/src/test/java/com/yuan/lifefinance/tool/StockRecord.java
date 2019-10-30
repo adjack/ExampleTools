@@ -37,10 +37,14 @@ public class StockRecord {
         List<StockInfoBuyBean> stockInfoBuyBeans = new ArrayList<>();
         stockInfoBuyBeans.add(new StockInfoBuyBean("20190923",15.14,"睿能科技",15.36,1100,18.35,"20190926",15.15));
         stockInfoBuyBeans.add(new StockInfoBuyBean("20190905",17.05,"四维图新",16.56,1200,22.41,"20190927",17.26));
-//        stockInfoBuyBeans.add(new StockInfoBuyBean("20190925",34.30,"饕数据港",34.77,700,43.01,"20191025",32.61));
-        stockInfoBuyBeans.add(new StockInfoBuyBean("20190912",56.56,"紫光国威",57.65,500,73.07,"",0));
-        stockInfoBuyBeans.add(new StockInfoBuyBean("20191025",4.51,"广博股份",4.65,3300,5.33,"",0));
-        return stockInfoBuyBeans;
-    }
+        stockInfoBuyBeans.add(new StockInfoBuyBean("20190925",34.30,"饕数据港",34.61,700,43.01,"20191025",32.61));
+        stockInfoBuyBeans.add(new StockInfoBuyBean("20191025",4.51,"广博股份",4.65,3300,5.33,"20191030",5.29));
+        stockInfoBuyBeans.add(new StockInfoBuyBean("20191028",3.63,"京东方乂",3.74,4500,4.18,"20191030",3.66));
+
+//        stockInfoBuyBeans.add(new StockInfoBuyBean("20190912",56.56,"紫光国威-做T降低成本阶段",57.65,500,73.07,"",0));
+//        stockInfoBuyBeans.add(new StockInfoBuyBean("20191030",29.78,"饕数据港-逢低建仓阶段",0,700,43.01,"",0));
+
+            return stockInfoBuyBeans;
+}
 
 }

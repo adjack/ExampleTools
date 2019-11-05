@@ -188,7 +188,7 @@ public class ExampleUnitTest {
 
     @Test
     public void testlongTermTrackT(){
-        List<List<DicText.StockInfo>> totalvalue = DicText.longTermTrackAll_10();//月总体操作
+        List<List<DicText.StockInfo>> totalvalue = DicText.longTermTrackAll_11();//月总体操作
         System.out.println("名称          买入       数量       卖出      操作时间           持股时间       盈利        金额[手续费]           阶段     [月操作记录]");
 //        System.err.println("----------------------------------------------------------------------------------");
 

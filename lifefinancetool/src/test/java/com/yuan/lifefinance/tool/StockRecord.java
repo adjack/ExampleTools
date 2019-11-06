@@ -39,12 +39,17 @@ public class StockRecord {
         stockInfoBuyBeans.add(new StockInfoBuyBean("20190905",17.05,"四维图新",16.56,1200,22.41,"20190927",17.26));
         stockInfoBuyBeans.add(new StockInfoBuyBean("20190925",34.30,"饕数据港",34.61,700,43.01,"20191025",32.61));
         stockInfoBuyBeans.add(new StockInfoBuyBean("20191025",4.51,"广博股份",4.65,3300,5.33,"20191030",5.29));
-        stockInfoBuyBeans.add(new StockInfoBuyBean("20191028",3.63,"京东方乂",3.74,4500,4.18,"20191030",3.66));
-
+        stockInfoBuyBeans.add(new StockInfoBuyBean("20191028",3.63,"乂京东方",3.74,4500,4.18,"20191030",3.66));
+        stockInfoBuyBeans.add(new StockInfoBuyBean("20191030",29.78,"饕数据港",31.82,700,43.01,"20191106",32.49));
 //        stockInfoBuyBeans.add(new StockInfoBuyBean("20190912",56.56,"紫光国威-做T降低成本阶段",57.65,500,73.07,"",0));
-//        stockInfoBuyBeans.add(new StockInfoBuyBean("20191030",29.78,"饕数据港-逢低建仓阶段",0,700,43.01,"",0));
+//        stockInfoBuyBeans.add(new StockInfoBuyBean("20191106",3.59,"乂京东方",3.62,6700,4.01,"",0));
 
-            return stockInfoBuyBeans;
+//        ========================================================================================================================
+//        stockInfoBuyBeans.add(new StockInfoBuyBean("20191107",8.71,"中国国航-等30分钟3买",8.77,2000,9.63,"",0));
+//        stockInfoBuyBeans.add(new StockInfoBuyBean("20191108",29.78,"饕数据港-等60分钟杀跌的1买或者2买",0,700,43.01,"",));
+
+
+        return stockInfoBuyBeans;
 }
 
 }

@@ -34,19 +34,32 @@ public class StockRecord {
 //            天齐锂业->：理由：周线有1买背驰趋势，跌幅巨大，公司属于锂矿龙头 【成本:26.98->1700 止损：23】【目标->25.30目标->27.60目标->35.00】
 
     public static List<StockInfoBuyBean> getStockInfoBuyList(){
+        //注意：只关注年线之上的票
         List<StockInfoBuyBean> stockInfoBuyBeans = new ArrayList<>();
-        stockInfoBuyBeans.add(new StockInfoBuyBean("20190923",15.14,"睿能科技",15.36,1100,18.35,"20190926",15.15));
-        stockInfoBuyBeans.add(new StockInfoBuyBean("20190905",17.05,"四维图新",16.56,1200,22.41,"20190927",17.26));
-        stockInfoBuyBeans.add(new StockInfoBuyBean("20190925",34.30,"饕数据港",34.61,700,43.01,"20191025",32.61));
-        stockInfoBuyBeans.add(new StockInfoBuyBean("20191025",4.51,"广博股份",4.65,3300,5.33,"20191030",5.29));
-        stockInfoBuyBeans.add(new StockInfoBuyBean("20191028",3.63,"乂京东方",3.74,4500,4.18,"20191030",3.66));
-        stockInfoBuyBeans.add(new StockInfoBuyBean("20191030",29.78,"饕数据港",31.82,700,43.01,"20191106",32.49));
-//        stockInfoBuyBeans.add(new StockInfoBuyBean("20190912",56.56,"紫光国威-做T降低成本阶段",57.65,500,73.07,"",0));
-//        stockInfoBuyBeans.add(new StockInfoBuyBean("20191106",3.59,"乂京东方",3.62,6700,4.01,"",0));
+        stockInfoBuyBeans.add(
+                new StockInfoBuyBean("20190923",15.14,"睿能科技",15.36,1100,18.35,"20190926",15.15));
+        stockInfoBuyBeans.add(
+                new StockInfoBuyBean("20190905",17.05,"四维图新",16.56,1200,22.41,"20190927",17.26));
+        stockInfoBuyBeans.add(
+                new StockInfoBuyBean("20190925",34.30,"饕数据港",34.61,700,43.01,"20191025",32.61));
+        stockInfoBuyBeans.add(
+                new StockInfoBuyBean("20191025",4.51,"广博股份",4.65,3300,5.33,"20191030",5.29));
+        stockInfoBuyBeans.add(
+                new StockInfoBuyBean("20191028",3.63,"乂京东方",3.74,4500,4.18,"20191030",3.66));
+        stockInfoBuyBeans.add(
+                new StockInfoBuyBean("20191030",29.78,"饕数据港",31.82,700,43.01,"20191106",32.49));
+        stockInfoBuyBeans.add(
+                new StockInfoBuyBean("20190912",56.56,"紫光国威",57.65,500,73.07,"失败未止损-持股慢慢做T降低成本阶段",0));
+        stockInfoBuyBeans.add(
+                new StockInfoBuyBean("20191106",3.59,"乂京东方",3.62,7600,4.01,"15分钟类2买-买入博日线反弹",0));
+        stockInfoBuyBeans.add(
+                new StockInfoBuyBean("20191107",8.70,"中国国航",8.79,2800,9.99,"30分钟3买-买入博日线反弹",0,"当前攻击年线"));
+        stockInfoBuyBeans.add(
+                new StockInfoBuyBean("20191108",15.20,"乂士兰微",0,0,17.40,"30分钟类2买位置开始建仓-博周线反弹【准备换掉京东方】",0,"年线上方运行"));
 
 //        ========================================================================================================================
-//        stockInfoBuyBeans.add(new StockInfoBuyBean("20191107",8.71,"中国国航-等30分钟3买",8.77,2000,9.63,"",0));
-//        stockInfoBuyBeans.add(new StockInfoBuyBean("20191108",29.78,"饕数据港-等60分钟杀跌的1买或者2买",0,700,43.01,"",));
+//        stockInfoBuyBeans.add(new StockInfoBuyBean("20191108",29.78,"饕数据港",0,0,43.01,"准备阶段-等60分钟杀跌的1买或者2买",0,"跌到年线支撑位"));
+//        stockInfoBuyBeans.add(new StockInfoBuyBean("20191108",14.53,"深天马-A"0,0,15.87,"准备阶段-等60分钟回调的2买",0,"当前年线支撑位反弹"));
 
 
         return stockInfoBuyBeans;

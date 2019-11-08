@@ -17,6 +17,7 @@ public class StockInfoBuyBean {
     private double targetPrice;//最高预期价格
     private double salePrice = 0;//卖出价格
     private String saleDate;//卖出时间
+    private String klineBugReason;//年线描述
 
     public StockInfoBuyBean(String buyDate,double failPrice, String stokeName, double cost,int stockNum, double targetPrice, String saleDate,double salePrice) {
         this.buyDate = buyDate;
@@ -27,6 +28,25 @@ public class StockInfoBuyBean {
         this.targetPrice = targetPrice;
         this.salePrice = salePrice;
         this.saleDate = saleDate;
+    }
+    public StockInfoBuyBean(String buyDate,double failPrice, String stokeName, double cost,int stockNum, double targetPrice, String saleDate,double salePrice,String klineBugReason) {
+        this.buyDate = buyDate;
+        this.stokeName = stokeName;
+        this.cost = cost;
+        this.stockNum = stockNum;
+        this.failPrice = failPrice;
+        this.targetPrice = targetPrice;
+        this.salePrice = salePrice;
+        this.saleDate = saleDate;
+        this.klineBugReason = klineBugReason;
+    }
+
+    public String getKlineBugReason() {
+        return klineBugReason;
+    }
+
+    public void setKlineBugReason(String klineBugReason) {
+        this.klineBugReason = klineBugReason;
     }
 
     public String getBuyDate() {

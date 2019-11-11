@@ -287,6 +287,7 @@ public class ExampleUnitTest {
 
     @Test
     public void otherValue(){
+
         byte[] temp = {0x1A,0x01};
         String tempValue1 = Integer.toBinaryString(Integer.parseInt("1A",16));
         String tempValue2 = Integer.toBinaryString(Integer.parseInt("01",16));

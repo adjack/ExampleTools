@@ -233,7 +233,10 @@ public class ExampleUnitTest {
                     (stockInfoBuyBeans.get(i).getCost() - stockInfoBuyBeans.get(i).getFailPrice()),2);
             String incomeValue = dealDouble((stockInfoBuyBeans.get(i).getSalePrice() - stockInfoBuyBeans.get(i).getCost())
                     *stockInfoBuyBeans.get(i).getStockNum(),2);
-            String tempValue = dealDouble((stockInfoBuyBeans.get(i).getSalePrice() - stockInfoBuyBeans.get(i).getCost())/stockInfoBuyBeans.get(i).getCost()*100,2)+"%";
+            double tempv = ((stockInfoBuyBeans.get(i).getSalePrice() - stockInfoBuyBeans.get(i).getCost())/stockInfoBuyBeans.get(i).getCost())*100;
+            String tempValue = dealDouble(Math.abs(tempv),2)+"%";
+            if(tempv < 0){tempValue = "-"+tempValue; }
+//            System.out.println("tempValue:"+dealDouble(0.2762430939226583,2));
             if(stockInfoBuyBeans.get(i).getSalePrice() == 0){
                 incomeValue = "";
             }

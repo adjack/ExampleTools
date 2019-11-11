@@ -37,6 +37,8 @@ public class StockRecord {
         //注意：只关注年线之上的票
         List<StockInfoBuyBean> stockInfoBuyBeans = new ArrayList<>();
         stockInfoBuyBeans.add(
+                new StockInfoBuyBean("20190709",25.94,"天齐锂业",27.14,1200,27.61,"20191111",21.45));
+        stockInfoBuyBeans.add(
                 new StockInfoBuyBean("20190923",15.14,"睿能科技",15.36,1100,18.35,"20190926",15.15));
         stockInfoBuyBeans.add(
                 new StockInfoBuyBean("20190905",17.05,"四维图新",16.56,1200,22.41,"20190927",17.26));
@@ -49,13 +51,13 @@ public class StockRecord {
         stockInfoBuyBeans.add(
                 new StockInfoBuyBean("20191030",29.78,"饕数据港",31.82,700,43.01,"20191106",32.49));
         stockInfoBuyBeans.add(
-                new StockInfoBuyBean("20190912",56.56,"紫光国威",57.65,500,73.07,"失败未止损-持股慢慢做T降低成本阶段",0));
+                new StockInfoBuyBean("20190912",56.56,"紫光国威",57.65,500,73.07,"20191111",45.81));
         stockInfoBuyBeans.add(
-                new StockInfoBuyBean("20191106",3.59,"乂京东方",3.62,7600,4.01,"15分钟类2买-买入博日线反弹",0));
+                new StockInfoBuyBean("20191106",3.59,"乂京东方",3.62,7600,4.01,"20191111",3.61));
         stockInfoBuyBeans.add(
-                new StockInfoBuyBean("20191107",8.70,"中国国航",8.79,2800,9.99,"30分钟3买-买入博日线反弹",0,"当前攻击年线"));
+                new StockInfoBuyBean("20191107",8.40,"中国国航",8.78,3300,9.99,"30分钟3买-买入博日线反弹",0,"当前攻击年线"));
         stockInfoBuyBeans.add(
-                new StockInfoBuyBean("20191108",15.20,"乂士兰微",0,0,17.40,"30分钟类2买位置开始建仓-博周线反弹【准备换掉京东方】",0,"年线上方运行"));
+                new StockInfoBuyBean("20191108",14.76,"乂士兰微",0,0,17.40,"30分钟类2买位置开始建仓-博周线反弹【准备换掉京东方】",0,"年线上方运行"));
 
 //        ========================================================================================================================
 //        stockInfoBuyBeans.add(new StockInfoBuyBean("20191108",29.78,"饕数据港",0,0,43.01,"准备阶段-等60分钟杀跌的1买或者2买",0,"跌到年线支撑位"));

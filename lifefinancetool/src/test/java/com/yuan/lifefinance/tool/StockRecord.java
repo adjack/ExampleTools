@@ -35,38 +35,38 @@ public class StockRecord {
 
     public static List<StockInfoBuyBean> getStockInfoBuyList(){
         //注意：只关注年线之上的票
-        List<StockInfoBuyBean> stockInfoBuyBeans = new ArrayList<>();
-        stockInfoBuyBeans.add(
+        List<StockInfoBuyBean> stock = new ArrayList<>();
+        stock.add(
                 new StockInfoBuyBean("20190709",25.94,"天齐锂业",27.14,1200,27.61,"20191111",21.45));
-        stockInfoBuyBeans.add(
+        stock.add(
                 new StockInfoBuyBean("20190923",15.14,"睿能科技",15.36,1100,18.35,"20190926",15.15));
-        stockInfoBuyBeans.add(
+        stock.add(
                 new StockInfoBuyBean("20190905",17.05,"四维图新",16.56,1200,22.41,"20190927",17.26));
-        stockInfoBuyBeans.add(
+        stock.add(
                 new StockInfoBuyBean("20190925",34.30,"饕数据港",34.61,700,43.01,"20191025",32.61));
-        stockInfoBuyBeans.add(
+        stock.add(
                 new StockInfoBuyBean("20191025",4.51,"广博股份",4.65,3300,5.33,"20191030",5.29));
-        stockInfoBuyBeans.add(
+        stock.add(
                 new StockInfoBuyBean("20191028",3.63,"乂京东方",3.74,4500,4.18,"20191030",3.66));
-        stockInfoBuyBeans.add(
+        stock.add(
                 new StockInfoBuyBean("20191030",29.78,"饕数据港",31.82,700,43.01,"20191106",32.49));
-        stockInfoBuyBeans.add(
+        stock.add(
                 new StockInfoBuyBean("20190912",56.56,"紫光国威",57.65,500,73.07,"20191111",45.81));
-        stockInfoBuyBeans.add(
+        stock.add(
                 new StockInfoBuyBean("20191106",3.59,"乂京东方",3.62,7600,4.01,"20191111",3.61));
-        stockInfoBuyBeans.add(
+        stock.add(
                 new StockInfoBuyBean("20191108",14.76,"乂士兰微",15.30,1000,17.40,"20191112",14.72,"年线上方运行"));
-        stockInfoBuyBeans.add(
-                new StockInfoBuyBean("20191112",44.30,"紫光国威",45.01,300,46.80,"5分钟背驰-博60分钟反弹",0,""));
-        stockInfoBuyBeans.add(
+        stock.add(
+                new StockInfoBuyBean("20191112",44.30,"紫光国威",44.40,300,46.80,"20191114",45.70,""));
+        stock.add(
                 new StockInfoBuyBean("20191107",8.40,"中国国航",8.78,3300,9.99,"30分钟3买-买入博周线反弹",0,"当前攻击年线"));
-
+        stock.add(
+                new StockInfoBuyBean("20191114",24.82,"天齐锂业",0,0,29.01,"逢低买入博日线止跌反弹类2买。。。",0,"攻击年线后的回调"));
 //        ========================================================================================================================
-//        stockInfoBuyBeans.add(new StockInfoBuyBean("20191108",29.78,"饕数据港",0,0,43.01,"准备阶段-等60分钟杀跌的1买或者2买",0,"跌到年线支撑位"));
-//        stockInfoBuyBeans.add(new StockInfoBuyBean("20191108",14.53,"深天马-A"0,0,15.87,"准备阶段-等60分钟回调的2买",0,"当前年线支撑位反弹"));
+//        stock.add(new StockInfoBuyBean("20191113",29.78,"饕数据港",0,0,43.01,"准备阶段-等60分钟杀跌的1买或者2买//15分钟有机会出3买，当前周线处于类2买止跌反弹",0,"跌到年线支撑位"));
 
 
-        return stockInfoBuyBeans;
+        return stock;
 }
 //        【月线买点】：最保险的是做周线一笔反弹，[需要30分钟出3买,日线回调背驰买入最稳妥]
 //        【周线买点】：最保险的是做日线一笔反弹，[需要5分钟出3买,30分钟回调背驰买入最稳妥]

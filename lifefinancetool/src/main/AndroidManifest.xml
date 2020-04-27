@@ -3,8 +3,8 @@
     package="com.yuan.lifefinance.tool">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -13,13 +13,25 @@
         android:roundIcon="@mipmap/icon_launch_new"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <!-- <activity android:name=".Main2Activity"></activity> -->
+        <activity android:name=".Main3Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".receiver.MyScanReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <!--配置自定义的 action（事件类型）-->
+                <action android:name="honeywell.com.BARCODEDATA" />
+            </intent-filter>
+
+        </receiver>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -49,10 +61,10 @@
 
         <service
             android:name=".services.StockPriceService"
-            android:exported="false"></service>
+            android:exported="false" />
         <service
             android:name=".services.TempStockPriceService"
-            android:exported="false"></service>
+            android:exported="false" />
     </application>
 
 </manifest>

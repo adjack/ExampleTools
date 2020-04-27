@@ -3,6 +3,9 @@ package com.yuan.lifefinance.tool;
 import android.app.Application;
 import android.content.Context;
 
+import butterknife.internal.Utils;
+
+
 /**
  * Created by 123 on 2018/4/18.
  */

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -118,10 +119,15 @@ public class StockHistoryAdapter extends ListBaseAdapter<StockInfo> {
                     countDownTimerList[pos] = new CountDownTimer(1000*60*60,1000) {
                         @Override
                         public void onTick(long millisUntilFinished) {
-                            StockInfo stockInfo = DBManager.getInstance().selectStockInfoById(id);
-                            if(stockInfo != null){
-                                String[] prices = stockInfo.getDiscrib2().split("_");
-                                dealNowPrice(tv_nowPrice,StringInputUtils.value(prices[0]),StringInputUtils.value(prices[1]));
+                            try {
+                                StockInfo stockInfo = DBManager.getInstance().selectStockInfoById(id);
+                                if(stockInfo != null){
+                                    Log.d("selectBuyingStockInfo","测试打印："+stockInfo.getDiscrib2());
+                                    String[] prices = stockInfo.getDiscrib2().split("_");
+                                    dealNowPrice(tv_nowPrice,StringInputUtils.value(prices[0]),StringInputUtils.value(prices[1]));
+                                }
+                            }
+                            catch (Exception ex){
                             }
                         }
 
@@ -134,11 +140,13 @@ public class StockHistoryAdapter extends ListBaseAdapter<StockInfo> {
                         countDownTimerList[pos].start();
                     }
                     else{//显示一次
-                        StockInfo stockInfo = DBManager.getInstance().selectStockInfoById(id);
-                        if(stockInfo != null){
-                            String[] prices = stockInfo.getDiscrib2().split("_");
-                            dealNowPrice(tv_nowPrice,StringInputUtils.value(prices[0]),StringInputUtils.value(prices[1]));
-                        }
+                        try {
+                            StockInfo stockInfo = DBManager.getInstance().selectStockInfoById(id);
+                            if(stockInfo != null){
+                                String[] prices = stockInfo.getDiscrib2().split("_");
+                                dealNowPrice(tv_nowPrice,StringInputUtils.value(prices[0]),StringInputUtils.value(prices[1]));
+                            }
+                        }catch (Exception ex){}
                     }
                 }
                 catch (Exception ex){}

@@ -1,1 +1,2 @@
-include ':app',':lifefinancetool',':test_xrecyclerview', ':test_citylist', ':test_webview'
+include ':lifefinancetool' //,':test_xrecyclerview', ':test_citylist', ':test_webview', ':scanusb'
+//include   ':app',':scanusb', ':libusbcamera'

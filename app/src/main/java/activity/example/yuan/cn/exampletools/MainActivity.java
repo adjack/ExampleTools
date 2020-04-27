@@ -8,16 +8,16 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -29,10 +29,6 @@ import activity.example.yuan.cn.exampletools.view.DrawView;
 import activity.example.yuan.cn.test_webview.WebActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity
@@ -124,22 +120,22 @@ public class MainActivity extends AppCompatActivity
 
     //测试网络请求
     public void setNetRequest(String url){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url) // 设置 网络请求 Url
-                .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
-                .build();
-        Call<Object> call =  retrofit.create(GetRequest_Interface.class).getCall();
-        call.enqueue(new Callback<Object>() {
-            @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<Object> call, Throwable t) {
-
-            }
-        });
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(url) // 设置 网络请求 Url
+//                .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
+//                .build();
+//        Call<Object> call =  retrofit.create(GetRequest_Interface.class).getCall();
+//        call.enqueue(new Callback<Object>() {
+//            @Override
+//            public void onResponse(Call<Object> call, Response<Object> response) {
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Object> call, Throwable t) {
+//
+//            }
+//        });
 
     }
 

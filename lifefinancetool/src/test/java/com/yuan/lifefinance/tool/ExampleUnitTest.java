@@ -1,6 +1,7 @@
 package com.yuan.lifefinance.tool;
 
-import com.yuan.lifefinance.tool.bean.StockInfoBuyBean;
+import com.yuan.lifefinance.tool.bean.StockInfo;
+import com.yuan.lifefinance.tool.bean.StockInfoBuyBeans;
 
 import org.junit.Test;
 
@@ -188,7 +189,7 @@ public class ExampleUnitTest {
 
     @Test
     public void testlongTermTrackT(){
-        List<List<DicText.StockInfo>> totalvalue = DicText.longTermTrackAll_11();//月总体操作
+        List<List<StockInfo>> totalvalue = DicText.longTermTrackAll_11();//月总体操作
         System.out.println("名称          买入       数量       卖出      操作时间           持股时间       盈利        金额[手续费]           阶段     [月操作记录]");
 //        System.err.println("----------------------------------------------------------------------------------");
 
@@ -196,7 +197,7 @@ public class ExampleUnitTest {
             int failNum = 0;
             double resultValue = 0;
             double totalPrice = 0;//统计总收益比例
-            List<DicText.StockInfo> value = totalvalue.get(j);
+            List<StockInfo> value = totalvalue.get(j);
             for(int i=0; i<value.size(); i++){
                 totalPrice = totalPrice + (value.get(i).getSalePrice() - value.get(i).getCost())/value.get(i).getCost()*100;
                 String priceRateValue = getPriceRateValue(value.get(i).getCost(),value.get(i).getSalePrice());
@@ -218,13 +219,111 @@ public class ExampleUnitTest {
 
         }
     }
+    @Test
+    public void testdsghd(){
+        int sum = 0;//绿钞
+        int num = 50;//初始容量
+
+        int size = 3;//需要材料1+2+3+4+5+6+7+8
+        for(int i = 0; i<100;i++){
+            sum = sum + size*12;
+            size = size+3;
+            if(num >= 110){
+                if(num < 1010){
+                    num = num +25;
+                }
+                else {
+                    if(num < 2010){
+                        num = num +50;
+                    }else{
+                        num = num +75;
+                    }
+                }
+            }
+            else{
+                num = num +20;
+            }
+
+            System.out.println("------------:增加到"+num   +"           （需要："+(i+1)+")");
+        }
+        System.out.println(sum+":"+sum/12+"                     "      +"     num:"+num);
+
+        double value = 4.117;
+        int nums = 25;
+        double re = nums*(value/0.39);
+        System.out.println("total:"+re);
+    }
+
+    @Test
+    public void testdsghd2(){
+        int sum = 0;//绿钞
+        int num = 260;
+
+        int size = 10;
+        for(int i = 0; i<size;i++){
+            if(num>=85){
+                num = num -25;
+                System.out.print("------:"+i);
+            }
+
+        }
+        System.out.println("");
+        System.out.println(num+":"+num+"    //"+size);
+
+    }
+
+
+    @Test
+    public void testdsghd5(){
+        double value1 = 0;//总经验[积分]
+        double value2 = 0;//总卖出获利
+        double value3 = 0;//总积分
+
+        double temp = 2;//倍数
+        double time = 10;//总时间
+        double num = 35;//田地数目
+        String name = "";
+
+        List<List<Integer>> objects = new ArrayList<>();
+        String[] names = {"小麦","玉米","胡萝卜","甘蔗","棉花"};
+
+        List<Integer> list = new ArrayList<>();//卖出得到的积分[经验]  卖出价格  买的价格  需要的时间
+        list.add(1);list.add(1);list.add(0);list.add(2);
+        objects.add(list);
+
+        list = new ArrayList<>();
+        list.add(2);list.add(2);list.add(1);list.add(5);
+        objects.add(list);
+
+        list = new ArrayList<>();
+        list.add(3);list.add(5);list.add(2);list.add(9);//卖出得到的积分[经验]  卖出价格  买的价格  需要的时间
+        objects.add(list);
+
+        list = new ArrayList<>();
+        list.add(4);list.add(7);list.add(3);list.add(18);//卖出得到的积分[经验]  卖出价格  买的价格  需要的时间
+        objects.add(list);
+
+        list = new ArrayList<>();
+        list.add(5);list.add(9);list.add(4);list.add(27);//卖出得到的积分[经验]  卖出价格  买的价格  需要的时间
+        objects.add(list);
+
+        for(int i = 0; i < objects.size(); i++){
+            List<Integer> disc = objects.get(i);
+            value1 = time*60/disc.get(3)  *  disc.get(0)  * num * temp;
+            value2 = time*60/disc.get(3)  *  disc.get(1)  * num * temp  - time*60/disc.get(3)*disc.get(2)*num;
+            value3 = time*60/disc.get(3)  *  disc.get(0)  * num ;
+            System.out.println(names[i]+":"+dealDouble(value1,1)+"//"+dealDouble(value2,1)+"//"+dealDouble(value3,1));
+        }
+    }
+
+
 
     //总体操作记录
     @Test
     public void getStockInfoBuyList(){
         int totalNum = 0;
         int successNum = 0;
-        List<StockInfoBuyBean> stockInfoBuyBeans = StockRecord.getStockInfoBuyList();
+        List<StockInfoBuyBeans> stockInfoBuyBeans = StockRecord.getStockInfoBuyList();
         System.out.println("  买入日期       名称         成本       止损    目标价格    卖出价格   持仓数量     止损值[合理值]         R比率     卖出时间     收益");
         for(int i=0; i<stockInfoBuyBeans.size(); i++){
             String failValue = dealDouble((stockInfoBuyBeans.get(i).getCost()-stockInfoBuyBeans.get(i).getFailPrice())*stockInfoBuyBeans.get(i).getStockNum(),2)+"["+

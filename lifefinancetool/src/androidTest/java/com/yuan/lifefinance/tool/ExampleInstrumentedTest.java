@@ -7,6 +7,11 @@ package com.yuan.lifefinance.tool;
  */
 public class ExampleInstrumentedTest {
     public void useAppContext() throws Exception {
-        // Context of the app under test.
+        byte[] a = {1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,
+                1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8};
+//        byte[] a1 = EncryptUtils.encryptAES2Base64(a,a);
+//        for (int i=0; i<a1.length; i++){
+//            System.err.println(a1[i]);
+//        }
     }
 }

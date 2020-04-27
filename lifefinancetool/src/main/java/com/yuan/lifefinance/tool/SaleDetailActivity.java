@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.yuan.lifefinance.tool.greendao.DBManager;
 import com.yuan.lifefinance.tool.greendao.StockInfo;
 import com.yuan.lifefinance.tool.tools.ActivityUtils;
+import com.yuan.lifefinance.tool.tools.FileTools;
 import com.yuan.lifefinance.tool.tools.StringInputUtils;
 import com.yuan.lifefinance.tool.tools.TimeTools;
 import com.yuan.lifefinance.tool.view.CustomHintDialog;
@@ -145,7 +146,7 @@ public class SaleDetailActivity extends Activity{
 
             //截图保存
             String nowdate = getNowDate().replace(" ","");
-            saveToSD(ActivityUtils.activityShot(SaleDetailActivity.this),timeInfoBuy,nowdate,tv_name.getText().toString());
+            FileTools.saveToSD(ActivityUtils.activityShot(SaleDetailActivity.this),timeInfoBuy,nowdate,tv_name.getText().toString());
             Toast.makeText(SaleDetailActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
             startActivity(new Intent(SaleDetailActivity.this,HistoryInfoActivity.class));
         }
@@ -155,38 +156,38 @@ public class SaleDetailActivity extends Activity{
     }
 
 
-    private void saveToSD(Bitmap bmp,String timeInfoBuy,String nowDate,String stockName) throws IOException {
-        try {
-            String dirName = Environment.getExternalStorageDirectory()
-                    .getAbsolutePath() + File.separator + "finance"+ File.separator;
-            // 判断sd卡是否存在
-            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                File file = new File(dirName+timeInfoBuy+"_"+stockName+File.separator+stockName+"_"+nowDate+".jpg");
-                if(!file.exists()){
-                    file.createNewFile();
-                }
-                FileOutputStream fos = null;
-                try {
-                    fos = new FileOutputStream(file);
-                    if (fos != null) {
-                        // 第一参数是图片格式，第二个是图片质量，第三个是输出流
-                        bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                        // 用完关闭
-                        fos.flush();
-                        fos.close();
-                    }
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        }
-        catch(Exception ex){
-            Toast.makeText(SaleDetailActivity.this,"error:"+ex.toString(),Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void saveToSD(Bitmap bmp,String timeInfoBuy,String nowDate,String stockName) throws IOException {
+//        try {
+//            String dirName = Environment.getExternalStorageDirectory()
+//                    .getAbsolutePath() + File.separator + "finance"+ File.separator;
+//            // 判断sd卡是否存在
+//            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+//                File file = new File(dirName+timeInfoBuy+"_"+stockName+File.separator+stockName+"_"+nowDate+".jpg");
+//                if(!file.exists()){
+//                    file.createNewFile();
+//                }
+//                FileOutputStream fos = null;
+//                try {
+//                    fos = new FileOutputStream(file);
+//                    if (fos != null) {
+//                        // 第一参数是图片格式，第二个是图片质量，第三个是输出流
+//                        bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+//                        // 用完关闭
+//                        fos.flush();
+//                        fos.close();
+//                    }
+//                } catch (FileNotFoundException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//        catch(Exception ex){
+//            Toast.makeText(SaleDetailActivity.this,"error:"+ex.toString(),Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 }

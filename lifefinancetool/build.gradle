@@ -21,11 +21,43 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+    signingConfigs {
+        config_release {
+            try {
+                storeFile file(RELEASE_STORE_FILE)
+                storePassword RELEASE_STORE_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
+            }
+            catch (ex) {
+                throw new InvalidUserDataException("You should define release KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+        }
+
+        config_debug {
+            try {
+                storeFile file(DEBUG_STORE_FILE)
+                storePassword DEBUG_STORE_PASSWORD
+                keyAlias DEBUG_KEY_ALIAS
+                keyPassword DEBUG_KEY_PASSWORD
+            }
+            catch (ex) {
+                throw new InvalidUserDataException("You should define debug KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+        }
+    }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config_debug
+
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config_release
         }
     }
 
@@ -33,8 +65,8 @@ android {
         //版本号，升级时可配置
         schemaVersion 2
     }
-	
-	lintOptions {
+
+    lintOptions {
         checkReleaseBuilds false
         abortOnError false
     } 
@@ -72,4 +104,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.5.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.blankj:utilcode:1.9.1'
 }

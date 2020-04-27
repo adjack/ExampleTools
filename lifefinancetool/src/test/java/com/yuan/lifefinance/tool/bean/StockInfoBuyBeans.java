@@ -3,23 +3,23 @@ package com.yuan.lifefinance.tool.bean;
 /**
  * copyright:华润创业(深圳)有限公司
  * author:admin
- * create_date:2019/9/23 11:10
+ * create_date:2020/2/18 16:36
  * <p>
  * describe:TODO
  */
-public class StockInfoBuyBean {
+public class StockInfoBuyBeans {
     private String buyDate;//买入时间
     private String stokeName;//名称
     private double cost;//成本
     private int stockNum;//数量
-//    private double buyPrice;//买入价格
+    //    private double buyPrice;//买入价格
     private double failPrice;//止损价格
     private double targetPrice;//最高预期价格
     private double salePrice = 0;//卖出价格
     private String saleDate;//卖出时间
     private String klineBugReason;//年线描述
 
-    public StockInfoBuyBean(String buyDate,double failPrice, String stokeName, double cost,int stockNum, double targetPrice, String saleDate,double salePrice) {
+    public StockInfoBuyBeans(String buyDate,double failPrice, String stokeName, double cost,int stockNum, double targetPrice, String saleDate,double salePrice) {
         this.buyDate = buyDate;
         this.stokeName = stokeName;
         this.cost = cost;
@@ -29,7 +29,7 @@ public class StockInfoBuyBean {
         this.salePrice = salePrice;
         this.saleDate = saleDate;
     }
-    public StockInfoBuyBean(String buyDate,double failPrice, String stokeName, double cost,int stockNum, double targetPrice, String saleDate,double salePrice,String klineBugReason) {
+    public StockInfoBuyBeans(String buyDate,double failPrice, String stokeName, double cost,int stockNum, double targetPrice, String saleDate,double salePrice,String klineBugReason) {
         this.buyDate = buyDate;
         this.stokeName = stokeName;
         this.cost = cost;

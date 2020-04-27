@@ -90,6 +90,9 @@ class MainActivity : BaseActivity(), PermissionTools.PermissionDealListener {
         startService(Intent(this, StockPriceService::class.java))
     }
 
+    private fun textss() {
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

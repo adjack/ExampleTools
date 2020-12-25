@@ -1,5 +1,6 @@
 package com.yuan.lifefinance.tool;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.yuan.lifefinance.tool.bean.StockInfo;
 import com.yuan.lifefinance.tool.bean.StockInfoBuyBeans;
 
@@ -9,7 +10,11 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,6 +24,212 @@ import static org.junit.Assert.assertEquals;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+
+
+    @Test
+    public void testthread(){
+        List<String> listT1 = new ArrayList<>();
+        for(int i=0;i<100000;i++){
+            if(i%5 == 0){
+                listT1.add("A#"+i);
+            }
+            else{
+                listT1.add("A"+i);
+            }
+        }
+
+        List<String> listT2 = new ArrayList<>();
+        for(int i=0;i<30000;i++){
+            if(i%5 == 0){
+                listT2.add("B#"+i);
+            }
+            else{
+                listT2.add("B"+i);
+            }
+        }
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        List<String> listTTTT = new Vector<>();
+        long nowTime = new Date().getTime();
+        try {
+            for(i=0;i<listT1.size(); i++){
+//                Thread thread = new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+                        for(int m=0;m<listT2.size();m++){
+//                            System.out.println(m+"==");
+                            if(listT1.get(i).contains("#")&&listT2.get(m).contains("#")){
+                                if(listT1.get(i).substring(1).equals(listT2.get(m).substring(1))){
+                                    listTTTT.add(listT1.get(i)+listT2.get(m));
+                                }
+                            }
+                        }
+//                    }
+//                });
+//                thread.start();
+//                if(i != listT1.size()-1){
+//                    thread.join();
+//                }
+
+
+            }
+        }
+        catch (Exception ex){}
+
+        System.out.println("时间："+(new Date().getTime()-nowTime));
+        System.out.println(listTTTT.size()+"----------------------");
+
+
+        for(int i=0;i<listTTTT.size();i++){
+            System.out.println(listTTTT.get(i));
+        }
+
+    }
+
+    int i=0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Test
+    public void testNumds(){
+        String str = "#&#123456135434643|&|1231234646446|&|标签a|&|不合格，#&#123164675466|&|12434648776|&|标签b|&|超时";
+        getMark(str);
+    }
+
+    public static void getMark(String value){
+        try {
+            value = value.substring(3);
+            String[] temps = value.split("#&#");
+            List<MarkBean> markBeanList = new ArrayList<>();
+            for(int i=0;i<temps.length;i++){
+                String[] tags = temps[i].split("\\|&\\|");
+                System.out.println(tags[0]);
+                System.out.println(tags[1]);
+                if(tags.length>=3){
+                    System.out.println(tags[2]);}
+                if(tags.length>=4){
+                    System.out.println(tags[3]);}
+                System.out.println("============================");
+            }
+        }catch (Exception ex){
+            LogUtils.d("LogUtils",ex.toString());
+        }
+    }
+
+    class MarkBean {
+        private String markId;
+        private String issueId;
+        private String description;
+        private String content;
+
+        public String getMarkId() {
+            return markId;
+        }
+
+        public void setMarkId(String markId) {
+            this.markId = markId;
+        }
+
+        public String getIssueId() {
+            return issueId;
+        }
+
+        public void setIssueId(String issueId) {
+            this.issueId = issueId;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+    }
+
+
+
+
+    @Test
+    public void testNum(){
+        double num = 180000;
+        int monthDay = 10*12;
+        double value = 0.06;
+        String[] doTime = new String[monthDay];//执行日期
+        doTime[0] = "20200920->***";
+        for(int i=0;i<monthDay;i++){
+            doTime[i]="";
+            double temp = num*value;
+            num = num + temp;
+            System.out.println("第"+(i/12+1)+"月=============>目标："+dealDouble(temp,2)+"          总额："+dealDouble(num,2)+"    "+getDoTime(i,doTime));
+        }
+    }
+
+    private String getDoTime(int pos,String[] doTime){
+        try {
+            System.out.println(doTime[pos]);
+            if(doTime[pos].equals("null")){
+                return "11";
+            }
+            return doTime[pos];
+        }
+        catch (Exception ex){
+            return ""+ex.toString();
+        }
+    }
+
+    //总体操作记录
+    @Test
+    public void getStockInfoBuysssList(){
+//        String dfdf = "";
+//        double aa = Double.valueOf(dfdf);
+//        System.out.println((int)aa+"");
+
+        String value = "1286569428276350976|1284880109127995392|000000000000000000000|,#1286572464247803904|1281520555384246272|又一个标签bruce|,#1286573001903050752|1284877784669884416|77777777777777777777777|";
+        List<MarkBean> markBeanList = getMarkBean(value);
+        System.out.println(";;;"+markBeanList.size());
+    }
+
+    private List<MarkBean> getMarkBean(String value){
+        try {
+            value = value.substring(1);
+            String[] temps = value.split("#");
+            List<MarkBean> markBeanList = new ArrayList<>();
+            for(int i=0;i<temps.length;i++){
+                MarkBean markBean = new MarkBean();
+                String[] tags = temps[i].split("\\|");
+                System.out.println(";;;"+tags.length);
+                markBean.setMarkId(tags[0]);
+                markBean.setIssueId(tags[1]);
+                markBean.setDescription(tags[2]);
+                if(tags.length>=4){markBean.setContent(tags[3]);}
+
+                markBeanList.add(markBean);
+            }
+            return markBeanList;
+        }catch (Exception ex){
+            System.out.println(";;;"+ex.toString());
+        }
+        return new ArrayList<>();
+    }
 
     @Test
     public void addition_isCorredasd(){
@@ -31,7 +242,7 @@ public class ExampleUnitTest {
         System.out.println(dealDouble(-1.12,2));
     }
 
-    private String dealDouble(double data,int newScale){
+    public static String dealDouble(double data,int newScale){
         try {
             if(data == 0) return "0";
             DecimalFormat df = null;
@@ -407,7 +618,7 @@ public class ExampleUnitTest {
         return int1|int2;
     }
 
-    private String getOtherValue(double cost,double sale,double num){
+    public static String getOtherValue(double cost,double sale,double num){
         double value1 = (num/10000)*2  + cost*num/10000*0.487  + cost*num/10000*3;
         double value2 = (num/10000)*2  + sale*num/10000*0.487  + sale*num/10000*3 +sale*num/10000*10;
         return dealNum2(value1+value2);
@@ -478,7 +689,7 @@ public class ExampleUnitTest {
         return value+temp;
     }
 
-    private String getPriceValue(double cost,double salePrice,int stockNum){
+    public static String getPriceValue(double cost,double salePrice,int stockNum){
         String result="";
         double value = (salePrice - cost)*stockNum;
         if(value >= 0){
@@ -891,7 +1102,7 @@ public class ExampleUnitTest {
         return ""+nf.format(d);
     }
 
-    public String dealNum2(double d){
+    public static String dealNum2(double d){
         NumberFormat nf = NumberFormat.getNumberInstance();
         nf.setMaximumFractionDigits(2);
         return nf.format(d);

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ExampleTools.iml" filepath="$PROJECT_DIR$/ExampleTools.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lifefinancetool/lifefinancetool.iml" filepath="$PROJECT_DIR$/lifefinancetool/lifefinancetool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ExampleTools.iml" filepath="$PROJECT_DIR$/ExampleTools.iml" group="ExampleTools" />
+      <module fileurl="file://$PROJECT_DIR$/lifefinancetool/lifefinancetool.iml" filepath="$PROJECT_DIR$/lifefinancetool/lifefinancetool.iml" group="ExampleTools/lifefinancetool" />
     </modules>
   </component>
 </project>

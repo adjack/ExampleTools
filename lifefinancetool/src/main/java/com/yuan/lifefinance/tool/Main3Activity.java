@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class Main3Activity extends AppCompatActivity {
 //         */
 //        intentFilter.addAction("honeywell.com.BARCODEDATA");
 //        barcodeDataReceiver = new BarcodeDataReceiver();
+
     }
 
     @Override

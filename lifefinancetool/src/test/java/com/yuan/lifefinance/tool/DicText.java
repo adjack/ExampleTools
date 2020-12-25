@@ -8,10 +8,15 @@ import java.util.List;
 
 
 public class DicText {
+
+    public static void getMonth6ddNameArray(){
+
+    }
+
+
+
 	
 	//测试
-
-
     public static String[] getMonth6NameArray(){
 
         String[] value = {
